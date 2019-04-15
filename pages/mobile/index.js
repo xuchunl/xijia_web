@@ -4,6 +4,8 @@ var cartService = require('../../apis/cart/cartService')
 var msgDlg = require('../../utils/msgDlg')
 var storage = require('../../utils/storage')
 var moment = require('../../utils/moment')
+var huxingService = require('../../apis/huxing/huxingService')
+var fenggeService = require('../../apis/fengge/fenggeService')
 const app = getApp()
 Page({
   data: {
@@ -12,7 +14,6 @@ Page({
     windowWidth: wx.getSystemInfoSync().windowWidth,
     windowHeight: wx.getSystemInfoSync().screenHeight,
     scrollLeft: 0, //tab标题的滚动条位置
-    //tab切换
     currentTab: 0,
     currentIndex: 0,
     userInfo: {},
@@ -30,7 +31,7 @@ Page({
     guiGeStatus: false,
     autoplayStatus: true,
     hxDetail: {},
-    user: { userName: null, mobile: null, houseType: null, },
+    user: { userName: null, mobile: null, houseType: null,fengeId: null },
     userNameFocus: false,
     mobileFocus: false,
     houseTypeFocus: false,
@@ -45,7 +46,11 @@ Page({
     shoppingCarList: [], // 购物车的商品信息
     shoppingList:[], // 选中所有的商品信息
     goodsId: '',
-    cateList:[]
+    cateList:[],
+    hxList: [],
+    fgList: [],
+    hxIndex: '',
+    fgIndex: '',
   },
 
   /**
@@ -78,8 +83,10 @@ Page({
         }
       })
     }
-    this.findCatelist();
     if (id) this.loadData(id);
+    this.findCatelist();
+    this.loadHXList();
+    this.loadFGList();
   },
   loadData: function (id) {
     let $this = this
@@ -159,7 +166,7 @@ Page({
           let list = res.data.filter(item => item.isLeaf)
           this.setData({
             cateList: list,
-            cateId: res.data[0].id
+            cateId: list[0].id
           })
         } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
       },
@@ -168,6 +175,60 @@ Page({
       },
       complete: (res) => {}
     })
+  },
+  loadHXList: function () {
+    let $this = this
+    huxingService.queryList({
+      data: {},
+      success: (res) => {
+        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ hxList: res.data })
+        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+      },
+      fail: (res) => {
+        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+      },
+      complete: (res) => {
+        msgDlg.hideLoading();
+      }
+    })
+  },
+  loadFGList: function () {
+    let $this = this
+    fenggeService.queryList({
+      data: {},
+      success: (res) => {
+        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ fgList: res.data })
+        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+      },
+      fail: (res) => {
+        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+      },
+      complete: (res) => {
+        msgDlg.hideLoading();
+      }
+    })
+  },
+  nameInput: function (e) {
+    let sub = this.data.user;
+    sub.userName = e.detail.value;
+  },
+  mobileInput: function (e) {
+    let sub = this.data.user;
+    sub.mobile = e.detail.value;
+  },
+  bindHX: function (e) {
+    let hx = ''
+    if (this.data.hxList && this.data.hxList.length) hx = this.data.hxList[e.detail.value].id
+    let user = this.data.user
+    user.houseType = hx;
+    this.setData({ hxIndex: e.detail.value, user: user })
+  },
+  bindFG: function (e) {
+    let fenggeId = ''
+    if (this.data.fgList && this.data.fgList.length) fenggeId = this.data.fgList[e.detail.value].id
+    let user = this.data.user
+    user.fenggeId = fenggeId;
+    this.setData({ fgIndex: e.detail.value, user: user })
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
@@ -708,35 +769,29 @@ Page({
     wx.setStorageSync("goodsList", [this.data.currentShopping])
     wx.navigateTo({ url: '../settle/settle?pageType=mobile'})
   },
-  // 定金支付
-  onPay: function (e) {
-    wx.requestPayment({
-      timeStamp: '',
-      nonceStr: '',
-      package: '',
-      signType: 'MD5',
-      paySign: '',
-      success(res) { },
-      fail(res) { }
-    })
-  },
-  /* 微信支付 */
+  /* 支付 */
   wxpay: function () {
-    debugger
-    var that = this
-    //登陆获取code
-    wx.login({
-      success: function (res) {
-        console.log(res.code)
-        //获取openid
-        that.getOpenId(res.code)
-      },
-      fail: function (res) {
-        console.log('fail', res)
-      }
-    });
+    let user = this.data.user;
+    if (!user || !user.userName) {
+      wx.showToast({ title: '请填写姓名！', icon: 'none' })
+      return
+    }
+    if (!user || !user.mobile) {
+      wx.showToast({ title: '请填写电话！', icon: 'none' })
+      return
+    } else if (user.mobile) {
+      // 判断手机格式是否正确
+    }
+    if (!user || !user.houseType || !user.fenggeId) {
+      wx.showToast({ title: '请选择户型或选择风格！', icon: 'none' })
+      return
+    }
+    msgDlg.showLoading('正在支付中...');
+    let loginInfo = wx.getStorageSync('loginInfo');
+    if (loginInfo) {
+      this.getOpenId(loginInfo.code)
+    }
   },
-
   /* 获取openId */
   getOpenId: function (code) {
     var that = this
@@ -880,5 +935,8 @@ Page({
       current: images[index], // 当前显示图片的http链接
       urls: images // 需要预览的图片http链接列表
     })
+  },
+  toViewVR: function(){
+    wx.navigateTo({ url: '../webView/index?url=' + this.data.detailInfo.locationUrl })
   }
 })

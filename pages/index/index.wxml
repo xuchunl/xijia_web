@@ -60,7 +60,7 @@
           <view style='clear:both;color: #909399;font-size: 20rpx;'>{{taocan.description}}</view>
         </view>
         <view class='detail float-left' bindtap='clickDetail' data-taocan='{{taocan}}'>
-          <view class='detail-icon'>详 情</view>
+          <view class='detail-icon'>{{taocan.hsquare}}m² {{taocan.hname}}</view>
         </view>
       </view>
     </view>

@@ -58,7 +58,8 @@
     <view class='main-bottom-info'>
       <view class='main-bottom-main' >
         <view class='main-bottom-house-info'>
-          <view class='main-bottom-top-square float-left background-gray'>{{hxDetail.square}}m² {{hxDetail.name}}</view>
+          <view class='main-bottom-top-square float-left background-waring'>{{detailInfo.hsquare}}m² {{detailInfo.hname}}</view>
+          <view class='float-left vr' bindtap='toViewVR'>VR体验</view>
           <!-- <view class='main-bottom-top-house-type background-gray float-left' bindtap='clickShowImage'>{{hxDetail.name}}</view> -->
           <view class='main-bottom-top-house-group float-right  background-gray' bindtap="clickPintuan">我要拼团</view>
         </view>
@@ -101,9 +102,9 @@
   </view>
 
   <view class='mobile-show-product'>
-    <view class="taoqan-detail">拎包价格 1800 ~ 30000</view>
+    <view class="taoqan-detail">拎包价格 1800元 ~ 30000元</view>
     <view class='float-left product-class'>
-      <view class="product-class-name {{cateId == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}}</view>
+      <view class="product-class-name {{cateId == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} 5件 1800元</view>
     </view>
     <view class='float-left product-info'>
       <view class='product-info-content' wx:if="{{detailItem.cateId && detailItem.cateId === cateId}}" wx:for="{{productList}}" wx:for-item="detailItem"  wx:key="detailIndex" >
@@ -124,10 +125,14 @@
               <view class='color-danger detail-price'>{{detailItem.marketPrice}}</view>
               <view class='color-info float-left'></view>
             </view>
-            <view class='product-detail-add float-right background-info' bindtap="clickShowShopping" data-product='{{detailItem}}'>
-              <!-- <i class='fa fa-plus cartPlus'></i> -->
-              <text>选规格</text>
+            <view class='float-right chaneg-num'>
+              <view class='de-num fa fa-minus-circle'></view>
+              <view class='add-num fa fa-plus-circle'></view>
             </view>
+            <!-- <view class='product-detail-add float-right background-info' bindtap="clickShowShopping" data-product='{{detailItem}}'>
+              <i class='fa fa-plus cartPlus'></i>
+              <text>选规格</text>
+            </view> -->
           </view>
         </view>
       </view>
@@ -187,59 +192,68 @@
   <view class="main_cover" wx:if="{{pintuanStatus}}" id="main_cover" bindtap="clickPintuan" catchtouchmove="pintuanTouchMove">
   </view>
   <view class="show_pintuan" wx:if="{{pintuanStatus}}" catchtouchmove="pintuanTouchMove">
-    <view class="pintuan-userInfo" >
-      <view class="pintuan-time" id="time">
+    <view class="pintuan-time" id="time">
       <view class='pintuan-discount-time float-left'>
         钜惠还剩：<span class="day">00</span>天
         <span class="hour">00</span>小时
         <span class="minute">00</span>分
       </view>
-      <view class='pintuan-close float-right'>
-        <i class="fa fa-times-circle-o float-right" bindtap="clickPintuan" ></i>
-      </view>
-        
-      </view>
-      <view id="marquee4" >
-        <swiper autoplay='true' interval='1500' duration='1000' vertical='true' circular='true'>
-          <swiper-item style='height:30rpx;' wx:for="{{baojia}}" wx:for-item="item"  wx:key="itemIndex">
-            <view>{{item.label}}<span></span> {{item.value}}<span></span>成功拼成</view>
-          </swiper-item>
-        </swiper>
-      </view>
-      <view class='form'>
-        <form class='form-form' >
-          <view class='conten-label'>
-            <view class='content-th'>
-              <label >姓 名</label>
-            </view>
-            <view class='content-td'>
-              <input class="{{userNameFocus ? 'input-focus' : ''}}" value='{{user.userName}}' bindfocus="bindFocus" bindblur="bindBlur" data-value='userName'></input>
-            </view>
+    </view>
+    <view id="marquee4" >
+      <swiper autoplay='true' interval='1500' duration='1000' vertical='true' circular='true'>
+        <swiper-item style='height:30rpx;' wx:for="{{baojia}}" wx:for-item="item"  wx:key="itemIndex">
+          <view>{{item.label}}<span></span> {{item.value}}<span></span>成功拼成</view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class='form'>
+      <form class='form-form' bindsubmit="saveuser">
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >姓 名</label>
           </view>
-          <view class='conten-label'>
-            <view class='content-th'>
-              <label >电 话</label>
-            </view>
-            <view class='content-td'>
-              <input type='number' class="{{mobileFocus ? 'input-focus' : ''}}" value='{{user.mobile}}' bindfocus="bindFocus" bindblur="bindBlur" data-value='mobile'></input>
-            </view>
+          <view class='content-td'>
+            <input class="{{nameFocus ? 'input-focus' : ''}}" bindinput='nameInput' value='{{user.userName}}' data-value='userName'></input>
           </view>
-          <!-- <view class='conten-label'>
-            <view class='content-th'>
-              <label >户 型</label>
-            </view>
-            <view class='content-td'>
-              <input class="{{houseTypeFocus ? 'input-focus' : ''}}" value='{{user.houseType}}' bindfocus="bindFocus" bindblur="bindBlur" data-value='houseType'></input>
-            </view>
-          </view> -->
-          <view class='conten-label'>
-            <view class='conten-dj'>定金1000元，拼不成我退款</view>
+        </view>
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >电 话</label>
           </view>
-          <view class='conten-button'> 
-            <button bindtap='wxpay'>支付</button>
+          <view class='content-td'>
+            <input type='number' class="{{mobileFocus ? 'input-focus' : ''}}" value='{{user.mobile}}' data-value='mobile' bindinput='mobileInput'></input>
           </view>
-        </form>
-      </view>
+        </view>
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >户 型</label>
+          </view>
+          <view class='content-td'>
+            <picker bindchange="bindHX" value="{{hxIndex}}" range="{{hxList}}" range-key="{{'name'}}">
+              <view class='hx'>{{hxList[hxIndex] ? hxList[hxIndex].name : '请选择'}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >风 格</label>
+          </view>
+          <view class='content-td'>
+            <picker bindchange="bindFG" value="{{fgIndex}}" range="{{fgList}}" range-key="{{'name'}}">
+              <view class='fg' >{{fgList[fgIndex] ? fgList[fgIndex].name : '请选择'}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class='conten-label'>
+          <view class='conten-dj'>定金1000元，拼不成我退款</view>
+        </view>
+        <view class='conten-button'> 
+          <button bindtap='wxpay'>支 付</button>
+        </view>
+      </form>
+    </view>
+    <view class='pintuan-close'>
+      <i class="fa fa-times-circle-o color-white" bindtap="clickPintuan" ></i>
     </view>
   </view>
 <!-- 
@@ -267,5 +281,16 @@
     <video src="{{urlPrefix}}{{videoUrl}}" autoplay="{{videoStatus}}" loop page-gesture controls ></video>
   </view>
   <view class='on-pay'>
+    <view class='totalMny float-left'>
+      <view class='color-white float-left'>总价：</view><view class='color-danger float-left'>￥100010</view>
+    </view>
+    <view class='cart-num float-left'>
+      <i class='fa fa-shopping-cart shopping-cart'></i>
+      <!-- <view class='count'>2</view> -->
+    </view>
+    <view class='price float-right'>
+      <view class='color-white float-left'>单价：</view>
+      <view class='color-danger float-left'>￥1800</view>
+    </view>
   </view>
 </view>

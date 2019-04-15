@@ -1,3 +1,3 @@
 <view>
-  <web-view src="http://img360.fang.com/2018/03/15/sanya/720/0b78fbdf941045b38451576d455fec22/html/index.html?nc=3012280846&type=hangpai&channel=newhouse&p=100&from=pc"></web-view>
+  <web-view src="{{url}}"></web-view>
 </view>

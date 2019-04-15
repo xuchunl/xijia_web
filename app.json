@@ -12,7 +12,8 @@
     "pages/order/index",
     "pages/brand/index",
     "pages/brand/detail",
-    "pages/brand/buy-detail"
+    "pages/brand/buy-detail",
+    "pages/webView/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

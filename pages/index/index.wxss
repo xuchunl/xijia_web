@@ -155,18 +155,15 @@
 }
 .index .body .taocan-info .detail {
   position:absolute;
-  top: -72rpx;
+  top: -80rpx;
   right: 15rpx;
   z-index: 10px;
   font-size: 28rpx;
 }
 .index .body .taocan-info .detail-icon {
   background: #E6A23C;
-  border-radius: 23rpx;
-  height: 65rpx;
-  line-height: 65rpx;
-  text-align: center;
-  width: 115rpx;
+  border-radius: 25rpx;
+  padding: 20rpx;
   float: right;
 }
 .index .body .designer {
@@ -362,8 +359,8 @@
   width: 90%;
   position: fixed;
   top: 15%;
-  z-index: 1020;
-  height: 58%;
+  z-index: 99;
+  height: 57%;
   margin-left: 5%;
   background: #E6A23C;
 	border-radius: 200rpx 200rpx 5rpx 5rpx;
@@ -449,10 +446,10 @@
   height: 70rpx;
   line-height: 100rpx;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 20rpx;
   background:#E6A23C;
 }
-.form button{
+.form .conten-button button{
   width: 30%;
   font-size: 28rpx;
 }
