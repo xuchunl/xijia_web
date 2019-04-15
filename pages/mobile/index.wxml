@@ -58,7 +58,7 @@
     <view class='main-bottom-info'>
       <view class='main-bottom-main' >
         <view class='main-bottom-house-info'>
-          <view class='main-bottom-top-square float-left background-waring'>{{detailInfo.hsquare}}m² {{detailInfo.hname}}</view>
+          <view class='main-bottom-top-square float-left background-waring' bindtap='clickShowImage'>{{detailInfo.hsquare}}m² {{detailInfo.hname}}</view>
           <view class='float-left vr' bindtap='toViewVR'>VR体验</view>
           <!-- <view class='main-bottom-top-house-type background-gray float-left' bindtap='clickShowImage'>{{hxDetail.name}}</view> -->
           <view class='main-bottom-top-house-group float-right  background-gray' bindtap="clickPintuan">我要拼团</view>
