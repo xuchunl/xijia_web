@@ -1,0 +1,30 @@
+<view class="edit-receiver">
+  <view class='receiver-item border-top-solid padding-left-20 '>
+    <view class='float-left receiver-label'>收货人：</view>
+    <view class='float-left receiver-value'>
+      <input value='{{receiver.name}}' bindinput='changeName' type='text'></input>
+    </view>
+  </view>
+  <view class='receiver-item border-top-solid padding-left-20 '>
+    <view class='float-left receiver-label'>手机号：</view>
+    <view class='float-left receiver-value'>
+      <input value='{{receiver.mobile}}' bindinput='changeMobile' type='text'></input>
+    </view>
+  </view>
+  <view class='receiver-item border-top-solid padding-left-20 '>
+    <view class='float-left receiver-label'>地址：</view>
+    <view class='float-left receiver-value'>
+      <input value='{{receiver.address}}'  bindinput='changeAddress' type='text'></input>
+    </view>
+  </view>
+  <view class='receiver-item border-top-solid border-bottom-solid padding-left-20 '>
+    <view class='float-left receiver-label'>设为默认收货地址</view>
+    <view class='float-right receiver-value'>
+      <view class="fa {{receiver.isDefault ? 'fa-check-circle' : 'fa-circle-o'}} receiver-check-icon {{receiver.isDefault ? 'color-blue' : 'color-gray'}}  float-left padding-right-20" bindtap='clickCheck' data-receiver='{{receiver}}'></view>
+    </view>
+  </view>
+  <view class='receiver-footer'>
+    <button class='save-buttom' type='warn' bindtap='save'>保存</button>
+    <button wx:if="{{receiver.id}}" class='delete-buttom' type='gost' bindtap='deleteReceiver'>删除</button>
+  </view>
+</view>

@@ -1,0 +1,112 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.2.5",
+	"appid": "wx8a40cf3b220bcdf7",
+	"projectname": "hyht",
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "mobile",
+					"pathName": "pages/mobile/index",
+					"query": "id=36"
+				},
+				{
+					"id": 1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "card",
+					"pathName": "pages/card/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "main",
+					"pathName": "pages/main/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "shopping",
+					"pathName": "pages/shopping/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "common",
+					"pathName": "pages/common/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "settle",
+					"pathName": "pages/settle/settle",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "receiverIndex",
+					"pathName": "pages/receiver/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "index1",
+					"pathName": "pages/index1/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "brand",
+					"pathName": "pages/brand/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "buy-detail",
+					"pathName": "pages/brand/buy-detail",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

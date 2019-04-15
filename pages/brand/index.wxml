@@ -1,0 +1,59 @@
+<view class='brand'>
+  <view class='header'>
+    <view class='logo'>
+      <image src='../image/p1_c_02.jpg' mode='aspectFill'></image>
+    </view>
+    <view class='shop-info'>
+      <view class='shop-logo float-left'>
+        <image src='../image/sandetang_logo.png'></image>
+      </view>
+      <view class='right float-left'>
+        <view class='title'>桌子</view>
+        <view class='float-left detail'>
+          <view class='float-left sale'> <i class='fa fa-tint'></i> 累计销售：33.1万</view>
+          <view class='float-left love'> <i class='fa fa-heart'></i> 累计销售：33.1万</view>
+        </view>
+      </view>
+      <view class='desc'>有品质的软装商店</view>
+      <view class='view-brand-story'><view class='float-right'>查看品牌故事 <i class="fa fa-angle-right"> </i></view></view>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='item' wx:for='{{productList}}' wx:for-item="product" wx:key="index">
+      <view class='title' bindtap='toDetail' data-product='{{product}}'>
+        <view class='name'>{{product.name}}</view>
+        <view class='love'>
+          <i class='fa fa-heart-o'></i> {{product.love}}
+        </view> 
+      </view>
+      <view class='info'>
+        <view class='float-left img' bindtap='toDetail' data-product='{{product}}'>
+          <image src='{{product.image}}'></image>
+        </view>
+        <view class='float-left detail' bindtap='toDetail' data-product='{{product}}'>
+          <view class='top'>
+            <view class='type'>{{product.type}}</view>
+            <view class='pj'>{{product.pj}}评价</view>
+          </view>
+          <view class='shopping'>
+            <view class='price' bindtap='toDetail' data-product='{{product}}'>￥{{product.price}}</view>
+            <!-- <button class='add-shpping'>去拼团</button> -->
+            <view class='add-shpping'>去拼团</view>
+          </view>
+        </view>
+      </view>
+      <view class='buy-info' bindtap='toBuyUser'>
+        <view class='buy-user float-left'>
+          <image class='' src='{{userInfo.avatarUrl}}'></image>
+          <image class='no-first0' src='{{userInfo.avatarUrl}}'></image>
+          <image class='no-first1'  src='{{userInfo.avatarUrl}}'></image>
+          <image class='no-first2'  src='{{userInfo.avatarUrl}}'></image>
+          <image class='no-first3'  src='{{userInfo.avatarUrl}}'></image>
+          <image class='no-first4'  src='{{userInfo.avatarUrl}}'></image>
+        </view>
+        <view class='float-left label'>等刚购买了此商品</view>
+        <view class='float-right icon-right'><i class='fa fa-angle-right'></i></view>
+      </view>
+    </view>
+  </view>
+</view>

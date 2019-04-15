@@ -1,0 +1,64 @@
+<view class='settle'>
+  <view class='address' bindtap='checkAddress'>
+    <view class='address-detail'>
+      <view class='info'>
+        <view class='label'>收货人：</view>
+        <view class='name'><input type='text' value='{{member.nickname}}' placeholder='收货人'></input></view>
+        <view class='mobile'><input type='text' value='{{member.mobile}}' placeholder='手机号码'></input></view>
+      </view>
+      <view class='th'>
+        提货地点：湖南省长沙市xxxxxxxxxxxxxxxxxxxxxxxx
+      </view>
+      <view class='zt'>
+        自提点：湖南省长沙市xxxxxxxxxxxxxxxxxxxxxxxx
+        <i class='fa fa-phone'></i>
+        <image src='../image/stripe.jpg' class='stripe'></image>
+      </view>
+    </view>
+    
+    <view class='markedwords'>
+      <view class='markedwords-label'>1.如果您购买胡商品有任何问题，请直接与购买的门店联系!</view>
+      <view class='markedwords-label'>100%售后保证</view>
+      <view class='markedwords-label'>2.如果您找不到购物的提货门店，请致电热线！</view>
+      <view class='markedwords-phone'>13888888888
+      <i class='fa fa-phone'></i>
+      </view>
+    </view>
+    <!-- <view class='float-left address-detail'>
+      <view wx:if="{{addressInfo && addressInfo.id}}" class='padding-left-20'>
+        <view>
+          <view>{{addressInfo.name}}  {{addressInfo.mobile}}</view>
+        </view>
+        <view class='address-detail-info'>
+          <view class='float-left defult-button' wx:if="addressInfo.idDefault">默认</view>
+          <view class='float-left'>{{addressInfo.address}}</view>
+        </view>
+      </view>
+      <view wx:else class='color-danger padding-left-20 select-adress'>请选择地址</view>
+    </view>
+    <i class="fa fa-angle-right float-right color-gray"></i> -->
+  </view>
+  <view class='goods-list margin-top-20'>
+    <view wx:for="{{goodsList}}" wx:key="index" wx:for-item="goods">
+      <view class='goods-info'>
+        <view class='float-left goods-info-iamge' wx:if="{{goods.ciimgUrl}}">
+         <image src='{{urlPrefix}}{{goods.ciimgUrl}}'></image>
+        </view>
+        <view class='float-left goods-info-iamge' wx:else>
+         <image src='../image/p1_c_06.jpg'></image>
+        </view>
+        <view class='float-left goods-right'>
+          <view class='goods-anme'>{{goods.name}}</view>
+          <view>
+            <view class='float-left color-danger'>X {{goods.num}}</view>
+            <view class='float-right color-danger'>{{goods.price}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='settle-footer'>
+    <view class='float-left sum-price'>合计：￥ {{sumPrice}}</view>
+    <view class='float-right submit' bindtap='onSubmit'>支付</view>
+  </view>
+</view>

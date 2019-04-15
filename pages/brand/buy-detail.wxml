@@ -1,0 +1,49 @@
+<view class='buy-detail'>
+  <view class='header'>
+    <view class='float-left img'>
+      <image src='../image/p1_c_02.jpg'></image>
+    </view>
+    <view class='float-left info'>
+      <view class='top'>
+        <view class='name'>大桌子 张</view>
+        <view class='size'>张</view>
+        <view class='sale-info'>
+          <view>今日已售 </view>
+          <view style='color: red; padding:0 10rpx'> 1755 </view>
+          <view>份 / 累计销售 </view>
+          <view style='color: red; padding:0 10rpx'> 6000 </view>
+          <view> 份 </view>
+        </view>
+      </view>
+      <view class='bottom'>
+        <view class='realy-price'>￥99.9</view>
+      </view>
+    </view>
+  </view>
+  <view class='promotion'>
+    <view class='time'>
+      <view class=''>剩余 11:20:30 结束</view>
+    </view>
+  </view>
+  <view class='sale-condition'>
+    <view class='label'>
+      <view>目前共</view>
+      <view style='color: red; padding:0 10rpx'>888</view>
+      <view>人参与购买，商品共销售</view>
+      <view style='color: red; padding:0 10rpx'>6000</view>
+      <view>份</view>
+    </view>
+  </view>
+  <view class='user-info'>
+    <view class='img'>
+      <image wx:for="userImage" wx:for-item="img"  wx:key="index" class="float-left {{(index > 7 && upStatus) || index < 7  ? 'show' : 'hidden' }}" src='{{userInfo.headimgurl}}'></image>
+    </view>
+    <view wx:if="{{userImage.length > 0}}" class='up-down' bindtap='onUpDown'>
+      <view class='icon'><i class="fa {{upStatus ?  'fa-angle-up' : 'fa-angle-down'}}"></i></view>
+      <view class='label'>{{upStatus ? '收起' : '展开'}}</view>
+    </view>
+  </view>
+  <view class='share' bindtap='onShareAppMessage' open-type='share'>
+    <button><i class='fa fa-share-alt'></i> 分享给好友</button>
+  </view>
+</view>

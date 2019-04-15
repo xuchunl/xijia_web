@@ -1,0 +1,67 @@
+<view class='user'>
+  <view class='header'>
+    <view class='avater'>
+      <image src='{{userInfo.headimgurl}}'></image>
+    </view>
+    <view class='info'>
+      <view class='name'>{{userInfo.nickname}}</view>
+      <view class='mobile'>13652887581</view>
+    </view>
+    <view class='code'>
+      <i class='fa fa-qrcode'></i>
+    </view>
+  </view>
+  <view class='order'>
+    <view class='text'>我 的 订 单</view>
+    <view class='order-info'>
+      <view class='item all-order' bindtap='toOrder' data-type='all'>
+        <view class='all-icon'>
+          <i class='fa fa-calendar'></i>
+        </view>
+        <view class='label'>全部订单</view>
+      </view>
+      <view class='item unpay-order' bindtap='toOrder' data-type='unpay'>
+        <view class='unpay-icon'>
+          <i class='fa fa-calendar-times-o'></i>
+        </view>
+        <view class='label'>未付款</view>
+      </view>
+      <view class='item unreceive-order' bindtap='toOrder' data-type='unreceive'>
+        <view class='unreceive-icon'>
+          <i class='fa fa-calendar-plus-o'></i>
+        </view>
+        <view class='label'>待提货</view>
+      </view>
+      <view class='item received-order' bindtap='toOrder' data-type='received'>
+        <view class='received-icon'>
+          <i class='fa fa-calendar-check-o'></i>
+        </view>
+        <view class='label'>已提货</view>
+      </view>
+    </view>
+  </view>
+  <view class='receive'>
+    <view class='text'>我的当前自提点</view>
+    <view class='detail'>
+      <view class='label' style='color: #F56C6C;'>当前自提点：广州市XXXXXXX</view>
+      <view class='label' style='color: #F56C6C;'>自提点电话：（11111111111）<i class='fa fa-phone'></i></view>
+      <view class='label' style='color: #909399;'>提货地址：广州市XXXXXXXX</view>
+    </view>
+  </view>
+  <view class='des'>
+    <view class='label'>
+      1.如果您购买的商品有任何问题，请直接与购买的门店联系！100%售后保证！
+    </view>
+    <view class='label'>2.如果你找不到购物的提货门店，请致电喜家帮忙热线！</view>
+    <view class='phone'>
+      <view style='color: #909399;'>1111111111</view>
+      <i class='fa fa-phone'></i>
+    </view>
+  </view>
+  <view class='to-shopping'>
+    <button type='warn'>去购物</button>
+  </view>
+  <view class='to-out'>
+    <button type='default'>退出当前账号</button>
+  </view>
+</view>

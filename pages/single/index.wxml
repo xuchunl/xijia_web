@@ -1,0 +1,112 @@
+<view class='single'>
+  <view class='header'>
+    <view class='left float-left'>
+      <view class='xj-info'>
+        <view class='float-left' style='font-size: 45rpx'>喜 家</view>
+        <view class='float-left shop-name'>岭秀金江</view>
+        <view class='float-left shop-num'>00003</view>
+        <view class='float-right' style='font-size: 34rpx;padding: 15rpx;'>生活头条</view>
+      </view>
+      <view class='slogan'>—— 有品质的社区软装设计拼团系统</view>
+    </view>
+    <view class='header-bottom'>
+      <view class='search float-left'>
+        <input type='text' confirm-type='search' placeholder='输入商品名称' bindinput='onQuery'></input>
+        <icon size='15' type='search'></icon>
+      </view>
+      <view class='share float-right' bindtap='onShareVisible'>
+        <view class='float-left'><image src='../image/share.jpg'></image></view>
+        <view class='float-left'>分享</view>
+         <!-- <i class="fa fa-share-square-o"></i> -->
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-x="true" class='tab-h' scroll-left="{{scrollLeft}}">
+    <view bindtap='swichNav' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="cateIndex"  class="tab-item  {{currentTab == index ? 'active' : ''}}" data-id='{{cateItem.id}}' data-current='{{index}}' >{{cateItem.name}}
+    </view>
+  </scroll-view>
+  <view class='body'>
+    <view wx:for="{{taocanList}}" wx:for-item="product" wx:key="index" class='tao-can-item'>
+      <view bindtap='toBrand' data-product='{{product}}' class='image-info'>
+        <view class='float-left image-left'><image  src="{{urlPrefix}}{{product.imgMobileUrl}}"></image></view>
+        <view class='float-left image-right'>
+          <view style='clear:both;color: #606266;font-size: 28rpx;height:50rpx;line-height:50rpx'>{{product.name}}</view>
+          <view style='color: #909399;font-size: 24rpx;'>{{product.adInfo}}</view>
+          <view style='color: #909399;font-size: 24rpx;'>描述： {{product.description}}</view>
+        </view>
+      </view>
+      <view class='taocan-info'>
+        <view class='float-left user-info'>
+          <view>
+            <view bindtap='toBrand' data-product='{{product}}'><image src='../image/avater.jpg'></image></view>
+            <view bindtap='toBrand' data-product='{{product}}'>厂家服务</view>
+          </view>
+          <!-- <view>18607599088</view> -->
+        </view>
+        <view class='float-left title'>
+          <view class='title-info'>
+            <view style='height:50rpx;line-height:50rpx'>
+              <view class='float-left'>宾皇尊品</view>
+              <view class='float-left to-view-brand'>查看品牌故事 <i class='fa fa-angle-right'></i> </view>
+            </view>
+          </view>
+          <view class='pin-dan'>
+            <view class='pin-num float-left' bindtap='toBrand' data-product='{{product}}'>已拼3100件</view>
+            <view class='pin-info float-left'>
+            <view class="progressbar float-left" wx:for="{{houseInfo}}" wx:for-item="house"  wx:key="index"  bindtap='toBrand' data-product='{{product}}'>
+              <view class='num'>{{house.num}}件</view>
+              <view class='case'>
+                <view class="step is-horizontal" style="flex-basis: 50%; margin-right: 0px;">
+                  <view class="step-head is-process">
+                    <view class="{{(index+1) != houseInfo.length ? 'step-line' : 'step-last-line'}}" style="margin-right: 0px;">
+                      <i class="step-line-inner" style="transition-delay: 0ms; border-width: 0px;width: 0%;"></i>
+                    </view>
+                    <view class="step-icon is-text background-info">
+                      <view class="step-icon-inner"></view>
+                    </view>
+                  </view>  
+                  <view class="step-main">
+                    <view class="step-title">{{house.price}}元</view>
+                    <view class="step-description is-process"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class='pin-dan-btn float-left' bindtap='toDetail' data-product='{{product}}'>
+            <button>去拼单</button>
+          </view>
+          </view>
+        </view>
+      </view>
+      <view class='pin-tun-info' bindtap='toBuyUser'>
+        <view class='avater'>
+          <image src='../image/avater.jpg'></image>
+          <image class='no-first0' src='../image/avater.jpg'></image>
+          <image class='no-first1' src='../image/avater.jpg'></image>
+          <image class='no-first2' src='../image/avater.jpg'></image>
+          <image class='no-first3' src='../image/avater.jpg'></image>
+        </view>
+        <view class='label'> 等刚拼了此商品</view>
+        <view class='float-right'><i class='fa fa-angle-right'></i></view>
+      </view>
+    </view>
+  </view>
+  <view class='share-area' wx:if='{{shareVisible}}'>
+    <view class='mask' bindtap='onShareVisible'></view>
+    <view class='share-info'>
+      <view class='share-to'> —— 分享到 —— </view>
+      <view class='share-detail'>
+        <button class='share-detail-item' id='wechat' bindtap='onShareAppMessage' open-type='share'>
+          <view class='share-icon'><i class="fa fa-wechat wechat"></i></view>
+          <view class='share-text'>微信好友</view>
+        </button>
+        <button class='share-detail-item' id='image' bindtap='buildPosterSaveAlbum'>
+          <view class='share-icon'><i class="fa fa-image image"></i></view>
+          <view class='share-text'>生成海报</view>
+        </button>
+      </view>
+      <view class='share-close' bindtap='onShareVisible'>取消</view>
+    </view>
+  </view>
+</view>

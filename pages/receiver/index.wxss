@@ -1,0 +1,61 @@
+/* pages/receiver/index.wxss */
+.receiver {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+.receiver-title {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 80%;
+}
+.receiver-list {
+  width: 100%;
+  height: auto;
+}
+.receiver-detail {
+  width: 100%;
+  min-height: 160rpx;
+  padding-bottom: 20rpx;
+  clear: both;
+}
+.receiver-check-icon {
+  font-size: 150%;
+  padding-top: 10%;
+  width: 10%;
+  text-align: center;
+}
+.receiver-address-info {
+  width: 78%;
+  min-height: 195rpx;
+}
+.receiver-user-info {
+  font-weight: bolder;
+  padding-top: 20rpx;
+}
+.defult-button {
+  width: 80rpx;
+  font-size: 80%;
+  padding: 10rpx;
+  text-align: center;
+  color: red;
+  border: 1rpx solid red;
+  margin-right: 10rpx;
+}
+.receiver-address-detail {
+  font-size: 80%;
+  padding-top: 20rpx;
+}
+.receiver-edit {
+  font-size: 80%;
+  width: 10%;
+  padding-top: 20rpx;
+}
+.add-address {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  z-index: 9999;
+}

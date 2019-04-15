@@ -1,0 +1,140 @@
+.user {
+  height: 100%;
+  width: 100%;
+  background: #f4f4f4;
+}
+.user .header {
+  height: 200rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+}
+.user .header .avater {
+  width: 200rpx;
+  text-align: center;
+}
+.user .header .avater image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.user .header .info {
+  width: calc(100% - 300rpx);
+}
+.user .header .info .name{
+  font-size: 28rpx;
+}
+.user .header .info .mobile{
+  font-size: 20rpx;
+  color: #909399;
+}
+.user .header .code {
+  width: 100rpx;
+  color: #909399;
+  font-size: 50rpx;
+}
+.user .order {
+  height: 230rpx;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.user .order .text {
+  font-size: 28rpx;
+  padding-left: 10rpx;
+  border-bottom: 1rpx solid #EBEEF5;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.user .order-info {
+  display: flex;
+  height: 150rpx;
+  align-items: center;
+}
+.user .order-info .item {
+  width: calc(100% / 4);
+  text-align: center;
+}
+.user .order-info .item .fa {
+  font-size: 50rpx;
+}
+.user .order-info .item .all-icon {
+  color: #409EFF;
+}
+.user .order-info .item .unpay-icon {
+  color: #F56C6C;
+}
+.user .order-info .item .unreceive-icon {
+  color: #E6A23C;
+}
+.user .order-info .item .received-icon {
+  color: #67C23A;
+}
+.user .order-info .item .label {
+  font-size: 24rpx;
+  color: #909399;
+  line-height: 55rpx;
+}
+.user .receive {
+  height: 230rpx;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.user .receive .text {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 10rpx;
+  font-size: 28rpx;
+  border-bottom: 1rpx solid #EBEEF5;
+}
+.user .receive .detail {
+  height: 150rpx;
+  padding: 0 10rpx;
+  font-size: 24rpx;
+}
+.user .receive .detail .label {
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.user .receive .detail .label .fa-phone {
+  color: #F56C6C;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border: 1rpx solid #F56C6C;
+  border-radius: 50%;
+  text-align: center;
+}
+.user .des {
+  background: #fff;
+  margin-top: 20rpx;
+  padding: 5rpx 20rpx 10rpx 10rpx;
+}
+.user .des .label {
+  font-size: 24rpx;
+  color: #909399;
+}
+.user .des .phone {
+  font-size: 28rpx;
+  display: flex;
+  height: 50rpx;
+  align-items: center;
+}
+.user .des .phone .fa-phone {
+  color: #F56C6C;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border: 1rpx solid #F56C6C;
+  border-radius: 50%;
+  text-align: center;
+}
+.user .to-shopping,
+.user .to-out {
+  width: 100%;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+.user .to-shopping button,
+.user .to-out button {
+  width: 95%;
+}

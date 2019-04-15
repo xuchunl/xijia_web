@@ -1,0 +1,245 @@
+.detail {
+  height: 100%;
+  width: 100%;
+  background: #f4f4f4;
+}
+.tab-h {
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #fff;
+  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  color: #C0C4CC;
+  font-size: 28rpx;
+  line-height: 80rpx;
+}
+.tab-item {
+  display: inline-block;
+  width: calc(100% / 2 - 1rpx);
+  font-weight: bold;
+  text-align: center;
+  border-right: 1rpx solid #f4f4f4;
+}
+.tab-item.active {
+  color: #57acee;
+  position: relative;
+}
+.tab-item.active:after {
+  content: "";
+  display: block;
+  height: 4rpx;
+  width: 100%;
+  background: #57acee;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 16rpx;
+}
+.detail .content {
+  height: calc(100% - 180rpx);
+  width: 100%;
+}
+.detail .content .image {
+  width: 100%;
+  height: 450rpx;
+}
+.detail .content .image image {
+  width: 100%;
+  height: 100%;
+}
+.detail .content .info {
+  width: 100%;
+  height: 150rpx;
+  position: relative;
+}
+.detail .content .info .user-info {
+  width: 140rpx;
+  font-size: 20rpx;
+  height: 150rpx;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #909399;
+  display: flex;
+}
+.detail .content .info .user-info image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 10rpx;
+}
+.detail .content .info .title {
+  width: calc(100% - 150rpx);
+  height: 100%;
+  font-size: 26rpx;
+  text-align: left;
+  align-items: center;
+  display: flex;
+}
+.pin-dan {
+  width: 100%;
+  height: 130rpx;
+}
+.pin-num {
+  width: 145rpx;
+  height: 130rpx;
+  font-size: 24rpx;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.pin-info {
+  width: calc(100% - 325rpx);
+}
+.pin-info .progressbar {
+  width: 32%;
+}
+.progressbar .num {
+  font-size: 24rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.progressbar .case {
+  width: 100%;
+  white-space: nowrap;
+}
+.step {
+  position: relative;
+  flex-shrink: 1;
+}
+.step.is-horizontal {
+  display: inline-block;
+  width: 100%;
+}
+.step-head.is-process {
+    color: #303133;
+    border-color: #303133;
+}
+.step-head {
+    position: relative;
+    width: 100%;
+}
+.step.is-horizontal .step-line {
+    height: 5rpx;
+    top: 9rpx;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+.step.is-horizontal .step-last-line{
+    height: 0rpx;
+    top: 9rpx;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+.step-line {
+    position: absolute;
+    border-color: inherit;
+    background-color: #c0c4cc;
+    width: 100%;
+}
+.step-line-inner {
+    display: block;
+    border-style: solid;
+    border-color: inherit;
+    transition: .15s ease-out;
+    box-sizing: border-box;
+    height: 0;
+    width: 100%;
+}
+.step-icon.is-text {
+    border-radius: 50%;
+}
+.step-icon {
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    width: 25rpx;
+    height: 25rpx;
+    font-size: 100%;
+    box-sizing: border-box;
+    transition: .15s ease-out;
+}
+.step-icon-inner {
+    display: inline-block;
+    user-select: none;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    color: inherit;
+}
+.step-main {
+  height: 45rpx;
+  line-height: 45rpx;
+  font-size: 24rpx;
+}
+.detail .content .kd {
+  color: #C0C4CC;
+  font-size: 24rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #fff;
+  padding-left: 10rpx;
+}
+.detail .content .product-detail {
+  width: 100%;
+  margin-top: 20rpx;
+}
+.detail .content .product-detail .title {
+  padding: 0 10rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #fff;
+  font-size: 28rpx;
+}
+.detail .bottom {
+  position: fixed;
+  bottom: 0;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: #fff;
+}
+.detail .bottom .icon {
+  width: 110rpx;
+  text-align: center;
+  color: #C0C4CC;
+  border-right: 1rpx solid #f4f4f4;
+}
+.detail .bottom .icon .fa {
+  font-size: 50rpx;
+}
+.detail .bottom .icon .label {
+  font-size: 20rpx;
+}
+.detail .bottom .btn {
+  color: #fff;
+  font-size: 24rpx;
+  width: calc((100% - 220rpx) / 2);
+  height: 100%;
+  line-height: 100rpx;
+  text-align: center;
+}
+.detail .bottom .add-cart {
+  background: #E6A23C;
+}
+.detail .bottom .buy {
+  background: red;
+}
+.cart-num {
+  position: absolute;
+  background: red;
+  color: #fff;
+  font-size: 18rpx;
+  padding: 3rpx 10rpx;
+  border-radius: 18rpx;
+  left: 60rpx;
+  top: 15rpx;
+}

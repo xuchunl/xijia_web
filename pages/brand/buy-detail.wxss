@@ -1,0 +1,120 @@
+.buy-detail {
+  height: 100%;
+  width: 100%;
+}
+.buy-detail .header {
+  height: 280rpx;
+  width: 100%;
+  padding: 10rpx 0;
+}
+.buy-detail .header .img {
+  height: 280rpx;
+  width: 300rpx;
+  text-align: center;
+}
+.buy-detail .header .img image {
+  height: 280rpx;
+  width: 280rpx;
+  text-align: center;
+  border: 1rpx solid #f4f4f4;
+}
+.buy-detail .header .info {
+  width: calc(100% - 300rpx);
+  height: 100%;
+}
+.buy-detail .header .info .top {
+  height: 245rpx;
+  width: 100%;
+}
+.buy-detail .header .info .top .name {
+  font-size: 28rpx;
+}
+.buy-detail .header .info .top .size {
+  font-size: 24rpx;
+  color: #C0C4CC;
+}
+.buy-detail .header .info .top .sale-info {
+  font-size: 24rpx;
+  padding-top: 15rpx;
+  display: flex;
+}
+.buy-detail .header .info .bottom {
+  color: red;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.buy-detail .promotion {
+  height: 60rpx;
+  background: #f4f4f4;
+  font-size: 24rpx;
+  color: red;
+  text-align: center;
+}
+.buy-detail .promotion .time {
+  background: #f4f4f4;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.buy-detail .sale-condition {
+  height: 60rpx;
+  font-size: 24rpx;
+  color: #C0C4CC;
+  width: 100%;
+  text-align: center;
+  border-top: 1rpx solid #f4f4f4;
+  border-bottom: 1rpx solid #f4f4f4;
+}
+.buy-detail .sale-condition  .label {
+  height: 60rpx;
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.buy-detail .user-info {
+  width: 100%;
+}
+.buy-detail .user-info .img {
+  padding-left: 15rpx;
+}
+.buy-detail .user-info .img image {
+  width: 85rpx;
+  height: 85rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.buy-detail .user-info .img .show {
+  display: block;
+}
+.buy-detail .user-info .img .hidden {
+  display: none;
+}
+.buy-detail .user-info .up-down {
+  clear: both ;
+  border-top: 1rpx solid #f4f4f4;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 100;
+  text-align: center;
+  color: #C0C4CC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buy-detail .user-info .up-down .icon {
+  font-size: 50rpx;
+}
+.buy-detail .user-info .up-down .label {
+  font-size: 24rpx;
+}
+.buy-detail .share {
+  width: 100%;
+}
+.buy-detail .share button {
+  width: 90%;
+  height: 80rpx;
+  line-height: 80rpx;
+}

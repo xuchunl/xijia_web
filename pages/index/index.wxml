@@ -1,0 +1,167 @@
+<view class='index'>
+  <view class='header'>
+    <view class='left float-left'>
+      <view class='xj-info'>
+        <view class='float-left' style='font-size: 45rpx'>喜 家</view>
+        <view class='float-left shop-name'>岭秀金江</view>
+        <view class='float-left shop-num'>00003</view>
+        <view class='float-right' style='font-size: 34rpx;padding: 15rpx;'>生活头条</view>
+      </view>
+      <view class='slogan'>—— 有品质的社区软装设计拼团系统</view>
+    </view>
+    <view class='header-bottom'>
+      <view class='search float-left'>
+        <input type='text' confirm-type='search' placeholder='输入商品名称' bindinput='onQuery'></input>
+        <icon size='15' type='search'></icon>
+      </view>
+      <view class='share float-right' bindtap='onShareVisible'>
+        <view class='float-left'><image src='../image/share.jpg'></image></view>
+        <view class='float-left'>分享</view>
+         <!-- <i class="fa fa-share-square-o"></i> -->
+      </view>
+    </view>
+  </view>
+  <!--  现代 新中 小美  法式 -->
+  <scroll-view scroll-x="true" class='tab-h' scroll-left="{{scrollLeft}}">
+    <view bindtap='swichNav' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="cateIndex"  class="tab-item  {{currentCate == index ? 'active' : ''}}" data-id='{{cateItem.id}}' data-current='{{index}}' >{{cateItem.name}}
+    </view>
+  </scroll-view>
+  <view class='body'>
+    <view wx:for="{{taocanList}}" wx:for-item="taocan" wx:key="index" class='body-taocan'>
+    <view class='designer'>
+      <image src='../image/avater2.jpg'></image>
+    </view>
+    <!-- <view class='designer' wx:if="{{index == 1}}">
+      <image src='../image/avater1.jpg'></image>
+    </view> -->
+      <view style='height: {{windowWidth}}px'>
+        <swiper current="{{currentTab}}" class="change-img" autoplay='true' interval='5000' duration='300' data-index = '{{index+1}}'>
+          <swiper-item wx:for="{{taocan.showImages}}" wx:for-item="image" wx:key="index">
+            <image src="{{image}}" bindtap='previewImage' data-index="{{index}}" data-images="{{taocan.showImages}}" ></image>
+          </swiper-item>
+        </swiper>
+        <!-- <image src="{{urlPrefix}}{{taocan.preImg}}"></image> -->
+      </view>
+      <view class='taocan-info'>
+        <view class='float-left user-info'>
+          <view>
+            <image src='../image/avater.jpg'></image>
+            <view>厂家服务</view>
+          </view>
+          <!-- <view style='font-size:24rpx'>18607599088</view> -->
+        </view>
+        <view class='float-left title'>
+          <view class='title-info'>
+            <view style='height:50rpx;line-height:50rpx'>
+              <view class='float-left'>宾皇尊品</view>
+              <view class='float-left to-view-brand'>查看品牌故事 <i class='fa fa-angle-right'></i> </view>
+            </view>
+          </view>
+          <view style='clear:both;color: #909399;font-size: 20rpx;'>{{taocan.description}}</view>
+        </view>
+        <view class='detail float-left' bindtap='clickDetail' data-taocan='{{taocan}}'>
+          <view class='detail-icon'>详 情</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='share-area' wx:if='{{shareVisible}}'>
+    <view class='mask' bindtap='onShareVisible'></view>
+    <view class='share-info'>
+      <view class='share-to'> —— 分享到 —— </view>
+      <view class='share-detail'>
+        <button class='share-detail-item' id='wechat' bindtap='onShareAppMessage' open-type='share'>
+          <view class='share-icon'><i class="fa fa-wechat wechat"></i></view>
+          <view class='share-text'>微信好友</view>
+        </button>
+        <button class='share-detail-item' id='image' bindtap='buildPosterSaveAlbum'>
+          <view class='share-icon'><i class="fa fa-image image"></i></view>
+          <view class='share-text'>生成海报</view>
+        </button>
+      </view>
+      <view class='share-close' bindtap='onShareVisible'>取消</view>
+    </view>
+  </view>
+  <view class='post-mask' wx:if='{{postVisible || loginStatus}}'></view>
+  <view class='post-area' wx:if='{{postVisible}}'>
+    <view class='close' bindtap='closePost'><i class='fa fa-close'></i></view>
+    <canvas canvas-id='firstCanvas' class='first-canvas'></canvas>
+    <view class='save-image' bindtap='baocun'>
+      <button type='primary'>保存图片</button>
+    </view>
+  </view>
+  <view class='login' wx:if='{{loginStatus}}'>
+    <view class='text'>请先登录！</view>
+    <view class='login-btn'>
+      <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">登 录</button>
+    </view>
+  </view>
+  <!-- 广告活动 -->
+  <view class='advertise-info' wx:if="{{!advertiseStatus && !loginStatus}}" bindtap="clickAdvertise">
+    <view class='color-danger advertise-info-text'>惊喜巨惠，征集样板间，报名</view>
+  </view>
+  <view class="index_advertise_cover" wx:if="{{advertiseStatus}}" id="index_advertise_cover" bindtap="clickAdvertise" > 
+  </view>
+  <view class="index_show_advertise" wx:if="{{advertiseStatus}}">
+    <view class="show_advertise-time" id="time">
+      <view class='show_advertise-discount-time float-left'>
+        钜惠还剩：<span class="day">00</span>天
+        <span class="hour">00</span>小时
+        <span class="minute">00</span>分
+      </view>
+    </view>
+    <view id="show-all-user" >
+      <swiper autoplay='true' interval='1500' duration='1000' vertical='true' circular='true'>
+        <swiper-item style='height:30rpx;' wx:for="{{orderList}}" wx:for-item="item"  wx:key="itemIndex">
+          <view>{{item.name}}<span></span> {{item.phone}}<span></span>报名成功</view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class='form'>
+      <form class='form-form' bindsubmit="saveSubscribe">
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >姓 名</label>
+          </view>
+          <view class='content-td'>
+            <input class="{{nameFocus ? 'input-focus' : ''}}" bindinput='nameInput' value='{{subscribe.name}}' data-value='name'></input>
+          </view>
+        </view>
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >电 话</label>
+          </view>
+          <view class='content-td'>
+            <input type='number' class="{{phoneFocus ? 'input-focus' : ''}}" value='{{subscribe.phone}}' data-value='phone' bindinput='phoneInput'></input>
+          </view>
+        </view>
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >户 型</label>
+          </view>
+          <view class='content-td'>
+            <picker bindchange="bindHX" value="{{hxIndex}}" range="{{hxList}}" range-key="{{'name'}}">
+              <view class='hx'>{{hxList[hxIndex] ? hxList[hxIndex].name : '请选择'}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class='conten-label'>
+          <view class='content-th'>
+            <label >风 格</label>
+          </view>
+          <view class='content-td'>
+            <picker bindchange="bindFG" value="{{fgIndex}}" range="{{fgList}}" range-key="{{'name'}}">
+              <view class='fg' >{{fgList[fgIndex] ? fgList[fgIndex].name : '请选择'}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class='conten-button'> 
+          <button form-type='submit'>报名</button>
+        </view>
+      </form>
+    </view>
+    <view class='show_advertise-close'>
+      <i class="fa fa-times-circle-o color-white" bindtap="clickAdvertise" ></i>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,227 @@
+/* pages/shopping/index.wxss */
+page {
+  height: 100%;
+  background: #f2f2f2;
+}
+.shopping-all {
+  height: 100%;
+  width: 100%;
+}
+.shopping-top {
+  background: #000;
+  color: #fff;
+  width: 100%;
+  height: 100rpx;
+  padding: 0rpx 10rpx;
+  position: fixed;
+  top: 0rpx;
+}
+.shopping-top-back {
+  font-size: 50rpx;
+  width: 8%;
+  height: 100%;
+  line-height: 100rpx;
+  text-align: center;
+}
+.shopping-top-home{
+  height: 100%;
+  width: 20%;
+  text-align: left;
+}
+.shopping-top-home-text {
+  font-size: 25rpx;
+  width: 100%;
+  height: 50%;
+}
+.shopping-top-home-icon{
+  font-size: 30rpx;
+  width: 100%;
+  height: 35%;
+  padding-top: 15%;
+}
+.shopping-top-title {
+  width: 30%;
+  font-size: 35rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.shopping-top-edit {
+  width: 30%;
+  font-size: 30rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+.shopping-main {
+  height: 75%;
+  overflow: auto;
+  position: absolute;
+  top: 100rpx;
+  width: 100%;
+}
+.shopping-info-head {
+  height: 80rpx;
+  width: 100%;
+  margin-top: 15rpx;
+}
+.shopping-info-image {
+  height: 70rpx;
+  width: 80rpx;
+  padding-top: 5rpx;
+  padding-left: 15rpx;
+  padding-right: 5rpx;
+}
+.shopping-info-shop {
+  font-size: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 20rpx;
+}
+.shopping-info-money {
+  font-size: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-right: 20rpx;
+}
+.shopping-info-body {
+  margin-top: 10rpx;
+  height: 200rpx;
+}
+.shopping-info-body-icon{
+  font-size: 150%;
+  padding-top: 10%;
+  width: 10%;
+  text-align: center;
+}
+.shopping-info-body-image {
+  height: 100%;
+  width: 30%;
+  /* padding-top: 10%; */
+  text-align: center;
+}
+.shopping-info-body-image image {
+  height: 90%;
+  width: 100%;
+  padding-top: 5%;
+}
+.shopping-info-body-name {
+  font-size: 30rpx;
+  line-height: 120rpx;
+  padding-left: 20rpx;
+  height: 60%;
+  width: 55%;
+}
+.shopping-info-body-add {
+  font-size: 30rpx;
+  height: 40%;
+  width: 74%;
+  padding-left: 20rpx;
+}
+.shopping-info-body-num {
+  height: 90%;
+}
+.shopping-info-body-money {
+  height: 50%;
+  position: relative;
+  bottom: -20rpx;
+}
+.minimize, .addNum{
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  border: 1rpx solid #DCDFE6;
+  width: 100rpx;
+  text-align: center;
+  background: #F1F1F1;
+  margin-top: 30rpx;
+}
+.num-input{
+  border-top: 1rpx solid #DCDFE6;
+  border-bottom: 1rpx solid #DCDFE6;
+  width: 100rpx;
+  text-align: center;
+  background: #FFFFFF;
+  height: 50rpx;
+  margin-top: 30rpx;
+}
+/* .shopping-info-body .minimize,
+.shopping-info-body .addNum{
+  height: 100%;
+  font-size: 50rpx;
+  border: 1rpx solid #DCDFE6;
+  width: 80rpx;
+  text-align: center;
+  background: #F1F1F1;
+}
+.shopping-info-body .num-input{
+  border-top: 1rpx solid #DCDFE6;
+  border-bottom: 1rpx solid #DCDFE6;
+  width: 80rpx;
+  text-align: center;
+  background: #FFFFFF;
+  height: 100%;
+} */
+.shopping-bottom {
+  position: fixed;
+  bottom: 0rpx;
+  height: 13%;
+  width: 100%;
+  z-index: 9999;
+}
+.shopping-bottom-icon {
+  font-size: 150%;
+  height: 100%;
+  padding-top: 15rpx;
+  width: 10%;
+  text-align: center;
+}
+.shopping-bottom-allCheck {
+  font-size: 80%;
+  height: 100%;
+  padding-top: 25rpx;
+}
+.shopping-bottom-sum {
+  width: 50%;
+  height: 100%;
+}
+.shopping-bottom-sum-money {
+  height: 35%;
+  padding: 20rpx;
+}
+.shopping-bottom-count {
+  font-size: 100%;
+}
+.shopping-bottom-real-money {
+  font-size: 100%;
+}
+.shopping-bottom-total {
+  padding-left: 15rpx;
+  font-size: 80%;
+  height: 40%;
+}
+.shopping-bottom-total-money {
+  padding-right: 8rpx;
+}
+.shopping-bottom-settle {
+  width: 30%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  font-size: 100%;
+}
+.shopping-bottom-edit {
+  padding: 0 10rpx;
+  padding-top: 15rpx;
+}
+.shopping-delete{
+  border:1rpx solid red;
+  padding:15rpx;
+  border-radius:10rpx;
+}
+.shopping-colletion {
+  border:1rpx solid #E6A23C;
+  padding:15rpx;
+  margin-right: 10rpx;
+  border-radius:10rpx;
+}

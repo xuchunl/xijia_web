@@ -1,0 +1,118 @@
+/**app.wxss**/
+@import "resources/style/fontAwesome";
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+page {
+  height: 100%;
+  width: 100%;
+}
+.float-left {
+  float: left
+}
+.float-right {
+  float: right
+}
+.show{
+	display: block;
+}
+.hidden{
+	display: none;
+}
+.padding-left-20 {
+  padding-left: 20rpx;
+}
+.padding-right-20 {
+  padding-right: 20rpx;
+}
+.padding-top-20 {
+  padding-top: 20rpx;
+}
+.padding-bottom-20 {
+  padding-bottom: 20rpx;
+}
+.margin-left-20 {
+  margin-left: 20rpx;
+}
+.margin-right-20 {
+  margin-right: 20rpx;
+}
+.margin-top-20 {
+  margin-top: 20rpx;
+}
+.margin-bottom-20 {
+  margin-bottom: 20rpx;
+}
+
+.color-white {
+  color: white;
+}
+.color-blue {
+  color: #409EFF;
+}
+.color-danger {
+  color: red;
+}
+.color-success {
+  color: #67C23A;
+}
+.color-waring {
+  color: #E6A23C
+}
+.color-info {
+  color: #909399;
+}
+.color-gray {
+  color: #DCDFE6;
+}
+.color-black {
+  color: #000;
+}
+.background-white {
+  background: white;
+}
+.background-blue {
+  background: #409EFF;
+}
+.background-danger {
+  background: red;
+}
+.background-success {
+  background: #67C23A;
+}
+.background-waring {
+  background: #E6A23C
+}
+.background-info {
+  background: #909399;
+}
+.background-gray {
+  background: #DCDFE6;
+}
+.background-black {
+  background: #000;
+}
+.clear-borth {
+  clear: both;
+}
+.border-top-solid {
+  border-top: 1rpx solid #e9eaec;
+}
+.border-bottom-solid {
+  border-bottom: 1rpx solid #e9eaec;
+}
+.border-right-solid {
+  border-right: 1rpx solid #dddee1;
+}
+.border-left-solid {
+  border-left: 1rpx solid #dddee1;
+}
+.text-align-center {
+  text-align: center
+}

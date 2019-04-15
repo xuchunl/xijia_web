@@ -1,0 +1,180 @@
+.brand {
+  height: 100%;
+  width: 100%;
+  background: #f4f4f4;
+}
+.brand .header {
+  height: 400rpx;
+  width: 100%;
+  background: #fff;
+}
+.brand .header .logo {
+  height: 250rpx;
+  width: 100%;
+}
+.brand .header .logo image {
+  height: 250rpx;
+  width: 100%;
+}
+.brand .shop-info {
+  height: 150rpx;
+}
+ .brand .shop-info .shop-logo {
+   position: relative;
+   z-index: 2;
+   padding: 0 20rpx;
+   top: -40rpx;
+}
+.brand .shop-info .shop-logo image {
+  border-radius: 8rpx;
+  height: 110rpx;
+  width: 110rpx;
+  border: 1rpx solid #f4f4f4;
+}
+.brand .shop-info .right {
+  width: calc(100% - 160rpx);
+}
+.brand .shop-info .detail {
+  font-size: 20rpx;
+  color: #C0C4CC;
+  width: 100%;
+}
+.brand .shop-info .right .detail .sale,
+.brand .shop-info .right .detail .love {
+  width: calc(100% / 2);
+}
+.brand .shop-info .right .detail .fa-tint,
+.brand .shop-info .right .detail .fa-heart {
+  color: red;
+}
+.brand .shop-info .desc {
+  font-size: 20rpx;
+  color: #909399;
+  clear: both;
+  padding-left: 20rpx;
+  position: relative;
+  top: -40rpx;
+}
+.view-brand-story {
+  font-size: 20rpx;
+  color: #909399;
+  width: 100%;
+  position: relative;
+  top: -40rpx;
+  right: 10rpx;
+}
+.brand .content {
+  width: 100%;
+}
+.brand .content .item {
+  padding: 0rpx 20rpx;
+  margin-top: 20rpx;
+  background: #fff;
+  clear: both;
+}
+.brand .content .item .title {
+  width: 100%;
+  height: 70rpx;
+  /* line-height: 70rpx; */
+  font-size: 24rpx;
+  color: #C0C4CC;
+  border-bottom: 1rpx solid #f4f4f4;
+  display: flex;
+  align-items: center;
+}
+.brand .content .item .title .name {
+  width: 70%;
+}
+.brand .content .item .title .love {
+  width: 30%;
+  text-align: right;
+  color: red;
+}
+.brand .content .item .info {
+  width: 100%;
+  background: #fff;
+  padding: 10rpx 0;
+  height: 200rpx;
+}
+.brand .content .item .img {
+  width: 200rpx;
+  height: 200rpx;
+  padding-right: 15rpx;
+}
+.brand .content .item .img image {
+  width: 100%;
+  height: 100%;
+  border: 1rpx solid #f4f4f4;
+}
+.brand .content .item .detail {
+  width: calc(100% - 215rpx);
+}
+.brand .content .item .detail .top {
+  height: 150rpx;
+}
+.brand .content .item .detail .type {
+  font-size: 24rpx;
+  color: #909399;
+}
+.brand .content .item .detail .pj {
+  font-size: 20rpx;
+  color: #C0C4CC;
+}
+.brand .content .item .detail .shopping {
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+}
+.brand .content .item .detail .shopping .price {
+  color: red;
+  font-size: 30rpx;
+  width: calc(100% - 110rpx);
+}
+.brand .content .item .detail .shopping .add-shpping {
+  background: #DEDEDE;
+  border-radius: 8rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 28rpx;
+  padding: 10rpx;
+}
+.brand .content .item .buy-info {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 100%;
+  border-top: 1rpx solid #f4f4f4;
+  color: #C0C4CC;
+}
+.brand .content .item .buy-user {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+.brand .content .item .label {
+  font-size: 24rpx;
+}
+.brand .content .item .buy-user image {
+  height: 50rpx;
+  width: 50rpx;
+  border-radius: 50%;
+}
+.brand .content .item .buy-user .no-first0 {
+  position: relative;
+  left: -15rpx;
+}
+.brand .content .item .buy-user .no-first1 {
+  position: relative;
+  left: -30rpx;
+}
+.brand .content .item .buy-user .no-first2 {
+  position: relative;
+  left: -45rpx;
+}
+.brand .content .item .buy-user .no-first3 {
+  position: relative;
+  left: -60rpx;
+}
+.brand .content .item .buy-user .no-first4 {
+  position: relative;
+  left: -75rpx;
+}

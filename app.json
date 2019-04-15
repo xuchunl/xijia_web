@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mobile/index",
+    "pages/logs/logs",
+    "pages/single/index",
+    "pages/shopping/index",
+    "pages/settle/settle",
+    "pages/receiver/index",
+    "pages/receiver/edit",
+    "pages/mine/index",
+    "pages/order/index",
+    "pages/brand/index",
+    "pages/brand/detail",
+    "pages/brand/buy-detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": " ",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "套餐",
+        "iconPath": "resources/icon/icon_gray_01.png",
+        "selectedIconPath": "resources/icon/icon_blue_01.png"
+      },
+      {
+        "pagePath": "pages/single/index",
+        "text": "品牌馆",
+        "iconPath": "resources/icon/icon_gray_02.png",
+        "selectedIconPath": "resources/icon/icon_blue_02.png"
+      },
+      {
+        "pagePath": "pages/shopping/index",
+        "text": "购物车",
+        "iconPath": "resources/icon/icon_gray_02.png",
+        "selectedIconPath": "resources/icon/icon_blue_02.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "resources/icon/icon_gray_05.png",
+        "selectedIconPath": "resources/icon/icon_blue_05.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,48 @@
+.order {
+  height: 100%;
+  width: 100%;
+  background: #f4f4f4;
+}
+.tab-h {
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #fff;
+  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  color: #C0C4CC;
+  font-size: 28rpx;
+  line-height: 80rpx;
+}
+.tab-item {
+  display: inline-block;
+  width: calc(100% / 4 - 3rpx);
+  font-weight: bold;
+  text-align: center;
+  border-top: 1rpx solid #f4f4f4;
+  border-bottom: 1rpx solid #f4f4f4;
+  border-right: 1rpx solid #f4f4f4;
+}
+.tab-item.active {
+  color: #57acee;
+  position: relative;
+}
+.tab-item.active:after {
+  content: "";
+  display: block;
+  height: 4rpx;
+  width: 100%;
+  background: #57acee;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 16rpx;
+}
+.order .content {
+  margin-top: 20rpx;
+  height: calc(100% - 80rpx);
+}

@@ -1,0 +1,271 @@
+<!--pages/mobile/index.wxml-->
+<view class='mobile' >
+  <view class='header'>
+    <view class='left float-left'>
+      <view class='xj-info'>
+        <view class='float-left' style='font-size: 45rpx'>喜 家</view>
+        <view class='float-left shop-name'>岭秀金江</view>
+        <view class='float-left shop-num'>00003</view>
+        <view class='float-right' style='font-size: 34rpx;padding: 15rpx;'>生活头条</view>
+      </view>
+      <view class='slogan'>—— 有品质的社区软装设计拼团系统</view>
+    </view>
+    <view class='header-bottom'>
+      <view class='search float-left'>
+        <input type='text' confirm-type='search' placeholder='输入商品名称' bindinput='onQuery'></input>
+        <icon size='15' type='search'></icon>
+      </view>
+      <view class='share float-right' bindtap='onShareVisible'>
+        <view class='float-left'><image src='../image/share.jpg'></image></view>
+        <view class='float-left'>分享</view>
+         <!-- <i class="fa fa-share-square-o"></i> -->
+      </view>
+    </view>
+  </view>
+  <view class="mobile-conatiner">
+    <view id="mobile-conatine-change" class="mobile-conatine-change">
+      <view class='tab-content ' style='height: {{windowWidth}}px'>
+        <swiper current="{{currentTab}}"  class="change-img" autoplay='{{autoplayStatus}}' interval='{{interval}}' duration='300' bindchange='switchTab' bindanimationfinish='switchTabFinish'>
+        <swiper-item wx:for="{{detailInfo.showImages}}" wx:for-item="image" wx:key="index">
+            <image src="{{image}}" bindtap='previewImage' data-index="{{index}}" data-images="{{detailInfo.showImages}}" ></image>
+          </swiper-item>
+          
+        </swiper>
+      </view>
+      <!-- <view class='mobile-buttom-type'>
+        <view class='padding-left-20 float-left'>{{detailInfo.name}}</view>
+        <view class='padding-right-20 float-right'>
+          套餐{{detailInfo.taoCanPrice}}元-团购{{detailInfo.tuangouPrice}}元起
+        </view>
+      </view> -->
+      <view class="mobile-change-scrollView ">
+        <scroll-view scroll-x = "true" class='tab-h' scroll-left = "{{scrollLeft}}" >
+          <view class="tab-item {{currentIndex ==0 ? 'active' : ''}}" data-current = '0' bindtap="swichNav">客 厅</view>
+          <view class="tab-item {{currentIndex ==1 ? 'active' : ''}}" data-current = '1' bindtap="swichNav">餐 厅</view>
+          <view class="tab-item {{currentIndex ==2 ? 'active' : ''}}" data-current = '2' bindtap="swichNav">主 卧</view>
+          <view class="tab-item {{currentIndex ==3 ? 'active' : ''}}" data-current = '3' bindtap="swichNav">客 房</view>
+          <view class="tab-item {{currentIndex ==4 ? 'active' : ''}}" data-current = '4' bindtap="swichNav">书 房</view>
+          <view class="tab-item {{currentIndex ==5 ? 'active' : ''}}" data-current = '5' bindtap="swichNav">阳 台</view>
+        </scroll-view>
+      </view>
+      <view class='mobile-invite'>
+        <button class='mobile-invite-button' bindtap='onShareAppMessage' open-type="share">邀请邻居好友 <i class='fa fa-wechat'></i></button>
+        <!-- <image src='../image/sheji.png'></image> -->
+      </view>
+    </view>
+  </view>
+  <view class='main-bottom' >
+    <view class='main-bottom-info'>
+      <view class='main-bottom-main' >
+        <view class='main-bottom-house-info'>
+          <view class='main-bottom-top-square float-left background-gray'>{{hxDetail.square}}m² {{hxDetail.name}}</view>
+          <!-- <view class='main-bottom-top-house-type background-gray float-left' bindtap='clickShowImage'>{{hxDetail.name}}</view> -->
+          <view class='main-bottom-top-house-group float-right  background-gray' bindtap="clickPintuan">我要拼团</view>
+        </view>
+        <view class='main-bottom-steps'>
+          <view class="main-bottom-progressbar float-left" wx:for="{{detailInfo.info}}" wx:for-item="house"  wx:key="index">
+            <view class='main-bottom-progressbar-num'>{{house.num}}套</view>
+            <view class='main-bottom-progressbar-case'>
+              <view class="el-step is-horizontal" style="flex-basis: 50%; margin-right: 0px;">
+                <view class="el-step__head is-process">
+                  <view class="{{(index+1) != detailInfo.info.length ? 'el-step__line' : 'el-step__last__line'}}" style="margin-right: 0px;">
+                    <i class="el-step__line-inner" style="transition-delay: 0ms; border-width: 0px;width: 0%;"></i>
+                  </view>
+                  <view class="el-step__icon is-text background-info">
+                    <view class="el-step__icon-inner"></view>
+                  </view>
+                </view>  
+                <view class="el-step__main">
+                  <!-- <view class="el-step__title is-process">{{house.price}}万</view> -->
+                  <view class="el-step__title is-process">
+                    <image class=" main-bottom-userInfo-avatar userInfo-avatar-margin float-left" src="{{userInfo.avatarUrl}}" ></image>
+                  </view>
+                  <view class="el-step__description is-process"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view class='main-bottom-userInfo'>
+          <image class=" main-bottom-userInfo-avatar float-left" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+          <image class=" main-bottom-userInfo-avatar userInfo-avatar-margin float-left" src="{{userInfo.avatarUrl}}" ></image>
+          <image class=" main-bottom-userInfo-avatar userInfo-avatar-margin float-left" src="{{userInfo.avatarUrl}}" ></image>
+          <view  class='main-bottom-tatol-pin float-left'>3人在拼单</view>
+          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </view> -->
+        <!-- <view class='main-bottom-total'>
+          共10套
+        </view> -->
+      </view>
+    </view>
+  </view>
+
+  <view class='mobile-show-product'>
+    <view class="taoqan-detail">拎包价格 1800 ~ 30000</view>
+    <view class='float-left product-class'>
+      <view class="product-class-name {{cateId == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}}</view>
+    </view>
+    <view class='float-left product-info'>
+      <view class='product-info-content' wx:if="{{detailItem.cateId && detailItem.cateId === cateId}}" wx:for="{{productList}}" wx:for-item="detailItem"  wx:key="detailIndex" >
+        <view class='float-left product-info-content-iamge'>
+          <image bindtap='previewImageOne' data-imageurl="{{urlPrefix}}{{detailItem.imgMobileUrl}}" src='{{urlPrefix}}{{detailItem.imgMobileUrl}}'></image>
+        </view>
+        <view class='float-right product-info-content-show'>
+          <view class='product-detail-title'>
+            <view style='width:100%'>
+              {{detailItem.name}}
+            </view>
+            <view class='product-detail-condition' >
+            </view>
+          </view>
+          <view class='product-detail-shopping'>
+            <view class='float-left product-detail-price'>
+              <view class='color-danger float-left'>￥</view>
+              <view class='color-danger detail-price'>{{detailItem.marketPrice}}</view>
+              <view class='color-info float-left'></view>
+            </view>
+            <view class='product-detail-add float-right background-info' bindtap="clickShowShopping" data-product='{{detailItem}}'>
+              <!-- <i class='fa fa-plus cartPlus'></i> -->
+              <text>选规格</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="cover_cover" wx:if="{{guiGeStatus}}" id="cover_cover" bindtap="closeShowShopping" catchtouchmove="preventTouchMove">
+  </view>
+  <view class="addicon_popover" wx:if="{{guiGeStatus}}" >
+    <view class="add-view-container">
+      <view class="dialog-title">
+        <view class='info'>
+          <view class='dialog-title-image'>
+            <image bindtap='previewImageOne' data-imageurl="{{urlPrefix}}{{currentShopping.ciimgUrl}}" src='{{urlPrefix}}{{currentShopping.ciimgUrl}}'></image>
+          </view>
+          <view class='right'>
+            <view class='close' bindtap="closeShowShopping" >
+              <i class='fa fa-times-circle-o'></i>
+            </view>
+            <view class='price'>价格：￥{{currentShopping.price}}</view>
+            <view class='onhand'>库存：{{currentShopping.count}}</view>
+            <view class='size'>规格：{{currentShopping.guigeName}}</view>
+          </view>
+        </view>
+      </view>
+        <view class="dialog-content">
+          <view class="dialog-content-size-info">
+            <view class='gui-ge-label' wx:for="{{showGuiGeInfo}}" wx:for-item="item" wx:key="itemIndex">
+              <view class='label'>{{item.name}}</view>
+              <view class='sub-item-info' wx:for="{{item.giList}}" wx:for-item="gi" wx:key="giIndex">
+                <button wx:for="{{gi.subItemList}}" class="size-span {{(currentShopping.guigeIds === subItem.id) ? 'sizeBackground' : 'background-info' }}" data-guige="{{subItem}}"  bindtap='clickType' wx:for-item="subItem" wx:key="subItemIndex" data-guigeId='{{subItem.id}}' data-guigename='{{subItem.name}}'>{{subItem.name}}</button> 
+              </view>
+            </view>
+          </view>
+          <view class='num-info'>
+            <view class='float-left color-info num-info-left'>数 量</view>
+            <view class='float-right num-info-right'>
+              <view class='minimize float-left' bindtap="deNum">-</view>
+              <input type="digit" bindblur="changeNum"  value='{{currentShopping.num || 1}}' class='num-input float-left'  ></input>
+              <view class='addNum float-left' bindtap="addNum">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    <view class='btn'>
+      <view class='add-cart' bindtap='addShoppingCar'>加入购物车</view>
+      <!-- <view class='buy' bindtap='onBuy'>立即购买</view> -->
+    </view>
+  </view>
+
+  <!-- 显示户型图片 -->
+  <!-- <view class='mobile-image-cover' wx:if="{{showImageStatus}}" bindtap="clickShowImage" catchtouchmove="preventTouchMove"></view>
+  <view class='mobile-image-dialog' wx:if="{{showImageStatus}}" bindtap="clickShowImage" catchtouchmove="preventTouchMove">
+    <image src='{{urlPrefix}}{{hxDetail.bigImgUrl}}'></image>
+  </view> -->
+
+  <!-- 拼团信息 -->
+  <view class="main_cover" wx:if="{{pintuanStatus}}" id="main_cover" bindtap="clickPintuan" catchtouchmove="pintuanTouchMove">
+  </view>
+  <view class="show_pintuan" wx:if="{{pintuanStatus}}" catchtouchmove="pintuanTouchMove">
+    <view class="pintuan-userInfo" >
+      <view class="pintuan-time" id="time">
+      <view class='pintuan-discount-time float-left'>
+        钜惠还剩：<span class="day">00</span>天
+        <span class="hour">00</span>小时
+        <span class="minute">00</span>分
+      </view>
+      <view class='pintuan-close float-right'>
+        <i class="fa fa-times-circle-o float-right" bindtap="clickPintuan" ></i>
+      </view>
+        
+      </view>
+      <view id="marquee4" >
+        <swiper autoplay='true' interval='1500' duration='1000' vertical='true' circular='true'>
+          <swiper-item style='height:30rpx;' wx:for="{{baojia}}" wx:for-item="item"  wx:key="itemIndex">
+            <view>{{item.label}}<span></span> {{item.value}}<span></span>成功拼成</view>
+          </swiper-item>
+        </swiper>
+      </view>
+      <view class='form'>
+        <form class='form-form' >
+          <view class='conten-label'>
+            <view class='content-th'>
+              <label >姓 名</label>
+            </view>
+            <view class='content-td'>
+              <input class="{{userNameFocus ? 'input-focus' : ''}}" value='{{user.userName}}' bindfocus="bindFocus" bindblur="bindBlur" data-value='userName'></input>
+            </view>
+          </view>
+          <view class='conten-label'>
+            <view class='content-th'>
+              <label >电 话</label>
+            </view>
+            <view class='content-td'>
+              <input type='number' class="{{mobileFocus ? 'input-focus' : ''}}" value='{{user.mobile}}' bindfocus="bindFocus" bindblur="bindBlur" data-value='mobile'></input>
+            </view>
+          </view>
+          <!-- <view class='conten-label'>
+            <view class='content-th'>
+              <label >户 型</label>
+            </view>
+            <view class='content-td'>
+              <input class="{{houseTypeFocus ? 'input-focus' : ''}}" value='{{user.houseType}}' bindfocus="bindFocus" bindblur="bindBlur" data-value='houseType'></input>
+            </view>
+          </view> -->
+          <view class='conten-label'>
+            <view class='conten-dj'>定金1000元，拼不成我退款</view>
+          </view>
+          <view class='conten-button'> 
+            <button bindtap='wxpay'>支付</button>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+<!-- 
+  <view class='shopping-info'>
+    <view class='shopping-info-blank'></view>
+    <view class='shopping-info-detail'>
+      <view class='shopping-info-cart float-left'>
+        <image src='../image/shopping.png'></image>
+      </view>
+      <view class='float-left shopping-info-price color-white'>
+        ￥{{totalMny}}
+      </view>
+      <view class='float-right background-info shopping-info-settle' >去结算</view>
+    </view>
+  </view> -->
+  <!-- 播放  -->
+  <view class='video-tab ' style='top: {{windowWidth}}px'>
+    <image bindtap="bindVideoTab" src="../image/bofang.png"></image>
+  </view>
+  <view class='video-info' wx:if="{{videoStatus}}">
+    <view class='close-video' bindtap="bindVideoTab">
+      <view class='float-right fa fa-close video-close-icon'></view>
+      <view class='float-right video-close-button'>关闭按钮</view>
+    </view>
+    <video src="{{urlPrefix}}{{videoUrl}}" autoplay="{{videoStatus}}" loop page-gesture controls ></video>
+  </view>
+  <view class='on-pay'>
+  </view>
+</view>

@@ -1,0 +1,374 @@
+.single{
+  background: #fff;
+  height: calc(100% - 265rpx);
+  width: 100%;
+  padding-top: 265rpx;
+}
+.single .header {
+  height: 185rpx;
+  padding: 0 10rpx;
+  width: calc(100% - 20rpx);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: #fff;
+}
+.single .header .left {
+  font-size: 35rpx;
+  width: 100%;
+  height: 120rpx;
+  text-align: left;
+}
+.single .header .left .xj-info {
+  height: 50rpx;
+}
+.single .header .left .xj-info .shop-name {
+  border: 1rpx solid #F4F4F4;
+  border-radius: 8rpx;
+  padding: 15rpx;
+  margin-left: 15rpx;
+  font-size: 28rpx;
+}
+.single .header .left .xj-info .shop-num {
+  padding: 15rpx;
+  font-size: 28rpx;
+}
+.single .header .slogan {
+  clear: both;
+  font-size: 26rpx;
+}
+.single .header .header-bottom {
+  clear: both;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.single .header .header-bottom .search {
+  width: 85%;
+}
+.header-bottom .search icon {
+  position: absolute;
+  top: 130rpx;
+  left: 17rpx;
+}
+.header-bottom .search input {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  padding-left: 54rpx;
+  width: 367rpx;
+}
+.header-bottom .share {
+  width: 15%;
+  text-align: right;
+  height: 60rpx;
+  font-size: 28rpx;
+  display: flex;
+}
+.header-bottom .share image {
+  height: 40rpx;
+  width: 40rpx;
+}
+.single .tab-h {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: fixed;
+  z-index: 99;
+  top: 185rpx;
+  left: 0;
+  font-size: 20rpx;
+  border-top: 2rpx solid #BEBEBE;
+  height: 80rpx;
+  line-height: 80rpx;
+  white-space: nowrap;
+  background: #fff;
+}
+.single .tab-h .tab-item {
+  display: inline-block;
+  width: calc(100% / 5 - 2rpx);
+  text-align: center;
+  background: #E6E4E4;
+  margin-right: 2rpx;
+  font-size: 28rpx;
+}
+.single .tab-h .tab-item:last-child {
+  margin-right: 0rpx;
+}
+.single .tab-h .tab-item.active {
+  color: #57acee;
+  position: relative;
+}
+.single .body {
+  min-height: calc(100% - 265rpx);
+  width: 100%;
+}
+.single .body .tao-can-item {
+  background: #fff;
+}
+.single .body .image-info{
+  width: 100%;
+  height: 400rpx;
+  padding-top: 10rpx;
+}
+.single .body .image-info .image-left {
+  width: 400rpx;
+}
+.single .body .image-info .image-left image {
+  width: 400rpx;
+  height: 400rpx;
+  border: 1rpx solid #F4F4F4;
+}
+.single .body .image-info .image-right {
+  width: calc(100% - 410rpx);
+  padding-left: 10rpx;
+}
+.single .body .taocan-info {
+  width: 100%;
+  height: 175rpx;
+  border-bottom: 1rpx solid #F4F4F4;
+  clear: both;
+}
+.single .body .taocan-info .user-info {
+  width: 140rpx;
+  font-size: 20rpx;
+  height: 175rpx;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #909399;
+  display: flex;
+}
+.single .body .taocan-info .user-info image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 10rpx;
+}
+.single .body .taocan-info .title {
+  width: calc(100% - 160rpx);
+  height: 100%;
+  font-size: 26rpx;
+  text-align: left;
+}
+.single .body .taocan-info .title .to-view-brand {
+  padding-left: 20rpx;
+  font-size: 24rpx;
+  color: #909399;
+}
+.single .body .taocan-info .pin-dan {
+  width: 100%;
+  height: 130rpx;
+}
+.single .body .taocan-info .pin-dan .pin-num {
+  width: 140rpx;
+  height: 130rpx;
+  font-size: 24rpx;
+  align-items: center;
+  display: flex;
+}
+.single .body .taocan-info .pin-dan .pin-info {
+  width: calc(100% - 260rpx);
+}
+.single .body .taocan-info .pin-dan .pin-info .progressbar {
+  width: 32%;
+}
+.single .body .taocan-info .pin-dan .progressbar .num {
+  font-size: 24rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.single .body .taocan-info .pin-dan .progressbar .case {
+  width: 100%;
+  white-space: nowrap;
+}
+.single .body .taocan-info .pin-dan .step {
+  position: relative;
+  flex-shrink: 1;
+}
+.single .body .taocan-info .pin-dan .step.is-horizontal {
+  display: inline-block;
+  width: 100%;
+}
+.single .body .taocan-info .pin-dan .step-head.is-process {
+  color: #303133;
+  border-color: #303133;
+}
+.single .body .taocan-info .pin-dan .step-head {
+  position: relative;
+  width: 100%;
+}
+.single .body .taocan-info .pin-dan .step.is-horizontal .step-line {
+  height: 5rpx;
+  top: 9rpx;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.single .body .pin-tun-info {
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 10rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+  font-size: 24rpx;
+  color: #c0c4cc;
+  width: 100%;
+}
+.single .body .pin-tun-info image {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+/* .single .body .pin-tun-info .no-first0 {
+  position: relative;
+  left: -15rpx;
+}
+.single .body .pin-tun-info .no-first1 {
+  position: relative;
+  left: -30rpx;
+}
+.single .body .pin-tun-info .no-first2 {
+  position: relative;
+  left: -45rpx;
+}
+.single .body .pin-tun-info .no-first3 {
+  position: relative;
+  left: -60rpx;
+} */
+.single .body .pin-tun-info .label {
+  width: calc(100% - 260rpx);
+  padding-left: 10rpx;
+}
+.step.is-horizontal .step-last-line{
+  height: 0rpx;
+  top: 9rpx;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.step-line {
+  position: absolute;
+  border-color: inherit;
+  background-color: #c0c4cc;
+  width: 100%;
+}
+.step-line-inner {
+  display: block;
+  border-style: solid;
+  border-color: inherit;
+  transition: .15s ease-out;
+  box-sizing: border-box;
+  height: 0;
+  width: 100%;
+}
+.step-icon.is-text {
+    border-radius: 50%;
+}
+.step-icon {
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+  width: 25rpx;
+  height: 25rpx;
+  font-size: 100%;
+  box-sizing: border-box;
+  transition: .15s ease-out;
+}
+.step-icon-inner {
+  display: inline-block;
+  user-select: none;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1;
+  color: inherit;
+}
+.step-main {
+  height: 45rpx;
+  line-height: 45rpx;
+  font-size: 24rpx;
+}
+.pin-dan-btn {
+  width: 110rpx;
+  height: 130rpx;
+  display: flex;
+  align-items: center;
+}
+.pin-dan-btn button {
+  width: 100%;
+  font-size: 24rpx;
+  padding: 0;
+}
+.share-area {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.share-area .mask {
+  width: 100%;
+  height: 60%;
+  background: #000 none repeat scroll 0% 0%;
+  opacity: 0.4;
+}
+.share-area .share-info {
+  width: 100%;
+  height: 40%;
+  background: #fff;
+}
+.share-to {
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.share-detail {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 180rpx);
+  align-items: center;
+}
+.share-detail-item {
+  width: 50%;
+  text-align: center;
+  background: inherit;
+  padding: 0px;
+}
+.share-detail button::after {
+  border-radius: 0;
+  border: none;
+}
+.share-icon {
+  font-size: 50rpx;
+}
+.share-icon .wechat {
+  background:#67C23A;
+  color:#fff;
+  width:100rpx;
+  height:100rpx;
+  line-height:100rpx;
+  border-radius:50%;
+}
+.share-icon .image {
+  background:#E6A23C;
+  color:#fff;
+  width:100rpx;
+  height:100rpx;
+  line-height:100rpx;
+  border-radius:50%;
+}
+.share-text {
+  font-size: 24rpx;
+  color: #C0C4CC;
+}
+.share-close {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  border-top: 1rpx solid #F4F4F4;
+  font-size: 24rpx;
+}

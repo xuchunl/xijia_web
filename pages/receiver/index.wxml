@@ -1,0 +1,28 @@
+<view class="receiver">
+  <view class='receiver-title border-top-solid color-info'>
+    <view class='padding-left-20 float-left'>收货地址</view>
+    <view class='padding-right-20 color-success float-right' bindtap='checkAddress'>完成</view>
+  </view>
+  <view class='receiver-list'>
+    <view class='receiver-detail border-top-solid' wx:for="{{receiverList}}" wx:for-item="receiver" wx:key="receiver.id">
+        <view class="fa {{receiver.isCheck ? 'fa-check-circle' : 'fa-circle-o'}} receiver-check-icon {{receiver.isCheck ? 'color-blue' : 'color-gray'}}  float-left" bindtap='clickCheck' data-index = "{{index}}" data-receiver='{{receiver}}'></view>
+        <view class='float-left receiver-address-info'>
+          <view class='receiver-user-info'>
+            {{receiver.name}}  {{receiver.mobile}}
+          </view>
+          <view class='float-left receiver-address-detail'>
+            <view class='float-left defult-button' wx:if="receiver.idDefault">默认</view>
+            <view class='float-left'>{{receiver.address}}</view>
+          </view>
+        </view>
+        <view class='float-left receiver-edit color-danger' bindtap='addAddress' data-receiver='{{receiver}}'>编辑</view>
+    </view>
+    <view class='border-top-solid text-align-center padding-top-20' wx:if="{{!receiverList.length}}">
+    
+    </view>
+  </view>
+
+  <view class='add-address'>
+    <button type='warn' bindtap='addAddress'>添加新地址</button>
+  </view>
+</view>

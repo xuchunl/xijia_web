@@ -1,0 +1,64 @@
+<view class='detail'>
+  <scroll-view scroll-x="true" class='tab-h' scroll-left="{{scrollLeft}}">
+    <view class="tab-item {{currentTab ==0 ? 'active' : ''}}" data-current='0' bindtap="swichNav">基本信息</view>
+    <view class="tab-item {{currentTab ==1 ? 'active' : ''}}" data-current='1' bindtap="swichNav">购买记录</view>
+  </scroll-view>
+  <view class='content'>
+    <view class='base-info' wx:if='{{currentTab == 0}}'>
+      <view class='image'><image src='../image/p1_c_02.jpg'></image></view>
+      <view class='info'>
+        <view class='float-left user-info'>
+          <view>
+            <image src='../image/avater.jpg'></image>
+            <view>厂家服务</view>
+          </view>
+        </view>
+        <view class='float-left title'>
+          圧在夺在大在在在圧在夺在大在在在圧在夺在
+        </view>
+      </view>
+      <view class='pin-dan'>
+        <view class='pin-num float-left' bindtap='toBrand' data-product='{{product}}'>已拼3100件</view>
+        <view class='pin-info float-left'>
+          <view class="progressbar float-left" wx:for="{{houseInfo}}" wx:for-item="house"  wx:key="index"  bindtap='toBrand' data-product='{{product}}'>
+            <view class='num'>{{house.num}}件</view>
+            <view class='case'>
+              <view class="step is-horizontal" style="flex-basis: 50%; margin-right: 0px;">
+                <view class="step-head is-process">
+                  <view class="{{(index+1) != houseInfo.length ? 'step-line' : 'step-last-line'}}" style="margin-right: 0px;">
+                    <i class="step-line-inner" style="transition-delay: 0ms; border-width: 0px;width: 0%;"></i>
+                  </view>
+                  <view class="step-icon is-text background-info">
+                    <view class="step-icon-inner"></view>
+                  </view>
+                </view>  
+                <view class="step-main">
+                  <view class="step-title">{{house.price}}元</view>
+                  <view class="step-description is-process"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='kd'> 全场包邮 · 7天退换 · 48小时发货 · 假一赔十 </view>
+      <view class='product-detail'>
+        <view class='title'>商品详情</view>
+      </view>
+    </view>
+    <view class='record' wx:if='{{currentTab == 1}}'></view>
+  </view>
+  <view class='bottom'>
+    <view class='shopping-cart icon'>
+      <view><i class='fa fa-shopping-cart'></i></view>
+      <view class='label'>购物车</view>
+    </view>
+    <view class='share icon'>
+      <view><i class='fa fa-share-alt'></i></view>
+      <view class='label'>分享</view>
+    </view>
+    <view class='cart-num'>10</view>
+    <view class='btn add-cart'>加入购物车</view>
+    <view class='btn buy'>立即购买</view>
+  </view>
+</view>
