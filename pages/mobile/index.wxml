@@ -282,7 +282,7 @@
   </view>
   <view class='on-pay'>
     <view class='totalMny float-left'>
-      <view class='color-white float-left'>总价：</view><view class='color-danger float-left'>￥100010</view>
+      <view class='color-white float-left'>总价：</view><view class='color-waring float-left'>￥100010</view>
     </view>
     <view class='cart-num float-left'>
       <i class='fa fa-shopping-cart shopping-cart'></i>
@@ -290,7 +290,7 @@
     </view>
     <view class='price float-right'>
       <view class='color-white float-left'>单价：</view>
-      <view class='color-danger float-left'>￥1800</view>
+      <view class='color-waring float-left'>￥1800</view>
     </view>
   </view>
 </view>

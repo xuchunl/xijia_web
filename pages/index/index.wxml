@@ -156,7 +156,7 @@
           </view>
         </view>
         <view class='conten-button'> 
-          <button form-type='submit'>报名</button>
+          <button form-type='submit'>美学家报名</button>
         </view>
       </form>
     </view>
