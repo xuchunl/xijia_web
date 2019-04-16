@@ -50,7 +50,6 @@
       </view>
       <view class='mobile-invite'>
         <button class='mobile-invite-button' bindtap='onShareAppMessage' open-type="share">邀请邻居好友 <i class='fa fa-wechat'></i></button>
-        <!-- <image src='../image/sheji.png'></image> -->
       </view>
     </view>
   </view>
@@ -104,7 +103,7 @@
   <view class='mobile-show-product'>
     <view class="taoqan-detail">拎包价格 1800元 ~ 30000元</view>
     <view class='float-left product-class'>
-      <view class="product-class-name {{cateId == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} 5件 1800元</view>
+      <view class="product-class-name {{cateId == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} 5件 1800</view>
     </view>
     <view class='float-left product-info'>
       <view class='product-info-content' wx:if="{{detailItem.cateId && detailItem.cateId === cateId}}" wx:for="{{productList}}" wx:for-item="detailItem"  wx:key="detailIndex" >

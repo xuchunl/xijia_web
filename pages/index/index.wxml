@@ -97,7 +97,7 @@
     </view>
   </view>
   <!-- 广告活动 -->
-  <view class='advertise-info' wx:if="{{!advertiseStatus && !loginStatus}}" bindtap="clickAdvertise">
+  <view class='advertise-info' wx:if="{{!advertiseStatus && !loginStatus && !shareVisible && !postVisible}}" bindtap="clickAdvertise">
     <view class='color-danger advertise-info-text'>惊喜巨惠，征集样板间，报名</view>
   </view>
   <view class="index_advertise_cover" wx:if="{{advertiseStatus}}" id="index_advertise_cover" bindtap="clickAdvertise" > 

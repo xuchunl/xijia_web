@@ -73,7 +73,7 @@ Page({
     if (ops.from === 'button') { }
     return {
       title: '分享',
-      imageUrl: '../image/qindan_01.jpg',//图片地址
+      imageUrl: '../image/post2.jpg',//图片地址
       path: '/pages/index/index',// 用户点击首先进入的当前页面
       success: function (res) { },
       fail: function (res) { }

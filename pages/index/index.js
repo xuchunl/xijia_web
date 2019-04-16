@@ -143,14 +143,14 @@ Page({
     if (ops.from === 'button') {}
     return {
       title: '分享',
-      imageUrl: '../image/qindan_01.jpg',//图片地址
+      imageUrl: '../image/post1.jpg',//图片地址
       path: '/pages/index/index',// 用户点击首先进入的当前页面
       success: function (res) {},
       fail: function (res) {}
     }
     // wx.previewImage({
-    //   current: '../image/qindan_01.jpg', // 当前显示图片的http链接
-    //   urls: ['../image/p1_c_02.jpg'] // 需要预览的图片http链接列表，数组形式
+    //   current: '../image/post1.jpg', // 当前显示图片的http链接
+    //   urls: ['../image/post1.jpg'] // 需要预览的图片http链接列表，数组形式
     // })
   },
   onShareVisible: function (e) {
@@ -174,7 +174,7 @@ Page({
     context.fillText('—— 有品质的社区软装设计拼团系统', 15, 33);
     context.rect(0, 45, this.data.winWidth * 0.8, 0)
     context.setLineWidth(0.2)
-    context.drawImage('../image/qindan_01.jpg', 10, 50, 150, 150)
+    context.drawImage('../image/post1.jpg', 10, 50, this.data.winWidth * 0.8 - 20, (this.data.winHeight * 0.75) - 135)
     context.setStrokeStyle('#DCDFE6');
     context.rect(0, (this.data.winHeight * 0.75) - 80, this.data.winWidth * 0.8, 0);
     context.drawImage('../image/code.jpg', 10, (this.data.winHeight * 0.75) - 75, 75, 75);
