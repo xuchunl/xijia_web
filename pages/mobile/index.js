@@ -25,7 +25,7 @@ Page({
     currentSize: null,
     modalHidden: true,
     detailInfo: {},
-    cateId: null,
+    currentCate: {},
     productType: null,
     videoStatus: false,
     guiGeStatus: false,
@@ -166,7 +166,7 @@ Page({
           let list = res.data.filter(item => item.isLeaf)
           this.setData({
             cateList: list,
-            cateId: list[0].id
+            currentCate: list[0] || {}
           })
         } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
       },
@@ -331,7 +331,8 @@ Page({
   },
   clickCate: function(e){
     let id = e.currentTarget.dataset.id;
-    this.setData({ cateId: id})
+    let currentCate = e.currentTarget.dataset.cate;
+    this.setData({ currentCate: currentCate})
   },
   closeShowShopping: function () {
     this.setData({ guiGeStatus: false})

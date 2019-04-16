@@ -191,26 +191,6 @@ Page({
       that.setData({ postVisible: true});
       msgDlg.hideLoading();
     },2000)
-    // setTimeout(() => {
-    //   wx.canvasToTempFilePath({
-    //     canvasId: 'firstCanvas',
-    //     success: (res) => {
-    //       console.log('path:', res)
-    //       var tempFilePath = res.tempFilePath;
-    //       that.setData({
-    //         canvasImagePath: tempFilePath,
-    //         postVisible: true
-    //       });
-    //     },
-    //     fail: (res) => {
-    //       console.log('path:', res)
-    //     },
-    //     complete: (res) => {
-    //       console.log('path:', res)
-    //       msgDlg.hideLoading();
-    //     }
-    //   });
-    // }, 200);
   },
   //点击保存到相册
   baocun1: function () {
@@ -226,7 +206,6 @@ Page({
           success: (res) => {
             if (res.confirm) {
               console.log('用户点击确定');
-              /* 该隐藏的隐藏 */
               that.setData({ postVisible: false})
             }
           }, fail: (res) => {

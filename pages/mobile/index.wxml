@@ -99,39 +99,40 @@
       </view>
     </view>
   </view>
-
   <view class='mobile-show-product'>
     <view class="taoqan-detail">拎包价格 1800元 ~ 30000元</view>
-    <view class='float-left product-class'>
-      <view class="product-class-name {{cateId == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} 5件 1800</view>
-    </view>
-    <view class='float-left product-info'>
-      <view class='product-info-content' wx:if="{{detailItem.cateId && detailItem.cateId === cateId}}" wx:for="{{productList}}" wx:for-item="detailItem"  wx:key="detailIndex" >
-        <view class='float-left product-info-content-iamge'>
-          <image bindtap='previewImageOne' data-imageurl="{{urlPrefix}}{{detailItem.imgMobileUrl}}" src='{{urlPrefix}}{{detailItem.imgMobileUrl}}'></image>
-        </view>
-        <view class='float-right product-info-content-show'>
-          <view class='product-detail-title'>
-            <view style='width:100%'>
-              {{detailItem.name}}
-            </view>
-            <view class='product-detail-condition' >
-            </view>
+    <view style='width:100%'>
+      <view class='float-left product-class'>
+        <view class="product-class-name {{currentCate.id == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' data-cate='{{cateItem}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} 5件 1800元</view>
+      </view>
+      <view class='float-left product-info'>
+        <view class='product-info-content' wx:if="{{detailItem.cateId && detailItem.cateId === currentCate.id}}" wx:for="{{productList}}" wx:for-item="detailItem"  wx:key="detailIndex" >
+          <view class='float-left product-info-content-iamge'>
+            <image bindtap='previewImageOne' data-imageurl="{{urlPrefix}}{{detailItem.imgMobileUrl}}" src='{{urlPrefix}}{{detailItem.imgMobileUrl}}'></image>
           </view>
-          <view class='product-detail-shopping'>
-            <view class='float-left product-detail-price'>
-              <view class='color-danger float-left'>￥</view>
-              <view class='color-danger detail-price'>{{detailItem.marketPrice}}</view>
-              <view class='color-info float-left'></view>
+          <view class='float-right product-info-content-show'>
+            <view class='product-detail-title'>
+              <view style='width:100%'>
+                {{detailItem.name}}
+              </view>
+              <view class='product-detail-condition' >
+              </view>
             </view>
-            <view class='float-right chaneg-num'>
-              <view class='de-num fa fa-minus-circle'></view>
-              <view class='add-num fa fa-plus-circle'></view>
+            <view class='product-detail-shopping'>
+              <view class='float-left product-detail-price'>
+                <view class='color-danger float-left'>￥</view>
+                <view class='color-danger detail-price'>{{detailItem.marketPrice}}</view>
+                <view class='color-info float-left'></view>
+              </view>
+              <view class='float-right chaneg-num'>
+                <view class='de-num fa fa-minus-circle'></view>
+                <view class='add-num fa fa-plus-circle'></view>
+              </view>
+              <!-- <view class='product-detail-add float-right background-info' bindtap="clickShowShopping" data-product='{{detailItem}}'>
+                <i class='fa fa-plus cartPlus'></i>
+                <text>选规格</text>
+              </view> -->
             </view>
-            <!-- <view class='product-detail-add float-right background-info' bindtap="clickShowShopping" data-product='{{detailItem}}'>
-              <i class='fa fa-plus cartPlus'></i>
-              <text>选规格</text>
-            </view> -->
           </view>
         </view>
       </view>
@@ -288,7 +289,7 @@
       <!-- <view class='count'>2</view> -->
     </view>
     <view class='price float-right'>
-      <view class='color-white float-left'>单价：</view>
+      <view class='color-white float-left'>{{currentCate.name}}：</view>
       <view class='color-waring float-left'>￥1800</view>
     </view>
   </view>
