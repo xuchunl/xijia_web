@@ -4,8 +4,8 @@ import $requst from '../../utils/request.js'
  * 服务URL
  */
 const serviceURL = {
-  QUERYLIST_URL: "/hyht/mini/subscribe/query.action",
-  SAVE_SUBSCRIBE_URL: "/hyht/mini/subscribe/save.action",
+  QUERYLIST_URL: "/mini/subscribe/query.action",
+  SAVE_SUBSCRIBE_URL: "/mini/subscribe/save.action",
 }
 
 module.exports = {

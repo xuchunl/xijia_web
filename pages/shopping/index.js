@@ -32,7 +32,7 @@ Page({
     let $this = this
     let member = wx.getStorageSync('member') 
     if (!member || !member.id) {
-      msgDlg.showModal('系统提示', '请先登录！', false)
+      msgDlg.showModal('系统提示', '请到首页先登录！', false)
       return;
     }
     msgDlg.showLoading('正在加载中');
@@ -40,7 +40,6 @@ Page({
       data: {memId: member.id},
       success: function (result) {
         // 返回数据，
-        console.log('queryCartlist', result)
         if (result.data && (!result.data.msg || result.data.msg === 'success')) {
           if (result.data.cartMobileList) {
             let shoppingList = result.data.cartMobileList;
@@ -61,6 +60,7 @@ Page({
       },
       complete: function (result) {
         msgDlg.hideLoading();
+        wx.stopPullDownRefresh();
       }
     })
   },
@@ -129,7 +129,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.loadData();
   },
 
   /**

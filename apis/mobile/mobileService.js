@@ -4,11 +4,11 @@ import $requst from '../../utils/request.js'
  * 服务URL
  */
 const serviceURL = {
-  DETAIL_URL: "/hyht/mini/wz/details.action",
-  QUERY_HX_URL: '/hyht/mini/wz/huxing/details.action',
-  DETAIL_OF_GOODS_URL: '/hyht/mini/mall/detailOfGoods.action',
-  FIND_BY_ID_URL: '/hyht/mini/mall/findByIds.action',
-  CATE_LIST_URL: '/hyht/mini/mall/cate/query4Pagin.action'
+  DETAIL_URL: "/mini/wz/details.action",
+  QUERY_HX_URL: '/mini/wz/huxing/details.action',
+  DETAIL_OF_GOODS_URL: '/mini/mall/detailOfGoods.action',
+  FIND_BY_ID_URL: '/mini/mall/findByIds.action',
+  CATE_LIST_URL: '/mini/mall/cate/query4Pagin.action'
 }
 
 module.exports = {

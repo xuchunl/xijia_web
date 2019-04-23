@@ -36,13 +36,14 @@ Page({
     mobileFocus: false,
     houseTypeFocus: false,
     pintuanStatus: false,
+    cartStatus: false,
     productList: [],
     productDetailList: [],
     shoppingInfo: [],
     totalMny: 0,
     showGuiGeInfo: [],
     interval: 5000,
-    currentShopping: { goodsId: null, guigeIds: null, price: null, num: 1, total: 0, ciimgUrl: null, name: null, count: 0, guigeName: null }, // 当前选中的商品信息
+    currentShopping: { goodsId: null, guigeIds: null, price: null, num: 1, total: 0, ciimgUrl: null, name: null, count: 0, guigeName: null, cartGoodsList: [] }, // 当前选中的商品信息
     shoppingCarList: [], // 购物车的商品信息
     shoppingList:[], // 选中所有的商品信息
     goodsId: '',
@@ -84,7 +85,6 @@ Page({
       })
     }
     if (id) this.loadData(id);
-    this.findCatelist();
     this.loadHXList();
     this.loadFGList();
   },
@@ -119,17 +119,20 @@ Page({
             res.data.showImages.push(this.data.urlPrefix + res.data.secondaryRoom);
             res.data.showImages.push(this.data.urlPrefix + res.data.functionRoom);
             res.data.showImages.push(this.data.urlPrefix + res.data.veranda);
+            res.data.goodsList.filter(item => item.changeNum = item.num)
             $this.setData({
               detailInfo: res.data,
               videoUrl: res.data.livingVideo,
               productList: res.data.goodsList
             })
+            this.findCatelist();
             let time = new Date(moment(new Date).add(1, 'd')).getTime()
             // storage.setSync('fenge-detail', res.data, time)
             $this.queryHX(res.data.huxingId);
           } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
         },
         fail: (res) => {
+          
           msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
         },
         complete: (res) => {
@@ -158,16 +161,13 @@ Page({
   },
   // 查询类别列表
   findCatelist: function () {
-    msgDlg.showLoading('');
     mobileService.findCatelist({
       data: {},
       success: (res) => {
         if (res.data && (!res.data.msg || res.data.msg !== 'fail')) {
-          let list = res.data.filter(item => item.isLeaf)
-          this.setData({
-            cateList: list,
-            currentCate: list[0] || {}
-          })
+          let list = res.data.filter(item => item.isLeaf);
+          this.setData({ cateList: list, currentCate: list[0] || {} });
+          this.handlePrice();
         } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
       },
       fail: (res) => {
@@ -175,6 +175,52 @@ Page({
       },
       complete: (res) => {}
     })
+  },
+  handlePrice: function () {
+    let totalMny = 0;
+    let cateList = this.data.cateList;
+    let productList = this.data.productList;
+    let currentCate = this.data.currentCate;
+    let currentShopping = this.data.currentShopping;
+    cateList.filter(item => {
+      item.num = 0;
+      item.price = 0;
+      productList.filter(product => {
+        if (product.cateId == item.id) {
+          item.num = Number(item.num || 0) + Number(product.changeNum || 0);
+          item.price = item.price +  Number(product.changeNum || 0) * Number(product.marketPrice || 0);
+        }
+        if (item.id === currentCate.id) currentCate.price = item.price;
+      })
+      totalMny += Number(item.price || 0);
+      return true;
+    })
+    // 一套餐价格*数量
+    totalMny = totalMny * currentShopping.num
+    this.setData({
+      cateList: cateList,
+      totalMny: totalMny,
+      productList: productList,
+      currentCate: currentCate
+    })
+  },
+  deProductNum: function (e) {
+    let product = e.currentTarget.dataset.item;
+    if (product.changeNum < 0) return;
+    product.changeNum--;
+    let productList = this.data.productList;
+    productList.splice(productList.findIndex(item => item.id === product.id), 1, product);
+    this.setData({ productList: productList });
+    this.handlePrice();
+  },
+  addProductNum: function (e) {
+    let product = e.currentTarget.dataset.item;
+    if (product.changeNum >= product.num) return;
+    product.changeNum++;
+    let productList = this.data.productList;
+    productList.splice(productList.findIndex(item => item.id === product.id), 1, product);
+    this.setData({ productList: productList });
+    this.handlePrice();
   },
   loadHXList: function () {
     let $this = this
@@ -401,102 +447,24 @@ Page({
   },
   deNum(e) {
     let currentShopping = this.data.currentShopping || {};
-    let shoppingCarList = this.data.shoppingCarList | [];
-    let shoppingList = this.data.shoppingList || [];
-    if (currentShopping.num > 1) {
-      currentShopping.num = Number(currentShopping.num) - 1;
-      currentShopping.total = Number(currentShopping.num) * currentShopping.price
-    } else {
-      currentShopping.num = 1;
-      currentShopping.total = Number(currentShopping.num) * currentShopping.price
-      return
-    }
-    // 查询当前商品信息和选中所有的商品信息
-    if (currentShopping.guigeIds) {
-      shoppingList.forEach((item, itemIndex) => {
-        if (item.goodsId === currentShopping.goodsId && item.guigeIds === currentShopping.guigeIds) {
-          item.num = currentShopping.num
-          item.total = Number(item.num) * item.price
-          return;
-        }
-      });
-    } else {
-      shoppingList.forEach((item, itemIndex) => {
-        if (item.goodsId === currentShopping.goodsId && !item.guigeIds) {
-          item.num = currentShopping.num
-          item.total = Number(item.num) * item.price
-          return;
-        }
-      });
-    }
-    this.setData({
-      shoppingList: shoppingList,
-      currentShopping: currentShopping
-    })
+    if (currentShopping.num > 1) currentShopping.num--;
+    else currentShopping.num = 1;
+    this.setData({ currentShopping: currentShopping});
+    this.handlePrice();
   },
   addNum(e) {
     let currentShopping = this.data.currentShopping || {};
-    let shoppingCarList =  this.data.shoppingCarList | [];
-    let shoppingList = this.data.shoppingList || [] ;
-    currentShopping.num = Number(currentShopping.num) + 1 ;
-    currentShopping.total = Number(currentShopping.num) * currentShopping.price
-    // 查询当前商品信息和选中所有的商品信息
-    if (currentShopping.guigeIds) {
-      shoppingList.forEach((item, itemIndex) => {
-        if (item.goodsId === currentShopping.goodsId && item.guigeIds === currentShopping.guigeIds) {
-          item.num = currentShopping.num
-          item.total = Number(item.num) * item.price
-          return;
-        }
-      });
-    } else {
-      shoppingList.forEach((item, itemIndex) => {
-        if (item.goodsId === currentShopping.goodsId && !item.guigeIds ) {
-          item.num = currentShopping.num
-          item.total = Number(item.num) * item.price
-          return;
-        }
-      });
-    }
-    this.setData({
-      shoppingList: shoppingList,
-      currentShopping: currentShopping
-    })
+    currentShopping.num++;
+    this.setData({ currentShopping: currentShopping });
+    this.handlePrice();
   },
-  changeNum(e) {
+  changeCartNum(e) {
     let num = e.detail.value || 1;
     let currentShopping = this.data.currentShopping || {};
-    let shoppingCarList = this.data.shoppingCarList | [];
-    let shoppingList = this.data.shoppingList || [];
-    if (num && num > 1) {
-      currentShopping.num = num;
-      currentShopping.total = Number(num) * currentShopping.price
-    } else {
-      currentShopping.num = 1;
-      currentShopping.total = 1 * currentShopping.price
-    }
-    // 查询当前商品信息和选中所有的商品信息
-    if (currentShopping.guigeIds) {
-      shoppingList.forEach((item, itemIndex) => {
-        if (item.goodsId === currentShopping.goodsId && item.guigeIds === currentShopping.guigeIds) {
-          item.num = currentShopping.num
-          item.total = Number(item.num) * item.price
-          return;
-        }
-      });
-    } else {
-      shoppingList.forEach((item, itemIndex) => {
-        if (item.goodsId === currentShopping.goodsId && !item.guigeIds) {
-          item.num = currentShopping.num
-          item.total = Number(item.num) * item.price
-          return;
-        }
-      });
-    }
-    this.setData({
-      shoppingList: shoppingList,
-      currentShopping: currentShopping
-    })
+    if (num && num > 1) currentShopping.num = num;
+    else currentShopping.num = 1;
+    this.setData({ currentShopping: currentShopping })
+    this.handlePrice();
   },
   bindVideoTab: function() {
     let videoStatus = !this.data.videoStatus;
@@ -611,66 +579,50 @@ Page({
   // 添加到购物车
   addShoppingCar(e) {
     let currentShopping = this.data.currentShopping || {};
-    let shoppingCarList = this.data.shoppingCarList || [];
-    let shoppingList = this.data.shoppingList || [];
-    if (!currentShopping.guigeIds) {
-      wx.showToast({
-        title: '请选择规格！',  //标题
-        icon: 'none'
-      })
-      return 
-    } else {
-      let shoppingFilterList = shoppingList.filter(item => item.goodsId === currentShopping.goodsId && item.guigeIds === currentShopping.guigeIds) || [];
-      if (shoppingFilterList.length) {
-        if (shoppingCarList && shoppingCarList.length ) {
-          let shoppingCarFilterList = shoppingCarList.filter(item => {
-            if (item.goodsId === currentShopping.goodsId && item.guigeIds === currentShopping.guigeIds){
-              item.num = shoppingFilterList[0].num;
-              item.total = shoppingFilterList[0].total;
-              return true;
-            }
-          })
-          if (!shoppingCarFilterList || !shoppingCarFilterList.length) {
-            shoppingCarList.push(shoppingFilterList[0])
-          }
-        } else {
-          shoppingCarList.push(shoppingFilterList[0])
-        }
+    if (!Number(currentShopping.num)) return wx.showToast({ title: '数量有误！', icon: 'none' });
+    let member = wx.getStorageSync('member');
+    let cartGoodsList = this.data.productList.map(item => {
+      return {
+        goods: {id: item.id},
+        fgPosition: {id: this.data.detailInfo.id},
+        cate: { id: item.cateId },
+        num: item.changeNum,
+        price: item.marketPrice,
+        totalMny: item.totalMny
       }
+    });
+    let data = {
+      fgPosition: { id: this.data.detailInfo.id, name: this.data.detailInfo.name },
+      fgPositionId: this.data.detailInfo.id,
+      fgPositionName: this.data.detailInfo.name,
+      memId: member.id,
+      num: currentShopping.num,
+      cartGoodsList: cartGoodsList,
+      goodsId: this.data.detailInfo.goodsId,
+      ciimgUrl: this.data.detailInfo.preImg
     }
-    let totalMny = 0;
-    shoppingCarList.filter(item => {
-      totalMny = item.total + totalMny
-      return true
-    })
-    shoppingCarList.forEach(item => {
-      cartService.saveCart({
-        data: item,
-        success: function (result) {
-          // 返回数据，
-          if (result.data && (!result.data.msg || result.data.msg === 'success')) {
-            wx.showToast({
-              title: '添加成功！',  //标题
-              icon: 'success'
-            })
-          } elsemsgDlg.showModal('错误提示', result.state || result.data.state || '添加购物车出错！', false)
-        },
-        fail: (result) => {
-          msgDlg.showModal('错误提示', result.state || result.data.state || '添加购物车出错！', false)
-        },
-        complete: function (result) {}
-      })
-    })
-    this.setData({
-      totalMny: totalMny,
-      shoppingCarList: shoppingCarList
+    cartService.saveCart({
+      data: data,
+      success: function (result) {
+        // 返回数据，
+        if (result.data && (!result.data.msg || result.data.msg === 'success')) {
+          wx.showToast({ title: '添加成功！', icon: 'success' })
+        } else msgDlg.showModal('错误提示', result.state || result.data.state || '添加购物车出错！', false)
+      },
+      fail: (result) => {
+        msgDlg.showModal('错误提示', result.state || result.data.state || '添加购物车出错！', false)
+      },
+      complete: function (result) { }
     })
   },
   /**
    * 显示拼团信息
    */
-  clickPintuan: function (e) {
+  onPintuan: function() {
     this.setData({ pintuanStatus: !this.data.pintuanStatus})
+  },
+  onMask: function (e) {
+    this.setData({ pintuanStatus: false, cartStatus: false})
   },
   /**
    * 点击选规格事件
@@ -767,7 +719,30 @@ Page({
     }
   },
   onBuy: function () {
-    wx.setStorageSync("goodsList", [this.data.currentShopping])
+    let currentShopping = this.data.currentShopping || {};
+    if (!Number(currentShopping.num)) return wx.showToast({ title: '数量有误！', icon: 'none' });
+    let member = wx.getStorageSync('member');
+    let cartGoodsList = this.data.productList.map(item => {
+      return {
+        goods: { id: item.id },
+        fgPosition: { id: this.data.detailInfo.id },
+        cate: { id: item.cateId },
+        num: item.changeNum,
+        price: item.marketPrice,
+        totalMny: item.totalMny
+      }
+    });
+    let data = {
+      fgPosition: { id: this.data.detailInfo.id, name: this.data.detailInfo.name },
+      fgPositionId: this.data.detailInfo.id,
+      fgPositionName: this.data.detailInfo.name,
+      memId: member.id,
+      num: currentShopping.num,
+      cartGoodsList: cartGoodsList,
+      goodsId: this.data.detailInfo.goodsId,
+      ciimgUrl: this.data.detailInfo.preImg
+    }
+    wx.setStorageSync("goodsList", [data])
     wx.navigateTo({ url: '../settle/settle?pageType=mobile'})
   },
   /* 支付 */
@@ -939,5 +914,8 @@ Page({
   },
   toViewVR: function(){
     wx.navigateTo({ url: '../webView/index?url=' + this.data.detailInfo.locationUrl })
+  },
+  onCartStatus : function () {
+    this.setData({ cartStatus: !this.data.cartStatus})
   }
 })

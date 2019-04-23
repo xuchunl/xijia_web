@@ -4,7 +4,7 @@ import $requst from '../../utils/request.js'
  * 服务URL
  */
 const serviceURL = {
-  QUERY_LIST_URL: "/hyht/mini/wz/huxing/query4Pagin.action",
+  QUERY_LIST_URL: "/mini/wz/huxing/query4Pagin.action",
 }
 
 module.exports = {

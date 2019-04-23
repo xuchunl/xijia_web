@@ -1,18 +1,17 @@
 <!--pages/shopping/index.wxml-->
 <view class='shopping-all color-info'>
   <view class='shopping-top'>
-    <view class='float-left fa fa-angle-left shopping-top-back'></view>
-    <view class='shopping-top-home float-left'>
+    <!-- <view class='float-left fa fa-angle-left shopping-top-back'></view> -->
+    <!-- <view class='shopping-top-home float-left'>
       <view class='fa fa-home shopping-top-home-icon'></view>
       <view class='shopping-top-home-text'>主页</view>
     </view>
     <view class='shopping-top-title float-left'>
       <view class='shopping-top-title-text'>购物车</view>
-    </view>
+    </view> -->
     <view class='shopping-top-edit float-right' bindtap='clickEdit'>
       <view class='shopping-top-edit-text'>{{isEditStatus ? '完成' : '编辑'}}</view>
     </view>
-    
   </view>
   <view class='shopping-main'>
     <view class='shopping-info' wx:for="{{shoppingList}}" wx:for-item="shoppingItem" wx:key="{{shoppingItem.id}}">
@@ -37,16 +36,16 @@
     </view>
   </view>
   <view class='shopping-bottom background-white'>
-    <view class="fa {{isAllCheck ? 'fa-check-circle' : 'fa-circle-o'}} shopping-bottom-icon {{isAllCheck ? 'check' : 'uncheck'}}  float-left" bindtap='clickAllCheck'></view>
-    <view  class='shopping-bottom-allCheck float-left' >全选</view>
+    <view class="fa {{isAllCheck ? 'fa-check-circle color-blue check' : 'fa-circle-o color-gray uncheck'}} shopping-bottom-icon float-left" bindtap='clickAllCheck'></view>
+    <view class='shopping-bottom-allCheck float-left' >全选</view>
     <view wx:if="{{isEditStatus}}" class='shopping-bottom-edit float-right'>
         <view class='float-right shopping-delete color-danger' bindtap='deleteCart'>删除</view>
-        <view class='float-right shopping-colletion color-waring'>移入收藏夹</view>
+        <!-- <view class='float-right shopping-colletion color-waring'>移入收藏夹</view> -->
       </view>
     <view class='shopping-bottom-sum float-left' wx:if="{{!isEditStatus}}">
       <view class='shopping-bottom-sum-money'>
-        <view class='float-left shopping-bottom-count'>合计：</view>
-        <view class='color-black float-left shopping-bottom-real-money'>￥{{totalMny}}</view>
+        <view class='color-black float-left shopping-bottom-count'>合计：</view>
+        <view class='color-waring float-left shopping-bottom-real-money'>￥{{totalMny}}</view>
       </view>
       <!-- <view class='shopping-bottom-total'>
         <view class='float-left'>总额：</view>
@@ -54,7 +53,7 @@
         <view class='float-left'>立减：￥0</view>
       </view> -->
     </view>
-    <view wx:if="{{!isEditStatus}}" class='float-right shopping-bottom-settle background-info color-white' bindtap='doPay'>
+    <view wx:if="{{!isEditStatus}}" class='float-right shopping-bottom-settle background-waring color-white' bindtap='doPay'>
       <view>去付款</view>
     </view>
   </view>

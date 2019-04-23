@@ -38,7 +38,7 @@ Page({
   loadData: function () {
     msgDlg.showLoading('正在加载中');
     brandService.brandGoodList({
-      data: this.data.condition,
+      data: { mallBean: this.data.condition},
       success: (res)  =>{
         if (res.data && !res.data.message && res.data.msg != 'fail') {
           this.setData({ taocanList: res.data || []})
@@ -97,7 +97,7 @@ Page({
   },
   checkCor: function () {
     if (this.data.currentTab >= 4) {
-      let x = (this.data.currentTab % 4) == 0 ? (this.data.currentTab / 4) * 300 : this.data.scrollLeft
+      let x = (this.data.currentTab % 4) == 0 ? (this.data.currentTab / 4) * 250 : this.data.scrollLeft
       this.setData({ scrollLeft: x });
     } else this.setData({ scrollLeft: 0 });
   },
@@ -106,7 +106,7 @@ Page({
     else this.setData({ currentTab: e.currentTarget.dataset.current })
     this.checkCor();
     let condition = this.data.condition;
-    condition.brandId = e.currentTarget.dataset.id;
+    condition.cateId = e.currentTarget.dataset.id;
     this.setData({ condition: condition })
     this.loadData()
   },
@@ -119,7 +119,7 @@ Page({
     let product = e.currentTarget.dataset.product
     console.log('product', product)
     wx.navigateTo({
-      url: '../brand/index?brandId=' + product.id,
+      url: '../brand/index?brandId=' + product.shopBrandId,
     })
   },
   toBuyUser: (e) => {

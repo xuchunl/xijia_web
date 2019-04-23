@@ -47,7 +47,7 @@
           <view class='title-info'>
             <view style='height:50rpx;line-height:50rpx'>
               <view class='float-left'>宾皇尊品</view>
-              <view class='float-left to-view-brand'>查看品牌故事 <i class='fa fa-angle-right'></i> </view>
+              <view bindtap='toBrand' data-product='{{product}}' class='float-left to-view-brand'>查看品牌故事 <i class='fa fa-angle-right'></i> </view>
             </view>
           </view>
           <view class='pin-dan'>

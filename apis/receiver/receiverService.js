@@ -4,8 +4,8 @@ import $requst from '../../utils/request.js'
  * 服务URL
  */
 const serviceURL = {
-  QUERY_LIST_URL: "/hyht/mini/receiver/queryList.action",
-  SAVE_RECEIVER_URL: '/hyht/mini/receiver/save.action',
+  QUERY_LIST_URL: "/mini/receiver/queryList.action",
+  SAVE_RECEIVER_URL: '/mini/receiver/save.action',
 }
 
 module.exports = {

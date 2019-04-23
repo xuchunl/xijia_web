@@ -17,8 +17,8 @@ Page({
   onLoad: function (options) {
     this.setData({ userInfo: app.globalData.userInfo});
     if (options.brandId) {
-      mobileService.details({
-        data: { id: options.brandId },
+      brandService.brandGoodList({
+        data: { brandId: options.brandId },
         success: (res) => {
           console.log('res.data', res);
           if (res.data && !res.data.message && res.data.msg != 'fail') {

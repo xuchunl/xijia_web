@@ -1,5 +1,5 @@
 
-const SERVER_BASE_URL = "https://www.onezxkj.com"; 
+const SERVER_BASE_URL = "https://www.onezxkj.com/hyht";
 // const SERVER_BASE_URL = "192.168.43.202"; 
 
 /**

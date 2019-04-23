@@ -358,7 +358,7 @@
 .index_show_advertise {
   width: 90%;
   position: fixed;
-  top: 15%;
+  top: 25%;
   z-index: 99;
   height: 57%;
   margin-left: 5%;

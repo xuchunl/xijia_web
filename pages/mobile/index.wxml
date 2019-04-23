@@ -60,7 +60,7 @@
           <view class='main-bottom-top-square float-left background-waring' bindtap='clickShowImage'>{{detailInfo.hsquare}}m² {{detailInfo.hname}}</view>
           <view class='float-left vr' bindtap='toViewVR'>VR体验</view>
           <!-- <view class='main-bottom-top-house-type background-gray float-left' bindtap='clickShowImage'>{{hxDetail.name}}</view> -->
-          <view class='main-bottom-top-house-group float-right  background-gray' bindtap="clickPintuan">我要拼团</view>
+          <view class='main-bottom-top-house-group float-right  background-gray' bindtap="onPintuan">我要拼团</view>
         </view>
         <view class='main-bottom-steps'>
           <view class="main-bottom-progressbar float-left" wx:for="{{detailInfo.info}}" wx:for-item="house"  wx:key="index">
@@ -103,7 +103,7 @@
     <view class="taoqan-detail">拎包价格 1800元 ~ 30000元</view>
     <view style='width:100%'>
       <view class='float-left product-class'>
-        <view class="product-class-name {{currentCate.id == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' data-cate='{{cateItem}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} 5件 1800元</view>
+        <view class="product-class-name {{currentCate.id == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' data-cate='{{cateItem}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} {{cateItem.num || 0}}件 {{cateItem.price || 0}}元</view>
       </view>
       <view class='float-left product-info'>
         <view class='product-info-content' wx:if="{{detailItem.cateId && detailItem.cateId === currentCate.id}}" wx:for="{{productList}}" wx:for-item="detailItem"  wx:key="detailIndex" >
@@ -112,21 +112,18 @@
           </view>
           <view class='float-right product-info-content-show'>
             <view class='product-detail-title'>
-              <view style='width:100%'>
-                {{detailItem.name}}
-              </view>
-              <view class='product-detail-condition' >
-              </view>
+              <view style='width:100%'> {{detailItem.name}} </view>
+              <view class='product-detail-condition' >件数：{{detailItem.num}} </view>
             </view>
             <view class='product-detail-shopping'>
               <view class='float-left product-detail-price'>
                 <view class='color-danger float-left'>￥</view>
-                <view class='color-danger detail-price'>{{detailItem.marketPrice}}</view>
+                <view class='color-danger detail-price'>{{detailItem.marketPrice}} x {{detailItem.changeNum}}</view>
                 <view class='color-info float-left'></view>
               </view>
               <view class='float-right chaneg-num'>
-                <view class='de-num fa fa-minus-circle'></view>
-                <view class='add-num fa fa-plus-circle'></view>
+                <view wx:if="{{detailItem.changeNum && detailItem.changeNum !== 0}}" class='de-num fa fa-minus-circle' bindtap='deProductNum' data-item='{{detailItem}}'></view>
+                <view wx:if="{{detailItem.changeNum < detailItem.num}}" class='add-num fa fa-plus-circle' bindtap='addProductNum' data-item='{{detailItem}}'></view>
               </view>
               <!-- <view class='product-detail-add float-right background-info' bindtap="clickShowShopping" data-product='{{detailItem}}'>
                 <i class='fa fa-plus cartPlus'></i>
@@ -189,7 +186,7 @@
   </view> -->
 
   <!-- 拼团信息 -->
-  <view class="main_cover" wx:if="{{pintuanStatus}}" id="main_cover" bindtap="clickPintuan" catchtouchmove="pintuanTouchMove">
+  <view class="main_cover" wx:if="{{pintuanStatus || cartStatus}}" id="main_cover" bindtap="onMask" catchtouchmove="pintuanTouchMove">
   </view>
   <view class="show_pintuan" wx:if="{{pintuanStatus}}" catchtouchmove="pintuanTouchMove">
     <view class="pintuan-time" id="time">
@@ -253,7 +250,7 @@
       </form>
     </view>
     <view class='pintuan-close'>
-      <i class="fa fa-times-circle-o color-white" bindtap="clickPintuan" ></i>
+      <i class="fa fa-times-circle-o color-white" bindtap="onMask" ></i>
     </view>
   </view>
 <!-- 
@@ -282,15 +279,29 @@
   </view>
   <view class='on-pay'>
     <view class='totalMny float-left'>
-      <view class='color-white float-left'>总价：</view><view class='color-waring float-left'>￥100010</view>
+      <view class='color-white float-left'>总价：</view><view class='color-waring float-left'>￥{{totalMny}}</view>
     </view>
-    <view class='cart-num float-left'>
-      <i class='fa fa-shopping-cart shopping-cart'></i>
-      <!-- <view class='count'>2</view> -->
+    <view class='shopping-cart float-left' bindtap='onCartStatus'>
+      <i class='fa fa-shopping-cart shopping-cart-icon'></i>
+      <view class='count'>{{currentShopping.num}}</view>
     </view>
     <view class='price float-right'>
       <view class='color-white float-left'>{{currentCate.name}}：</view>
-      <view class='color-waring float-left'>￥1800</view>
+      <view class='color-waring float-left'>￥{{currentCate.price || 0}}</view>
+    </view>
+  </view>
+  <view class='show-cart-num' wx:if="{{cartStatus}}">
+    <view style='clear:both' class='cart-num-info'>
+      <view class='float-left color-info num-info-left'>数 量：</view>
+      <view class='float-right num-info-right'>
+        <view class='minimize float-left' bindtap="deNum">-</view>
+        <input type="digit" bindblur="changeCartNum"  value='{{currentShopping.num}}' class='num-input float-left'  ></input>
+        <view class='addNum float-left' bindtap="addNum">+</view>
+      </view>
+    </view>
+    <view class='cart-btn'>
+      <button class='add-cart float-left' bindtap='addShoppingCar'>加入购物车</button>
+      <button class='buy float-left' bindtap='onBuy'>立即购买</button>
     </view>
   </view>
 </view>

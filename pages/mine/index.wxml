@@ -5,7 +5,7 @@
     </view>
     <view class='info'>
       <view class='name'>{{userInfo.nickname}}</view>
-      <view class='mobile'>13652887581</view>
+      <view class='mobile'>{{userInfo.memNo}}</view>
     </view>
     <view class='code'>
       <i class='fa fa-qrcode'></i>

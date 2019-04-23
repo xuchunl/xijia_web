@@ -585,35 +585,6 @@
   height: 110rpx;
   clear: both;
 }
-.num-info-left {
-  padding-left: 20rpx;
-  height: 100%;
-  line-height: 110rpx;
-}
-.num-info-right {
-  padding-right: 20rpx;
-  text-align: right;
-  line-height: 110rpx;
-}
-.minimize, .addNum{
-  height: 60rpx;
-  line-height: 60rpx;
-  font-size: 30rpx;
-  border: 1rpx solid #DCDFE6;
-  width: 100rpx;
-  text-align: center;
-  background: #F1F1F1;
-  margin-top: 25rpx;
-}
-.num-input{
-  border-top: 1rpx solid #DCDFE6;
-  border-bottom: 1rpx solid #DCDFE6;
-  width: 100rpx;
-  text-align: center;
-  background: #FFFFFF;
-  height: 60rpx;
-  margin-top: 25rpx;
-}
 .dialog-bottom {
   width: 100%;
   height: 110rpx;
@@ -825,7 +796,7 @@ border: 1rpx solid #909399;
 
 /* 弹层样式 */ 
 #main_cover {
-  z-index: 998;
+  z-index: 90;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -1069,16 +1040,93 @@ border: 1rpx solid #909399;
   font-size: 34rpx;
   padding-left: 10rpx;
 }
-.mobile .on-pay .cart-num {
+.mobile .on-pay .shopping-cart {
   height: 100%;
   line-height: 100rpx;
 }
-.mobile .on-pay .shopping-cart {
+.mobile .on-pay .shopping-cart-icon {
   font-size: 60rpx;
   color: #fff;
+}
+.mobile .on-pay .count {
+  position:relative;
+  color:#fff;
+  bottom:100rpx;
+  background:red;
+  border-radius:20rpx;
+  height:25rpx;
+  line-height:25rpx;
+  font-size:24rpx;
+  text-align:center;
+  left:40rpx;
+  padding: 10rpx
 }
 .mobile .on-pay .price {
   font-size: 34rpx;
   padding-right: 10rpx;
   line-height:90rpx;
+}
+.mobile .show-cart-num {
+  position:fixed;
+  z-index:99;
+  background:#fff;
+  top:30%;
+  left:16%;
+  padding:10rpx;
+  border-radius:8rpx;
+}
+.mobile .show-cart-num .num-info-left {
+  padding-left: 20rpx;
+  height: 100%;
+  line-height: 110rpx;
+}
+.mobile .show-cart-num .num-info-right {
+  padding-right: 20rpx;
+  text-align: right;
+  line-height: 110rpx;
+}
+.mobile .show-cart-num .cart-num-info {
+  height:150rpx;
+}
+.mobile .show-cart-num .cart-num-info .minimize,
+.mobile .show-cart-num .cart-num-info .addNum {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  border: 1rpx solid #DCDFE6;
+  width: 100rpx;
+  text-align: center;
+  background: #F1F1F1;
+  margin-top: 25rpx;
+}
+.mobile .show-cart-num .num-input{
+  border-top: 1rpx solid #DCDFE6;
+  border-bottom: 1rpx solid #DCDFE6;
+  width: 100rpx;
+  text-align: center;
+  background: #FFFFFF;
+  height: 60rpx;
+  margin-top: 25rpx;
+}
+.mobile .cart-btn  {
+  width: 100%;
+  height:80rpx;
+
+}
+.mobile .cart-btn .add-cart {
+  width: calc(100% / 2 - 10rpx);
+  background: #E6A23C;
+  color: #fff;
+  height:80rpx;
+  line-height:80rpx;
+  margin-right: 15rpx;
+  font-size: 28rpx;
+}
+.mobile .cart-btn .buy {
+  width: calc(100% / 2 - 10rpx);
+  background: red;
+  color: #fff;
+  height:80rpx;
+  line-height:80rpx;
+  font-size: 28rpx;
 }

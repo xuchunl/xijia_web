@@ -4,8 +4,8 @@ import $requst from '../../utils/request.js'
  * 服务URL
  */
 const serviceURL = {
-  QUERY_URL: "/hyht/mini/wz/query.action",
-  DETAIL_URL: "/hyht/mini/wz/details.action",
+  QUERY_URL: "/mini/wz/query.action",
+  DETAIL_URL: "/mini/wz/details.action",
 }
 
 module.exports = {

@@ -4,8 +4,8 @@ import $requst from '../../utils/request.js'
  * 服务URL
  */
 const serviceURL = {
-  PAY_CONFIRM_URL: "/hyht/mini/order/toPayConfirm.action",
-  NO_PAY_CONFIRM_URL: 'hyht/mini/order/payConfirmWfkSave.action',
+  PAY_CONFIRM_URL: "/mini/order/toPayConfirm.action",
+  NO_PAY_CONFIRM_URL: '/mini/order/payConfirmWfkSave.action',
 }
 
 module.exports = {

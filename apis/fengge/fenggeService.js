@@ -4,7 +4,7 @@ import $requst from '../../utils/request.js'
  * 服务URL
  */
 const serviceURL = {
-  QUERY_LIST_URL: "/hyht/mini/fengGe/queryList.action",
+  QUERY_LIST_URL: "/mini/fengGe/queryList.action",
 }
 
 module.exports = {
