@@ -6,11 +6,12 @@ var storage = require('../../utils/storage')
 var moment = require('../../utils/moment')
 var huxingService = require('../../apis/huxing/huxingService')
 var fenggeService = require('../../apis/fengge/fenggeService')
+import MD5 from '../../utils/md5.js'
 const app = getApp()
 Page({
   data: {
     id: '',
-    urlPrefix: 'https://www.onezxkj.com/hyht',
+    urlPrefix: app.globalData.baseUrl,
     windowWidth: wx.getSystemInfoSync().windowWidth,
     windowHeight: wx.getSystemInfoSync().screenHeight,
     scrollLeft: 0, //tab标题的滚动条位置
@@ -52,6 +53,7 @@ Page({
     fgList: [],
     hxIndex: '',
     fgIndex: '',
+    loading: false,
   },
 
   /**
@@ -578,6 +580,7 @@ Page({
   },
   // 添加到购物车
   addShoppingCar(e) {
+    this.setData({ loading: true});
     let currentShopping = this.data.currentShopping || {};
     if (!Number(currentShopping.num)) return wx.showToast({ title: '数量有误！', icon: 'none' });
     let member = wx.getStorageSync('member');
@@ -599,12 +602,12 @@ Page({
       num: currentShopping.num,
       cartGoodsList: cartGoodsList,
       goodsId: this.data.detailInfo.goodsId,
-      ciimgUrl: this.data.detailInfo.preImg
+      ciimgUrl: this.data.detailInfo.preImg,
+      price: this.totalMny / currentShopping.num
     }
     cartService.saveCart({
       data: data,
       success: function (result) {
-        // 返回数据，
         if (result.data && (!result.data.msg || result.data.msg === 'success')) {
           wx.showToast({ title: '添加成功！', icon: 'success' })
         } else msgDlg.showModal('错误提示', result.state || result.data.state || '添加购物车出错！', false)
@@ -612,7 +615,9 @@ Page({
       fail: (result) => {
         msgDlg.showModal('错误提示', result.state || result.data.state || '添加购物车出错！', false)
       },
-      complete: function (result) { }
+      complete: (result) => {
+        this.setData({ loading: false });
+       }
     })
   },
   /**
@@ -724,7 +729,7 @@ Page({
     let member = wx.getStorageSync('member');
     let cartGoodsList = this.data.productList.map(item => {
       return {
-        goods: { id: item.id },
+        goods: { id: item.id, name: item.name },
         fgPosition: { id: this.data.detailInfo.id },
         cate: { id: item.cateId },
         num: item.changeNum,
@@ -736,17 +741,19 @@ Page({
       fgPosition: { id: this.data.detailInfo.id, name: this.data.detailInfo.name },
       fgPositionId: this.data.detailInfo.id,
       fgPositionName: this.data.detailInfo.name,
+      name: this.data.detailInfo.name,
       memId: member.id,
       num: currentShopping.num,
       cartGoodsList: cartGoodsList,
       goodsId: this.data.detailInfo.goodsId,
-      ciimgUrl: this.data.detailInfo.preImg
+      ciimgUrl: this.data.detailInfo.preImg,
+      price: this.data.totalMny / currentShopping.num
     }
     wx.setStorageSync("goodsList", [data])
     wx.navigateTo({ url: '../settle/settle?pageType=mobile'})
   },
   /* 支付 */
-  wxpay: function () {
+  wxpay1: function () {
     let user = this.data.user;
     if (!user || !user.userName) {
       wx.showToast({ title: '请填写姓名！', icon: 'none' })
@@ -765,7 +772,7 @@ Page({
     msgDlg.showLoading('正在支付中...');
     let loginInfo = wx.getStorageSync('loginInfo');
     if (loginInfo) {
-      this.getOpenId(loginInfo.code)
+      this.wxpay(loginInfo.code)
     }
   },
   /* 获取openId */
@@ -847,6 +854,113 @@ Page({
         })
       },
       fail: () => {}
+    })
+  },
+  paysignjsapi: function (appid, body, mch_id, nonce_str, notify_url, openid, out_trade_no, spbill_create_ip, total_fee, trade_type) {
+    var key = this.data.key;
+    var ret = {
+      appid: appid,
+      body: body,
+      mch_id: mch_id,
+      nonce_str: nonce_str,
+      notify_url: notify_url,
+      openid: openid,
+      out_trade_no: out_trade_no,
+      spbill_create_ip: spbill_create_ip,
+      total_fee: total_fee,
+      trade_type: trade_type
+    }
+    var str = this.raw(ret)
+    str = str + '&key=' + key
+    return MD5(str).toUpperCase()
+  },
+  /* 微信支付 */
+  wxpay: function () {
+    let member = wx.getStorageSync('member')
+    let loginInfo = wx.getStorageSync('loginInfo')
+    let user = this.data.user;
+    if (!user || !user.userName) {
+      wx.showToast({ title: '请填写姓名！', icon: 'none' })
+      return
+    }
+    if (!user || !user.mobile) {
+      wx.showToast({ title: '请填写电话！', icon: 'none' })
+      return
+    } else if (user.mobile) {
+      // 判断手机格式是否正确
+    }
+    if (!user || !user.houseType || !user.fenggeId) {
+      wx.showToast({ title: '请选择户型或选择风格！', icon: 'none' })
+      return
+    }
+    msgDlg.showLoading('正在支付中...');
+    var that = this
+    //统一支付签名
+    var bookingNo = 'zx' + new Date().getTime();
+    var openid = loginInfo.mini_openid;
+    var appid = 'wxcb57e518cc7c5fc0';//appid  
+    var body = '深圳市兆禧软装装饰有限公司';//商户名
+    var mch_id = '1488648672';//商户号  
+    var nonce_str = that.randomString();//随机字符串，不长于32位。  
+    var spbill_create_ip = '';//ip
+    // var total_fee = parseInt(that.data.wxPayMoney) * 100;
+    var total_fee = 1;
+    var timeStamp = new Date().getTime();
+    var notify_url = 'http://www.weixin.qq.com/wxpay/pay.php';
+    var trade_type = "JSAPI";
+    var key = this.data.key;
+
+    // var url = "https://api.mch.weixin.qq.com/pay/unifiedorder"
+    var formData = "<xml>"
+    formData += "<appid>" + appid + "</appid>" //appid  
+    formData += "<body>" + body + "</body>"
+    formData += "<mch_id>" + mch_id + "</mch_id>" //商户号  
+    formData += "<nonce_str>" + nonce_str + "</nonce_str>" //随机字符串，不长于32位。  
+    formData += "<notify_url>" + notify_url + "</notify_url>"
+    formData += "<openid>" + openid + "</openid>"
+    formData += "<out_trade_no>" + 'zx' + timeStamp + "</out_trade_no>"
+    formData += "<spbill_create_ip>61.50.221.43</spbill_create_ip>"
+    formData += "<total_fee>" + total_fee + "</total_fee>"
+    formData += "<trade_type>" + trade_type + "</trade_type>"
+    formData += "<sign>" + this.paysignjsapi(appid, body, mch_id, nonce_str, notify_url, openid, bookingNo, '61.50.221.43', total_fee, trade_type) + "</sign>"
+    formData += "</xml>"
+
+    //统一支付
+    wx.request({
+      url: 'https://api.mch.weixin.qq.com/pay/unifiedorder',
+      method: 'POST',
+      head: 'application/x-www-form-urlencoded',
+      data: formData, // 设置请求的 header
+      success: function (res) {
+        if (res.data && res.data.indexOf('FAIL') != -1) {
+          msgDlg.showModal('系统提示', res.data, false)
+          return;
+        }
+        var result_code = that.getXMLNodeValue('result_code', res.data.toString("utf-8"))
+        var resultCode = result_code.split('[')[2].split(']')[0]
+        if (resultCode == 'FAIL') {
+          msgDlg.showModal('resultCode FAIL', resultCode, false)
+          var err_code_des = that.getXMLNodeValue('err_code_des', res.data.toString("utf-8"))
+          var errDes = err_code_des.split('[')[2].split(']')[0]
+          msgDlg.showToast(errDes);
+        } else {
+          //发起支付
+          var prepay_id = that.getXMLNodeValue('prepay_id', res.data.toString("utf-8"))
+          var tmp = prepay_id.split('[')
+          var tmp1 = tmp[2].split(']')
+          // var appId = appid;
+          var time = that.createTimeStamp();
+          var nonceStr = that.randomString();
+          var stringSignTemp = "appId=" + appid + "&nonceStr=" + nonceStr + "&package=prepay_id=" + tmp1[0] + "&signType=MD5&timeStamp=" + time + "&key=" + key
+          var sign = MD5(stringSignTemp).toUpperCase()
+          console.log(sign)
+          var param = { "timeStamp": time, "package": 'prepay_id=' + tmp1[0], "paySign": sign, "signType": "MD5", "nonceStr": nonceStr }
+          that.pay(param)
+        }
+      },
+      fail: () => {
+        msgDlg.showModal('系统提示', '调用下单失败：' + res.data, false)
+      }
     })
   },
   /* 随机数 */

@@ -2,6 +2,7 @@
 var cartService = require('../../apis/cart/cartService')
 var orderService = require('../../apis/order/orderService')
 var msgDlg = require('../../utils/msgDlg')
+const app = getApp()
 Page({
 
   /**
@@ -11,7 +12,7 @@ Page({
     adressList: [],
     addressInfo: {},
     goodsList: [],
-    urlPrefix: 'https://www.onezxkj.com/hyht',
+    urlPrefix: app.globalData.baseUrl,
     sumPrice: 0,
     member: {},
     receiver: {}
@@ -28,10 +29,12 @@ Page({
     goodsList = wx.getStorageSync("goodsList");
     if (options.pageType) {
       if (options.pageType == "mobile") {
-        sumPrice = goodsList[0].total;
       } else if (options.pageType == "goodsList") {
-        goodsList.filter(item => sumPrice = Number(item.price) * Number(item.num) + sumPrice)
       }
+      goodsList.filter(item => {
+        sumPrice = Number(item.price) * Number(item.num) + sumPrice;
+        item.totalMny = Number(item.price) * Number(item.num);
+      })
     }
     this.setData({
       goodsList: goodsList,
@@ -45,9 +48,17 @@ Page({
     })
   },
   onSubmit: function () {
+    let member = this.data.member;
+    if (!member.nickname) {
+      wx.showToast({ title: '请填写收货人姓名！', icon: 'none' });
+      return;
+    }
+    if (!member.mobile) {
+      wx.showToast({ title: '请填写手机号！', icon: 'none' })
+      return;
+    }
     msgDlg.showLoading('正在提交中...');
     let $this = this
-    let member = wx.getStorageSync('member') 
     orderService.toPayConfirm({
       data: { sumPayPrice: $this.data.sumPrice, memId: member.id },
       success: function (res) {
@@ -64,6 +75,14 @@ Page({
         msgDlg.hideLoading();
       }
     });
+  },
+  nameInput: function (e) {
+    let member = this.data.member;
+    member.nickname = e.detail.value;
+  },
+  mobileInput: function (e) {
+    let member = this.data.member;
+    member.mobile = e.detail.value;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -16,6 +16,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    baseUrl: "https://www.onezxkj.com/xijia"
   }
 })

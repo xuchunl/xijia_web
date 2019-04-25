@@ -17,7 +17,7 @@
     <view class='shopping-info' wx:for="{{shoppingList}}" wx:for-item="shoppingItem" wx:key="{{shoppingItem.id}}">
       <view class='shopping-info-head background-white'>
         <!-- <image class='shopping-info-image float-left' src='../image/p1_c_03.jpg'></image> -->
-        <view class='shopping-info-shop float-left color-black'>{{shoppingItem.name}}</view>
+        <view class='shopping-info-shop float-left color-black'>{{shoppingItem.ciname}}</view>
         <view class='float-right shopping-info-money'>￥{{shoppingItem.price}}</view>
         <!-- <view class='shopping-info-discount float-right'>优惠券使用</view> -->
       </view>
@@ -26,7 +26,15 @@
         <view  class='shopping-info-body-image float-left' >
           <image src='{{urlPrefix}}{{shoppingItem.ciimgUrl}}'></image>
         </view>
-        <view class='float-left shopping-info-body-name'>{{shoppingItem.name}}</view>
+        <!-- <view class='float-left shopping-info-body-name'>{{shoppingItem.ciname}}</view> -->
+        <view wx:if="shoppingItem.cartGoodsList.length" class='float-left cart-goods-item'>
+          <view wx:for="{{shoppingItem.cartGoodsList}}" wx:for-item="cartGoodsItem" wx:key="{{cartGoodsItem.id}}">
+            <view class='float-left color-black text-overflow ' style='font-weight: bold; padding-right:10rpx; width:120rpx'> {{cartGoodsItem.goods.name}} </view>
+            <view class='float-left .color-waring text-overflow' style='padding-right:10rpx; width:100rpx'> {{cartGoodsItem.price}} </view> 
+            <view class='float-left color-waring text-overflow' style='padding-right:10rpx; width:40rpx'>{{cartGoodsItem.num}}</view>
+            <view class='float-left color-danger text-overflow'>{{cartGoodsItem.totalMny}}</view>
+          </view>
+        </view>
         <view class='shooping-num float-right'>
           <view class='minimize float-left' bindtap="deNum" data-shopping='{{shoppingItem}}'>-</view>
           <input type="number" bindinput="changeNum"  value='{{shoppingItem.num}}' class='num-input float-left' data-shopping='{{shoppingItem}}' ></input>

@@ -7,9 +7,6 @@ module.exports = {
       showCancel: showCancel || false,
       cancelText: '取消',
       success: function (res) {
-        if (res.confirm) {
-        } else if (res.cancel) {
-        }
         if (successCallback) {
           successCallback(res);
         }

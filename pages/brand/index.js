@@ -18,7 +18,7 @@ Page({
     this.setData({ userInfo: app.globalData.userInfo});
     if (options.brandId) {
       brandService.brandGoodList({
-        data: { brandId: options.brandId },
+        data: { mallBean: { brandId: options.brandId} },
         success: (res) => {
           console.log('res.data', res);
           if (res.data && !res.data.message && res.data.msg != 'fail') {

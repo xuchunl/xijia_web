@@ -456,3 +456,18 @@
 .input-focus {
   border: 1rpx solid #409EFF!important;
 }
+.contact {
+  position: fixed;
+  bottom: 50rpx;
+  left: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: #F56C6C;
+  color: #fff;
+  font-size: 50rpx;
+  text-align: center;
+  line-height: 80rpx;
+  padding: 0;
+  margin: 0;
+}

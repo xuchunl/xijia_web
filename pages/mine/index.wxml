@@ -58,10 +58,10 @@
       <i class='fa fa-phone'></i>
     </view>
   </view>
-  <view class='to-shopping'>
+  <view class='to-shopping' bindtap='onShopping'>
     <button type='warn'>去购物</button>
   </view>
-  <view class='to-out'>
+  <view class='to-out' bindtap='onOut'>
     <button type='default'>退出当前账号</button>
   </view>
 </view>

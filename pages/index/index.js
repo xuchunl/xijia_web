@@ -10,7 +10,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    urlPrefix: 'https://www.onezxkj.com/hyht',
+    urlPrefix: app.globalData.baseUrl,
     taocanList: [],
     currentCate: '0',
     cateList: [
@@ -67,8 +67,11 @@ Page({
     // 登录
     wx.login({
       success: res => {
+        console.log('code', res.code);
+        // debugger
+        // return;
         wx.request({
-          url: 'https://www.onezxkj.com/hyht/mini/login/login.action',
+          url: app.globalData.baseUrl+'/mini/login/login.action',
           data: {
             code: res.code,
             'mem.nickname': this.data.userInfo.nickName,
@@ -134,7 +137,20 @@ Page({
   onQuery: function (e) {
     let keywords = e.detail.value;
   },
-  onShow: function () {},
+  onShow: function () {
+    if (!this.data.loginStatus) {
+      let member = wx.getStorageSync('member');
+      if (!member || !member.id) {
+        this.setData({ 
+          loginStatus: true,
+          shareVisible: false,
+          postVisible: false,
+          advertiseStatus: false
+         })
+        return;
+      }
+    }
+  },
   /**
    * 用户点击右上角分享
    */

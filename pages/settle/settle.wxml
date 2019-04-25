@@ -1,10 +1,10 @@
 <view class='settle'>
-  <view class='address' bindtap='checkAddress'>
+  <view class='address'>
     <view class='address-detail'>
       <view class='info'>
         <view class='label'>收货人：</view>
-        <view class='name'><input type='text' value='{{member.nickname}}' placeholder='收货人'></input></view>
-        <view class='mobile'><input type='text' value='{{member.mobile}}' placeholder='手机号码'></input></view>
+        <view class='name'><input bindinput='nameInput' type='text' value='{{member.nickname}}' placeholder='收货人'></input></view>
+        <view class='mobile'><input bindinput='mobileInput' type='text' value='{{member.mobile}}' placeholder='手机号码'></input></view>
       </view>
       <view class='th'>
         提货地点：湖南省长沙市xxxxxxxxxxxxxxxxxxxxxxxx
@@ -49,9 +49,17 @@
         </view>
         <view class='float-left goods-right'>
           <view class='goods-anme'>{{goods.name}}</view>
+          <view wx:if="goods.cartGoodsList.length" class='float-left cart-goods-item'>
+            <view style="wdith: 100%;clear: both;" wx:for="{{goods.cartGoodsList}}" wx:for-item="cartGoodsItem" wx:key="{{cartGoodsItem.id}}">
+              <view class='float-left color-black text-overflow ' style='font-weight: bold; padding-right:10rpx; width:120rpx'> {{cartGoodsItem.goods.name}} </view>
+              <view class='float-left .color-waring text-overflow' style='padding-right:10rpx; width:100rpx'> {{cartGoodsItem.price}} </view> 
+              <view class='float-left color-waring text-overflow' style='padding-right:10rpx; width:40rpx'>{{cartGoodsItem.num}}</view>
+              <view class='float-left color-danger text-overflow'>{{cartGoodsItem.totalMny}}</view>
+            </view>
+          </view>
           <view>
             <view class='float-left color-danger'>X {{goods.num}}</view>
-            <view class='float-right color-danger'>{{goods.price}}</view>
+            <view class='float-right color-danger'>￥{{goods.totalMny}}</view>
           </view>
         </view>
       </view>

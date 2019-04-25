@@ -1,5 +1,6 @@
 var cartService = require('../../apis/cart/cartService')
 var msgDlg = require('../../utils/msgDlg')
+const app = getApp()
 Page({
 
   /**
@@ -8,7 +9,7 @@ Page({
   data: {
     num: 1,
     isAllCheck: false,
-    urlPrefix: 'https://www.onezxkj.com/hyht',
+    urlPrefix: app.globalData.baseUrl,
     shoppingList: [],
     totalMny: 0,
     isEditStatus: false,
@@ -20,26 +21,21 @@ Page({
    */
   onLoad: function (options) {
     this.loadData();
-    let totalMny = 0;
-    this.data.shoppingList.map(item => {
-      totalMny = totalMny + item.price
-    })
-    this.setData({
-      totalMny: totalMny
-    })
   },
   loadData: function(){
     let $this = this
     let member = wx.getStorageSync('member') 
     if (!member || !member.id) {
-      msgDlg.showModal('系统提示', '请到首页先登录！', false)
+      this.setData({ shoppingList: [] });
+      msgDlg.showModal('系统提示', '请到首页先登录！', false, (res) => {
+        if (res.confirm) wx.switchTab({ url: '../index/index' })
+      });
       return;
     }
     msgDlg.showLoading('正在加载中');
     cartService.queryCartlist({
       data: {memId: member.id},
       success: function (result) {
-        // 返回数据，
         if (result.data && (!result.data.msg || result.data.msg === 'success')) {
           if (result.data.cartMobileList) {
             let shoppingList = result.data.cartMobileList;

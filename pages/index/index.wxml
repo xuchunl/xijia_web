@@ -164,4 +164,7 @@
       <i class="fa fa-times-circle-o color-white" bindtap="clickAdvertise" ></i>
     </view>
   </view>
+  <button open-type="contact" class='contact'>
+    <i class="fa fa-comments-o"></i>
+  </button>
 </view>

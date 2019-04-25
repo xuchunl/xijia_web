@@ -8,7 +8,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    urlPrefix: 'https://www.onezxkj.com/hyht',
+    urlPrefix: app.globalData.baseUrl,
     taocanList: [],
     scrollLeft: 0,
     currentTab: 0,
@@ -18,7 +18,7 @@ Page({
     ],
     shareVisible: false,
     condition: {
-      brandId: 0,
+      brandId: '',
       searchCondition: null
     },
     cateList: [],
@@ -119,7 +119,7 @@ Page({
     let product = e.currentTarget.dataset.product
     console.log('product', product)
     wx.navigateTo({
-      url: '../brand/index?brandId=' + product.shopBrandId,
+      url: '../brand/index?brandId=' + (product.shopBrandId || ''),
     })
   },
   toBuyUser: (e) => {

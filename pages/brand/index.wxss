@@ -1,5 +1,4 @@
 .brand {
-  height: 100%;
   width: 100%;
   background: #f4f4f4;
 }
@@ -30,6 +29,7 @@
   height: 110rpx;
   width: 110rpx;
   border: 1rpx solid #f4f4f4;
+  background: #fff;
 }
 .brand .shop-info .right {
   width: calc(100% - 160rpx);
@@ -65,6 +65,7 @@
 }
 .brand .content {
   width: 100%;
+  border-top: 1rpx solid #f4f4f4;
 }
 .brand .content .item {
   padding: 0rpx 20rpx;
@@ -131,12 +132,15 @@
   width: calc(100% - 110rpx);
 }
 .brand .content .item .detail .shopping .add-shpping {
-  background: #DEDEDE;
-  border-radius: 8rpx;
-  height: 30rpx;
-  line-height: 30rpx;
-  font-size: 28rpx;
-  padding: 10rpx;
+  width:110rpx;
+  height:130rpx;
+  display:flex;
+  align-items:center;
+}
+.brand .content .item .detail .shopping .add-shpping button {
+  width:100%;
+  font-size:24rpx;
+  padding:0;
 }
 .brand .content .item .buy-info {
   height: 100rpx;
