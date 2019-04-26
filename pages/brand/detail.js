@@ -1,4 +1,6 @@
-// pages/brand/detail.js
+var brandService = require('../../apis/brand/brandService')
+var mobileService = require('../../apis/mobile/mobileService')
+var msgDlg = require('../../utils/msgDlg')
 Page({
 
   /**
@@ -11,13 +13,28 @@ Page({
       { num: 1, price: 500 },
       { num: 50, price: 300 }
     ],
+    detailInfo: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.id) {
+      mobileService.detailOfGoods({
+        data: { id: options.id },
+        success: function (result) {
+          if (result.data && (!result.data.msg || result.data.msg !== 'fail')) {
+          } else msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
+        },
+        fail: (result) => {
+          msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
+        },
+        complete: (result) => {
+          msgDlg.hideLoading();
+        }
+      })
+    }
   },
 
   /**

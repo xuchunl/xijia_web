@@ -35,26 +35,22 @@ Page({
     msgDlg.showLoading('正在加载中');
     cartService.queryCartlist({
       data: {memId: member.id},
-      success: function (result) {
+      success: (result) => {
         if (result.data && (!result.data.msg || result.data.msg === 'success')) {
           if (result.data.cartMobileList) {
             let shoppingList = result.data.cartMobileList;
             shoppingList.filter(item => {
-              item.num = Number(item.num)
+              item.num = Number(item.num);
               item.isCheck = false;
             })
-            $this.setData({
-              shoppingList: shoppingList,
-            })
+            $this.setData({ shoppingList: shoppingList })
           }
-        } else {
-          msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
-        }
+        } else msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false);
       },
-      fail: function (result) {
+      fail: (result) => {
         msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
       },
-      complete: function (result) {
+      complete: (result) => {
         msgDlg.hideLoading();
         wx.stopPullDownRefresh();
       }
@@ -62,9 +58,7 @@ Page({
   },
   clickEdit: function(e) {
     let isEditStatus = this.data.isEditStatus;
-    this.setData({
-      isEditStatus: !isEditStatus
-    })
+    this.setData({ isEditStatus: !isEditStatus });
   },
   deleteCart: function(e) {
     let $this = this
@@ -72,53 +66,41 @@ Page({
     if (ids) {
       cartService.deleteCart({
         data: { ids: ids },
-        success: function (result) {
-          // 返回数据，
-          console.log('deleteCart', result)
+        success: (result) => {
           if (result.data && (!result.data.msg || result.data.msg === 'success')) {
-            $this.loadData()
-            // msg, icon, mask, success, fail, complete
+            $this.loadData();
             msgDlg.showToast('删除成功！', 'success');
           }
         },
-        fail: function (result) {
+        fail: (result) => {
           msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
         },
-        complete: function (result) {
-          // msgDlg.hideLoading();
-        }
+        complete: (result) => {}
       })
-    }else {
-      // msg, icon, mask, success, fail, complete
-      msgDlg.showToast('请选择商品！');
-    }
+    } else msgDlg.showToast('请选择商品！');
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
   },
 
   /**
@@ -132,14 +114,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
   },
   clickCheck(e) {
     let isAllCheck = this.data.isAllCheck;
@@ -154,9 +134,7 @@ Page({
         if (!item.isCheck) {
           isAllCheck = false
           totalMny = (Number(totalMny) - (Number(item.price || 0)).toFixed(2) * Number(item.num))
-        } else {
-          totalMny = (Number(totalMny) + (Number(item.price || 0)).toFixed(2) * Number(item.num))
-        }
+        } else totalMny = (Number(totalMny) + (Number(item.price || 0)).toFixed(2) * Number(item.num));
       }
       if (item.isCheck) {
         ids += ids ? ',' : '';
@@ -165,12 +143,8 @@ Page({
       }
       return true;
     })
-    if (count === shoppingList.length) {
-      isAllCheck = true
-    } else {
-      isAllCheck = false;
-    }
-    
+    if (count === shoppingList.length) isAllCheck = true;
+    else isAllCheck = false;
     this.setData({
       shoppingList: shoppingList,
       isAllCheck: isAllCheck,
@@ -205,17 +179,12 @@ Page({
     let totalMny = 0;
     shoppingList.forEach(item => {
       if (item.id === shopping.id) {
-        if (item.num > 1) {
-          item.num = --item.num;
-        } else {
-          msgDlg.showToast('不能再减少了哟！')
-        }
+        if (item.num > 1) item.num = --item.num;
+        else msgDlg.showToast('不能再减少了哟！')
         return;
       }
     })
-    this.setData({
-      shoppingList: shoppingList
-    })
+    this.setData({ shoppingList: shoppingList });
   },
   addNum(e) {
     let shopping = e.currentTarget.dataset.shopping;
@@ -226,9 +195,7 @@ Page({
         return;
       }
     })
-    this.setData({
-      shoppingList: shoppingList
-    })
+    this.setData({ shoppingList: shoppingList });
   },
   changeNum(e) {
     let num = e.detail.value;
@@ -244,9 +211,7 @@ Page({
         }
       })
     }
-    this.setData({
-      shoppingList: shoppingList
-    })
+    this.setData({ shoppingList: shoppingList });
   },
   // 付款
   doPay: function(e) {
@@ -257,8 +222,6 @@ Page({
       wx.navigateTo({
         url: '../settle/settle?pageType=goodsList',
       })
-    } else {
-      msgDlg.showToast('请选择商品！');
-    }
+    } else msgDlg.showToast('请选择商品！');
   },
 })

@@ -32,7 +32,7 @@
       },
       {
         "pagePath": "pages/single/index",
-        "text": "品牌馆",
+        "text": "品牌联盟",
         "iconPath": "resources/icon/icon_gray_02.png",
         "selectedIconPath": "resources/icon/icon_blue_02.png"
       },
