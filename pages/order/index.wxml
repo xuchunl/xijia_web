@@ -6,5 +6,37 @@
     <view class="tab-item {{currentTab ==3 ? 'active' : ''}}" data-current='3' bindtap="swichNav">已提货</view>
   </scroll-view>
   <view class='content'>
+    <view class="text-align-center">
+      <image wx:if="{{!orderList.length}}" src="../image/offshelf.png" mode="aspectFit" style="width:120px;margin-top:40%;" />
+    </view>
+    <view wx:for="{{orderList}}" wx:for-item="order" wx:key="orderIndex" class='order-item'>
+      <view class='title'>
+        <view class='float-right status color-danger'>{{order.statusStr}}</view>
+      </view>
+      <view class='goods-info'wx:for="{{order.orderItemSet}}"  wx:for-item="goods" wx:key="goodsIndex" >
+        <view class='goods-img float-left'>
+          <image src='{{goods.ciimg}}'></image>
+        </view>
+        <view class='detail float-left'>
+          <view class='left float-left'>
+            <view class='name'>{{goods.name}}</view>
+            <view class='remarks color-info'>{{goods.remarks}}</view>
+          </view>
+          <view class='right float-right'>
+            <view class='price text-align-right'>￥{{goods.price}}</view>
+            <view class='num color-info text-align-right'>X {{goods.num}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='total-mny'>
+        <view class='float-right' style='font-size:24rpx'>￥{{order.sumPrice}}</view>
+        <view class='float-right' style='font-size:20rpx'>合计：</view>
+      </view>
+      <view class='footer'>
+        <view wx:if="{{order.status == 'wfk'}}" class='btn on-pay float-left'>去 付 款</view>
+        <view class='btn delete-order float-left'>删除订单</view>
+        <view wx:if="{{order.status == 'yfh'}}" class='btn confirm-order float-left'>确认收货</view>
+      </view>
+    </view>
   </view>
 </view>

@@ -1,0 +1,64 @@
+<view class='fengshui'>
+  <view class='header'>
+    <view class='left float-left'>
+      <view class='xj-info'>
+        <view class='logo'>
+          <view class='float-left' style='font-size: 45rpx'>喜 家</view>
+          <view class='float-left shop-name'>岭秀金江</view>
+        </view>
+        <view class='float-right color-success' style='font-size: 34rpx;padding: 15rpx;'>生活头条...</view>
+        <view class='share' bindtap='onShareVisible'>
+          <view style="font-size: 24rpx;">分享</view>
+        </view>
+      </view>
+      <view class='center'>
+        <view class='slogan float-left'>—— 有品质的社区软装设计拼团系统</view>
+      </view>
+    </view>
+    <view class='qz'>
+      <view class='jl'>远亲不如近邻</view>
+      <view class='avater'>
+        <image wx:for="{{[0,1,2]}}" wx:for-item="img"  wx:key="fengshui"  src='{{userInfo.headimgurl}}'></image>
+      </view>
+      <view class='ljq color-info'>邻居圈　<i class="fa fa-angle-right"></i> </view>
+    </view>
+  </view>
+  <view class='body'>
+    <view class='link-item' bindtap='toView' data-url='http://house.southcn.com/f/2018-08/17/content_182964269.htm?from=timeline'>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>传统文化融入当代设计 引领宜居新风尚-房产即时新闻</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='http://www.grtn.cn/mobile/folder2145/folder2146/folder2150/jrcj/2018-08-15/1583933.html?_hgOutLink=vod/videoDetail&id=1583933&from=timeline&isappinstalled=0'>
+      <i class=" link-icon color-info fa fa-link fa-rotate-90"></i>
+      <view class='text text-overflow'>传统文化融入设计 引领宜居新风尚</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='http://epaper.jiankangbest.com/html/2018-08/14/content_4_1.htm?from=timeline&isappinstalled=0'>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>健康养生周刊数据报-穗举办宜居环境选择主题讲座将国学传统文化融入家居设计</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='https://mp.weixin.qq.com/s/X6NinnSAmEAFzEGas4ai5g'>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>广州楷模│为传承国学风水文化特邀广东省五大诚信企业主笔设计师共享饕餮“盛宴”</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='https://mbd.baidu.com/newspage/data/landingshare?context=%7B%22nid%22%3A%22news_9065536008635285626%22%2C%22sourceFrom%22%3A%22bjh%22%7D&from=timeline'>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>穗举办宜居环境选择主题讲座，将家居设计融入国学传统文化中</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='https://kuaibao.qq.com/s/20180809A1VL4F00?refer=kb_sec_share&share_seq=3'>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>穗举办宜居环境选择主题讲座，将家居设计融入国学传统文化中</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='https://www.yidianzixun.com/article/0JkuVlD8?utk=a1kogp48&appid=yidian&ver=4.7.3.1&f=ios&s=3&from=timeline&share_count=3'>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>穗举办宜居环境选择主题讲座，将家居设计融入国学传统文化中</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='http://3g.k.sohu.com/t/n293524412?showType='>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>穗举办宜居环境选择主题讲座，将家居设计融入国学传统文化中</view>
+    </view>
+    <view class='link-item' bindtap='toView' data-url='https://m.toutiaocdn.cn/i6587729251007463939/?iid=39012011916&app=news_article&timestamp=1533829485&group_id=6587729251007463939&tt_from=weixin&utm_source=weixin&utm_medium=toutiao_ios&utm_campaign=client_share&wxshare_count=3&from=timeline&pbid=6626865940645725700'>
+      <i class="fa fa-link fa-rotate-90 link-icon color-info"></i>
+      <view class='text text-overflow'>穗举办宜居环境选择主题讲座，将家居设计融入国学传统文化中</view>
+    </view>
+  </view>
+</view>

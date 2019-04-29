@@ -53,11 +53,12 @@ Page({
         })
       }
     })
-    let member = wx.getStorageSync('member');
+    let member = wx.getStorageSync('member') || {};
+    this.setData({ userInfo: member });
     if (!member || !member.id) {
       this.setData({ loginStatus: true})
       return;
-    } else this.setData({ advertiseStatus: true })
+    } else this.setData({ advertiseStatus: true, userInfo: member})
     // 加载数据
     this.loadData();
   },

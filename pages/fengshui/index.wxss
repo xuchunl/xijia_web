@@ -1,0 +1,132 @@
+.fengshui{
+  background: #fff;
+  height: calc(100% - 160rpx);
+  width: 100%;
+  padding-top: 160rpx;
+}
+.fengshui .header {
+  height: 160rpx;
+  padding: 0 10rpx;
+  width: calc(100% - 20rpx);
+  position:fixed;   
+  top:0;
+  left:0;
+  z-index:10;
+  background: #fff;
+}
+.fengshui .header .left {
+  font-size: 35rpx;
+  width: 100%;
+  text-align: left;
+}
+.fengshui .header .left .xj-info {
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+.fengshui .header .left .xj-info .logo {
+  width: calc(100% - 280rpx);
+}
+.fengshui .header .left .xj-info .shop-name {
+  border: 1rpx solid #F4F4F4;
+  border-radius: 8rpx;
+  padding: 10rpx;
+  margin-left: 15rpx;
+  font-size: 26rpx;
+}
+.fengshui .header .left .xj-info .shop-num {
+  padding: 15rpx;
+  font-size: 26rpx;
+}
+.fengshui .header .center {
+  width: 100%;
+  height: 40rpx;
+  font-size: 20rpx;
+  line-height: 40rpx;
+}
+.fengshui .header .center .share {
+  width: 100rpx;
+  text-align: right;
+  height: 40rpx;
+  display: flex;
+}
+.fengshui .header .center .share image {
+  height: 40rpx;
+  width: 40rpx;
+}
+.fengshui .header .slogan {
+  width: calc(100% - 100rpx);
+}
+.fengshui .header .header-bottom {
+  clear: both;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.fengshui .header .header-bottom .search {
+  width: 85%;
+}
+.fengshui .header-bottom .search icon {
+  position: absolute;
+  top: 130rpx;
+  left: 17rpx;
+}
+.fengshui .header-bottom .search input {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  padding-left: 54rpx;
+  width: 367rpx;
+}
+.fengshui .header .qz {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 20rpx;
+  display: flex;
+  /* border-top: 1rpx solid #DCDFE6;
+  border-bottom: 1rpx solid #DCDFE6; */
+}
+.fengshui .header .qz .avater {
+  padding: 0 10rpx;
+  width:calc(100% - 240rpx);
+  display:flex;
+  height: 100%;
+  align-items:center;
+}
+.fengshui .header .qz .avater image {
+  width:40rpx;
+  height:40rpx;
+  border-radius:50%;
+}
+.fengshui .header .qz .ljq {
+  display: flex;
+  align-items: center;
+}
+.fengshui .header .qz .ljq .fa-angle-right {
+  font-size: 40rpx;
+}
+.fengshui .body {
+  width: 100%;
+  height: calc(100% - 10rpx);
+}
+.fengshui .body .link-item {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-top: 1rpx solid #F4F4F4;
+  display: flex;
+  font-size: 24rpx;
+}
+.fengshui .body .link-item .link-icon {
+  width:70rpx;
+  text-align:center;
+  font-size:35rpx;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.fengshui .body .link-item .text {
+  width: calc(100% - 80rpx);
+}

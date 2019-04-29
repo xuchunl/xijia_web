@@ -45,7 +45,7 @@
          <image src='{{urlPrefix}}{{goods.ciimgUrl}}'></image>
         </view>
         <view class='float-left goods-info-iamge' wx:else>
-         <image src='../image/p1_c_06.jpg'></image>
+         <image src='../image/p1_c_02.jpg'></image>
         </view>
         <view class='float-left goods-right'>
           <view class='goods-anme'>{{goods.name}}</view>

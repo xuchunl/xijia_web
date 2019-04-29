@@ -6,7 +6,8 @@ import $requst from '../../utils/request.js'
 const serviceURL = {
   QUERY_CART_LIST_URL: "/mini/cart/cartList.action",
   SAVE_CART_URL: "/mini/cart/saveCart.action",
-  DELETE_CART_URL: "//mini/cart/delCartItem.action"
+  DELETE_CART_URL: "/mini/cart/delCartItem.action",
+  CHANGE_CART_NUM_URL: "/mini/cart/addOrMinusNum.action"
 }
 
 module.exports = {
@@ -33,12 +34,13 @@ module.exports = {
             '&cartBean.cartGoodsList[' + index + '].cate.id=' + item.cate.id +
             '&cartBean.cartGoodsList[' + index + '].num=' + item.num +
             '&cartBean.cartGoodsList[' + index + '].price=' + item.price +
-            '&cartBean.cartGoodsList[' + index + '].totalMny=' + item.totalMny
+            '&cartBean.cartGoodsList[' + index + '].totalMny=' + item.totalMny +
+            '&cartBean.cartGoodsList[' + index + '].name=' + item.name
         }
       })
     }
     const $task = $requst.doPost({
-      url: serviceURL.SAVE_CART_URL + '?cartBean.goodsId=' + (param.data.goodsId || '') + (param.data.id ? '&cartBean.cartMobileId=' + param.data.id : '') + '&cartBean.memId=' + param.data.memId + '&cartBean.guigeIds=' + (param.data.guigeIds || '') + '&cartBean.num=' + param.data.num + (cartGoodsParam || '') + '&cartBean.fgPositionId=' + (param.data.fgPosition.id || null) + '&cartBean.fgPositionName=' + (param.data.fgPosition.name || null) + '&cartBean.ciimgUrl=' + param.data.ciimgUrl,
+      url: serviceURL.SAVE_CART_URL + '?cartBean.goodsId=' + (param.data.goodsId || '') + (param.data.id ? '&cartBean.cartMobileId=' + param.data.id : '') + '&cartBean.memId=' + param.data.memId + '&cartBean.guigeIds=' + (param.data.guigeIds || '') + '&cartBean.num=' + param.data.num + (cartGoodsParam || '') + '&cartBean.fgPositionId=' + (param.data.fgPosition.id || null) + '&cartBean.fgPositionName=' + (param.data.fgPosition.name || null) + '&cartBean.ciimgUrl=' + param.data.ciimgUrl + "&cartBean.price=" + param.data.price,
       data: param.data,
       method: 'POST',
       header: {
@@ -53,6 +55,19 @@ module.exports = {
   deleteCart: function (param) {
     const $task = $requst.doPost({
       url: serviceURL.DELETE_CART_URL + '?cartBean.delCartIds=' + param.data.ids,
+      data: param.data,
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      },
+      success: param.success,
+      fail: param.fail,
+      complete: param.complete
+    });
+    return $task;
+  },
+  changeCartNum: function (param) {
+    const $task = $requst.doPost({
+      url: serviceURL.CHANGE_CART_NUM_URL + '?cartBean.cart.id=' + param.data.id + "&cartBean.cartItemNum=" + param.data.num + "&cartBean.memId=" + param.data.memId,
       data: param.data,
       header: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"

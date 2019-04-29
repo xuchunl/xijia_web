@@ -17,6 +17,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: "https://www.onezxkj.com/xijia"
+    baseUrl: "https://www.onezxkj.com/xijia",
+    appId: "wx8a40cf3b220bcdf7"
   }
 })

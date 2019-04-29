@@ -122,6 +122,9 @@ page {
 .text-align-center {
   text-align: center
 }
+.text-align-right {
+  text-align: right
+}
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;

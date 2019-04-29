@@ -13,7 +13,9 @@
     "pages/brand/index",
     "pages/brand/detail",
     "pages/brand/buy-detail",
-    "pages/webView/index"
+    "pages/webView/index",
+    "pages/fengshui/index",
+    "pages/brandlm/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,15 +28,21 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "套餐",
-        "iconPath": "resources/icon/icon_gray_01.png",
-        "selectedIconPath": "resources/icon/icon_blue_01.png"
+        "text": "软装拎包",
+        "iconPath": "resources/icon/icon_gray_04.png",
+        "selectedIconPath": "resources/icon/icon_blue_04.png"
       },
       {
-        "pagePath": "pages/single/index",
+        "pagePath": "pages/brandlm/index",
         "text": "品牌联盟",
-        "iconPath": "resources/icon/icon_gray_02.png",
-        "selectedIconPath": "resources/icon/icon_blue_02.png"
+        "iconPath": "resources/icon/icon_gray_03.png",
+        "selectedIconPath": "resources/icon/icon_blue_03.png"
+      },
+      {
+        "pagePath": "pages/fengshui/index",
+        "text": "国学风水",
+        "iconPath": "resources/icon/icon_gray_01.png",
+        "selectedIconPath": "resources/icon/icon_blue_01.png"
       },
       {
         "pagePath": "pages/shopping/index",

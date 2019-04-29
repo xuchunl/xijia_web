@@ -603,7 +603,7 @@ Page({
       cartGoodsList: cartGoodsList,
       goodsId: this.data.detailInfo.goodsId,
       ciimgUrl: this.data.detailInfo.preImg,
-      price: this.totalMny / currentShopping.num
+      price: this.data.totalMny / currentShopping.num
     }
     cartService.saveCart({
       data: data,
@@ -734,7 +734,8 @@ Page({
         cate: { id: item.cateId },
         num: item.changeNum,
         price: item.marketPrice,
-        totalMny: item.totalMny
+        totalMny: item.totalMny,
+        name: item.name
       }
     });
     let data = {
@@ -747,10 +748,12 @@ Page({
       cartGoodsList: cartGoodsList,
       goodsId: this.data.detailInfo.goodsId,
       ciimgUrl: this.data.detailInfo.preImg,
-      price: this.data.totalMny / currentShopping.num
+      price: this.data.totalMny / currentShopping.num,
+      isNow: true,
+      fgPositionId: this.data.detailInfo.id
     }
     wx.setStorageSync("goodsList", [data])
-    wx.navigateTo({ url: '../settle/settle?pageType=mobile'})
+    wx.navigateTo({ url: '../settle/settle?pageType=mobile&isNow=' + true})
   },
   /* 支付 */
   wxpay1: function () {
@@ -1027,9 +1030,9 @@ Page({
     })
   },
   toViewVR: function(){
-    wx.navigateTo({ url: '../webView/index?url=' + this.data.detailInfo.locationUrl })
+    wx.navigateTo({ url: '../webView/index?url=' + this.data.detailInfo.locationUrl });
   },
   onCartStatus : function () {
-    this.setData({ cartStatus: !this.data.cartStatus})
+    this.setData({ cartStatus: !this.data.cartStatus});
   }
 })

@@ -1,7 +1,8 @@
 .order {
-  height: 100%;
+  height: calc(100% - 80rpx);
   width: 100%;
   background: #f4f4f4;
+  padding-top: 80rpx;
 }
 .tab-h {
   height: 80rpx;
@@ -43,6 +44,76 @@
   border-radius: 16rpx;
 }
 .order .content {
-  margin-top: 20rpx;
-  height: calc(100% - 80rpx);
+  height: 100%;
+}
+.order .content .order-item {
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  padding: 10rpx;
+  min-height: 250rpx;
+}
+.order .content .order-item .title {
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.order .content .order-item .title .status {
+  font-size: 20rpx;
+}
+.order .content .order-item .goods-info {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+}
+.order .content .order-item .goods-info .goods-img {
+  width: 200rpx;
+  height: 200rpx;
+  text-align: center;
+}
+.order .content .order-item .goods-info .goods-img image {
+  width: 180rpx;
+  height: 180rpx;
+  border: 1rpx solid #f4f4f4;
+  border-radius: 8rpx;
+}
+.order .content .order-item .goods-info .detail {
+  width: calc(100% - 205rpx);
+  font-size: 20rpx;
+  display: flex;
+  line-height: 33rpx;
+}
+.order .content .order-item .goods-info .detail .left {
+  width: calc(100% - 50rpx);
+}
+.order .content .order-item .total-mny {
+  clear:both;
+  text-align:right;
+  width:100%;
+  height:50rpx;
+  line-height:50rpx;
+}
+.order .content .order-item .footer {
+  padding: 10rpx 0;
+  width: 100%;
+  clear: both;
+  height: 50rpx;
+}
+.order .content .order-item .footer .btn {
+  padding: 10rpx 15rpx;
+  border: 1rpx solid #C0C4CC;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  margin-right: 15rpx;
+}
+.order .content .order-item .footer .on-pay {
+  border: 1rpx solid #E6A23C;
+  color: #E6A23C;
+}
+.order .content .order-item .footer .delete-order {
+  border: 1rpx solid #F56C6C;
+  color: #F56C6C;
+}
+.order .content .order-item .footer .confirm-order {
+  border: 1rpx solid #409EFF;
+  color: #409EFF;
 }

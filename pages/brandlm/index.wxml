@@ -1,0 +1,29 @@
+<view class='brandlm'>
+  <view class='header'>
+    <view class='left float-left'>
+      <view class='xj-info'>
+        <view class='logo'>
+          <view class='float-left' style='font-size: 45rpx'>喜 家</view>
+          <view class='float-left shop-name'>岭秀金江</view>
+        </view>
+        <view class='float-right color-success' style='font-size: 34rpx;padding: 15rpx;'>生活头条...</view>
+        <view class='share' bindtap='onShareVisible'>
+          <view style="font-size: 24rpx;">分享</view>
+        </view>
+      </view>
+      <view class='center'>
+        <view class='slogan float-left'>—— 有品质的社区软装设计拼团系统</view>
+      </view>
+    </view>
+    <view class='qz'>
+      <view class='jl'>远亲不如近邻</view>
+      <view class='avater'>
+        <image wx:for="{{[0,1,2]}}" wx:for-item="img"  wx:key="brandlm"  src='{{userInfo.headimgurl}}'></image>
+      </view>
+      <view class='ljq color-info'>邻居圈　<i class="fa fa-angle-right"></i> </view>
+    </view>
+  </view>
+  <view class='body'>
+    <image src='../image/gx.jpg'></image>
+  </view>
+</view>

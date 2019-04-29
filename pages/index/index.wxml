@@ -2,14 +2,27 @@
   <view class='header'>
     <view class='left float-left'>
       <view class='xj-info'>
-        <view class='float-left' style='font-size: 45rpx'>喜 家</view>
-        <view class='float-left shop-name'>岭秀金江</view>
-        <view class='float-left shop-num'>00003</view>
-        <view class='float-right' style='font-size: 34rpx;padding: 15rpx;'>生活头条</view>
+        <view class='logo'>
+          <view class='float-left' style='font-size: 45rpx'>喜 家</view>
+          <view class='float-left shop-name'>岭秀金江</view>
+        </view>
+        <!-- <view class='float-left shop-num'>00003</view> -->
+        <view class='float-right color-success' style='font-size: 34rpx;padding: 15rpx;'>生活头条...</view>
+        <view class='share' bindtap='onShareVisible'>
+          <!-- <view class='float-left'><image src='../image/share.jpg'></image></view> -->
+          <!-- <i style="font-size: 50rpx;" class="fa fa-share-square-o"></i> -->
+          <view style="font-size: 24rpx;">分享</view>
+        </view>
       </view>
-      <view class='slogan'>—— 有品质的社区软装设计拼团系统</view>
+      <view class='center'>
+        <view class='slogan float-left'>—— 有品质的社区软装设计拼团系统</view>
+        <!-- <view class='share float-right' bindtap='onShareVisible'>
+          <i class="fa fa-share-square-o"></i>
+          <view class='float-left'>分享</view>
+        </view> -->
+      </view>
     </view>
-    <view class='header-bottom'>
+    <!-- <view class='header-bottom'>
       <view class='search float-left'>
         <input type='text' confirm-type='search' placeholder='输入商品名称' bindinput='onQuery'></input>
         <icon size='15' type='search'></icon>
@@ -17,8 +30,15 @@
       <view class='share float-right' bindtap='onShareVisible'>
         <view class='float-left'><image src='../image/share.jpg'></image></view>
         <view class='float-left'>分享</view>
-         <!-- <i class="fa fa-share-square-o"></i> -->
+         <i class="fa fa-share-square-o"></i>
       </view>
+    </view> -->
+    <view class='qz'>
+      <view class='jl'>远亲不如近邻</view>
+      <view class='avater'>
+        <image wx:for="{{[0,1,2]}}" wx:for-item="img"  wx:key="index"  src='{{userInfo.headimgurl}}'></image>
+      </view>
+      <view class='ljq color-info'>邻居圈　<i class="fa fa-angle-right"></i> </view>
     </view>
   </view>
   <!--  现代 新中 小美  法式 -->
@@ -26,14 +46,26 @@
     <view bindtap='swichNav' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="cateIndex"  class="tab-item  {{currentCate == index ? 'active' : ''}}" data-id='{{cateItem.id}}' data-current='{{index}}' >{{cateItem.name}}
     </view>
   </scroll-view>
+  <view class='ad-detail'>
+    <view>● 品牌制造商直供　</view>
+    <view>● 软装设计师服务　</view>
+    <view>● 美学家线下真实体验　</view>
+    <view class='font-size-28 color-info'><i class="fa fa-angle-right"></i></view>
+  </view>
+  <view class='gx-ad'>
+    <image src='../image/1556512444(1).jpg'></image>
+  </view>
   <view class='body'>
-    <view wx:for="{{taocanList}}" wx:for-item="taocan" wx:key="index" class='body-taocan'>
-    <view class='designer'>
-      <image src='../image/avater2.jpg'></image>
+    <view class="text-align-center">
+      <image wx:if="{{!taocanList.length}}" src="../image/offshelf.png" mode="aspectFit" style="width:120px;margin-top:40%;" />
     </view>
-    <!-- <view class='designer' wx:if="{{index == 1}}">
-      <image src='../image/avater1.jpg'></image>
-    </view> -->
+    <view wx:for="{{taocanList}}" wx:for-item="taocan" wx:key="index" class='body-taocan'>
+      <!-- <view class='designer'>
+        <image src='../image/avater2.jpg'></image>
+      </view> -->
+      <!-- <view class='designer' wx:if="{{index == 1}}">
+        <image src='../image/avater1.jpg'></image>
+      </view> -->
       <view style='height: {{windowWidth}}px'>
         <swiper current="{{currentTab}}" class="change-img" autoplay='true' interval='5000' duration='300' data-index = '{{index+1}}'>
           <swiper-item wx:for="{{taocan.showImages}}" wx:for-item="image" wx:key="index">
@@ -43,25 +75,40 @@
         <!-- <image src="{{urlPrefix}}{{taocan.preImg}}"></image> -->
       </view>
       <view class='taocan-info'>
-        <view class='float-left user-info'>
+        <view class='user-info'>
           <view>
-            <image src='../image/avater.jpg'></image>
+            <image src='../image/factory.jpg'></image>
             <view>厂家服务</view>
           </view>
           <!-- <view style='font-size:24rpx'>18607599088</view> -->
         </view>
-        <view class='float-left title'>
+        <view class='title'>
           <view class='title-info'>
             <view style='height:50rpx;line-height:50rpx'>
               <view class='float-left'>宾皇尊品</view>
               <view class='float-left to-view-brand'>查看品牌故事 <i class='fa fa-angle-right'></i> </view>
             </view>
           </view>
-          <view style='clear:both;color: #909399;font-size: 20rpx;'>{{taocan.description}}</view>
+          <view class='color-info' style='font-size: 20rpx;word-break:break-all;'>{{taocan.description}}</view>
         </view>
+        <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
         <view class='detail float-left' bindtap='clickDetail' data-taocan='{{taocan}}'>
           <view class='detail-icon'>{{taocan.hsquare}}m² {{taocan.hname}}</view>
         </view>
+      </view>
+      <view class='guoxue-info'>
+        <view class='guoxue-image'>
+          <view><image src='../image/guoxue.jpg'></image><view>赖易风水</view></view>
+        </view>
+        <view class='content'></view>
+        <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
+      </view>
+      <view class='design-info'>
+        <view class='designer-image'>
+          <view><view><image src='../image/avater2.jpg'></image></view><view>设计师</view></view>
+        </view>
+        <view class='content'></view>
+        <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
       </view>
     </view>
   </view>

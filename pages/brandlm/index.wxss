@@ -1,0 +1,116 @@
+.brandlm{
+  background: #fff;
+  height: calc(100% - 160rpx);
+  width: 100%;
+  padding-top: 160rpx;
+}
+.brandlm .header {
+  height: 160rpx;
+  padding: 0 10rpx;
+  width: calc(100% - 20rpx);
+  position:fixed;   
+  top:0;
+  left:0;
+  z-index:10;
+  background: #fff;
+}
+.brandlm .header .left {
+  font-size: 35rpx;
+  width: 100%;
+  text-align: left;
+}
+.brandlm .header .left .xj-info {
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+.brandlm .header .left .xj-info .logo {
+  width: calc(100% - 280rpx);
+}
+.brandlm .header .left .xj-info .shop-name {
+  border: 1rpx solid #F4F4F4;
+  border-radius: 8rpx;
+  padding: 10rpx;
+  margin-left: 15rpx;
+  font-size: 26rpx;
+}
+.brandlm .header .left .xj-info .shop-num {
+  padding: 15rpx;
+  font-size: 26rpx;
+}
+.brandlm .header .center {
+  width: 100%;
+  height: 40rpx;
+  font-size: 20rpx;
+  line-height: 40rpx;
+}
+.brandlm .header .center .share {
+  width: 100rpx;
+  text-align: right;
+  height: 40rpx;
+  display: flex;
+}
+.brandlm .header .center .share image {
+  height: 40rpx;
+  width: 40rpx;
+}
+.brandlm .header .slogan {
+  width: calc(100% - 100rpx);
+}
+.brandlm .header .header-bottom {
+  clear: both;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.brandlm .header .header-bottom .search {
+  width: 85%;
+}
+.brandlm .header-bottom .search icon {
+  position: absolute;
+  top: 130rpx;
+  left: 17rpx;
+}
+.brandlm .header-bottom .search input {
+  border: 1rpx solid #DCDFE6;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  padding-left: 54rpx;
+  width: 367rpx;
+}
+.brandlm .header .qz {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 20rpx;
+  display: flex;
+  /* border-top: 1rpx solid #DCDFE6;
+  border-bottom: 1rpx solid #DCDFE6; */
+}
+.brandlm .header .qz .avater {
+  padding: 0 10rpx;
+  width:calc(100% - 240rpx);
+  display:flex;
+  height: 100%;
+  align-items:center;
+}
+.brandlm .header .qz .avater image {
+  width:40rpx;
+  height:40rpx;
+  border-radius:50%;
+}
+.brandlm .header .qz .ljq {
+  display: flex;
+  align-items: center;
+}
+.brandlm .header .qz .ljq .fa-angle-right {
+  font-size: 40rpx;
+}
+.brandlm .body {
+  width: 100%;
+  height: calc(100% - 10rpx);
+}
+.brandlm .body image {
+  width: 100%;
+  height: 100%;
+}

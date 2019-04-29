@@ -26,6 +26,9 @@
     </view>
   </scroll-view>
   <view class='body'>
+    <view class="text-align-center">
+      <image wx:if="{{!taocanList.length}}" src="../image/offshelf.png" mode="aspectFit" style="width:120px;margin-top:40%;" />
+    </view>
     <view wx:for="{{taocanList}}" wx:for-item="product" wx:key="index" class='tao-can-item'>
       <view bindtap='toBrand' data-product='{{product}}' class='image-info'>
         <view class='float-left image-left'><image  src="{{urlPrefix}}{{product.imgMobileUrl}}"></image></view>

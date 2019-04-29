@@ -11,8 +11,8 @@ Page({
     this.setData({ userInfo: member});
   },
   toOrder: function (e) {
-    var type = e.currentTarget.dataset.type
-    wx.navigateTo({ url: '../order/index?type=' + type})
+    var status = e.currentTarget.dataset.status
+    wx.navigateTo({ url: '../order/index?status=' + status})
   },
   onShopping: function (){
     wx.switchTab({

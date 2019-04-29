@@ -14,9 +14,11 @@
     </view>
   </view>
   <view class='shopping-main'>
+    <view class="text-align-center">
+      <image wx:if="{{!shoppingList.length}}" src="../image/offshelf.png" mode="aspectFit" style="width:120px;margin-top:40%;" />
+    </view>
     <view class='shopping-info' wx:for="{{shoppingList}}" wx:for-item="shoppingItem" wx:key="{{shoppingItem.id}}">
       <view class='shopping-info-head background-white'>
-        <!-- <image class='shopping-info-image float-left' src='../image/p1_c_03.jpg'></image> -->
         <view class='shopping-info-shop float-left color-black'>{{shoppingItem.ciname}}</view>
         <view class='float-right shopping-info-money'>￥{{shoppingItem.price}}</view>
         <!-- <view class='shopping-info-discount float-right'>优惠券使用</view> -->
@@ -24,7 +26,8 @@
       <view class='shopping-info-body background-white'>
         <view class="fa {{shoppingItem.isCheck ? 'fa-check-circle' : 'fa-circle-o'}} shopping-info-body-icon {{shoppingItem.isCheck ? 'color-blue' : 'color-gray'}}  float-left" bindtap='clickCheck' data-shopping='{{shoppingItem}}'></view>
         <view  class='shopping-info-body-image float-left' >
-          <image src='{{urlPrefix}}{{shoppingItem.ciimgUrl}}'></image>
+          <image wx:if="{{shoppingItem.ciimgUrl}}" src="{{urlPrefix}}{{shoppingItem.ciimgUrl}}"></image>
+          <image wx:else src="../image/p1_c_02.jpg"></image>
         </view>
         <!-- <view class='float-left shopping-info-body-name'>{{shoppingItem.ciname}}</view> -->
         <view wx:if="shoppingItem.cartGoodsList.length" class='float-left cart-goods-item'>

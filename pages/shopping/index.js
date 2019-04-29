@@ -13,7 +13,8 @@ Page({
     shoppingList: [],
     totalMny: 0,
     isEditStatus: false,
-    ids: null
+    ids: null,
+    member: {}
   },
 
   /**
@@ -23,8 +24,9 @@ Page({
     this.loadData();
   },
   loadData: function(){
-    let $this = this
-    let member = wx.getStorageSync('member') 
+    this.setData({ isAllCheck: false });
+    let member = wx.getStorageSync('member');
+    this.setData({ member: member });
     if (!member || !member.id) {
       this.setData({ shoppingList: [] });
       msgDlg.showModal('系统提示', '请到首页先登录！', false, (res) => {
@@ -43,12 +45,12 @@ Page({
               item.num = Number(item.num);
               item.isCheck = false;
             })
-            $this.setData({ shoppingList: shoppingList })
+            this.setData({ shoppingList: shoppingList })
           }
         } else msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false);
       },
       fail: (result) => {
-        msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false);
       },
       complete: (result) => {
         msgDlg.hideLoading();
@@ -61,14 +63,14 @@ Page({
     this.setData({ isEditStatus: !isEditStatus });
   },
   deleteCart: function(e) {
-    let $this = this
     let ids = this.data.ids;
     if (ids) {
       cartService.deleteCart({
         data: { ids: ids },
         success: (result) => {
           if (result.data && (!result.data.msg || result.data.msg === 'success')) {
-            $this.loadData();
+            this.loadData();
+            this.clickAllCheck()
             msgDlg.showToast('删除成功！', 'success');
           }
         },
@@ -122,69 +124,47 @@ Page({
   onShareAppMessage: function () {
   },
   clickCheck(e) {
-    let isAllCheck = this.data.isAllCheck;
     let shopping = e.currentTarget.dataset.shopping;
     let shoppingList = this.data.shoppingList || [];
-    let totalMny = this.data.totalMny;
-    let count = 0;
-    let ids = '';
     shoppingList = shoppingList.filter(item => {
-      if (item.id === shopping.id) {
-        item.isCheck = !item.isCheck;
-        if (!item.isCheck) {
-          isAllCheck = false
-          totalMny = (Number(totalMny) - (Number(item.price || 0)).toFixed(2) * Number(item.num))
-        } else totalMny = (Number(totalMny) + (Number(item.price || 0)).toFixed(2) * Number(item.num));
-      }
-      if (item.isCheck) {
-        ids += ids ? ',' : '';
-        ids += item.id
-        count++;
-      }
+      if (item.id === shopping.id) item.isCheck = !item.isCheck;
       return true;
     })
-    if (count === shoppingList.length) isAllCheck = true;
-    else isAllCheck = false;
     this.setData({
-      shoppingList: shoppingList,
-      isAllCheck: isAllCheck,
-      totalMny: totalMny,
-      ids: ids
-    })
+      shoppingList: shoppingList
+    });
+    this.handelTotalMny();
   },
-  clickAllCheck() {
+  clickAllCheck(param) {
     let isAllCheck = !this.data.isAllCheck;
     let shoppingList = this.data.shoppingList || [];
-    let totalMny = 0;
-    let ids = '';
     shoppingList.filter(item => {
       item.isCheck = isAllCheck;
-      if (isAllCheck) {
-        ids += ids ? ',' : '' ;
-        ids += item.id
-        totalMny = (Number(totalMny) + (Number(item.price || 0)).toFixed(2) * Number(item.num))
-      }
       return true;
     })
     this.setData({
       isAllCheck: isAllCheck,
-      shoppingList: shoppingList,
-      totalMny: totalMny,
-      ids: ids
-    })
+      shoppingList: shoppingList
+    });
+    this.handelTotalMny();
   },
   deNum(e) {
     let shopping = e.currentTarget.dataset.shopping;
     let shoppingList = this.data.shoppingList || [];
     let totalMny = 0;
+    if (shopping.num <= 1) {
+      msgDlg.showToast('不能再减少了哟！');
+      return;
+    }
     shoppingList.forEach(item => {
       if (item.id === shopping.id) {
-        if (item.num > 1) item.num = --item.num;
-        else msgDlg.showToast('不能再减少了哟！')
+        item.num = --item.num;
+        shopping = item;
         return;
       }
-    })
+    });
     this.setData({ shoppingList: shoppingList });
+    this.changeCartNum(shopping);
   },
   addNum(e) {
     let shopping = e.currentTarget.dataset.shopping;
@@ -192,10 +172,12 @@ Page({
     shoppingList.forEach(item => {
       if (item.id === shopping.id) {
         item.num = ++item.num;
+        shopping = item;
         return;
       }
     })
     this.setData({ shoppingList: shoppingList });
+    this.changeCartNum(shopping);
   },
   changeNum(e) {
     let num = e.detail.value;
@@ -207,11 +189,13 @@ Page({
       shoppingList.forEach(item => {
         if (item.id === shopping.id) {
           item.num = num;
+          shopping = item;
           return;
         }
       })
     }
     this.setData({ shoppingList: shoppingList });
+    this.changeCartNum(shopping);
   },
   // 付款
   doPay: function(e) {
@@ -220,8 +204,44 @@ Page({
     if (goodsList.length) {
       wx.setStorageSync("goodsList", goodsList )
       wx.navigateTo({
-        url: '../settle/settle?pageType=goodsList',
+        url: '../settle/settle?pageType=goodsList&isNow='+false,
       })
     } else msgDlg.showToast('请选择商品！');
   },
+  changeCartNum: function(param) {
+    let member = this.data.member;
+    cartService.changeCartNum({
+      data: { id: param.id, num: param.num, memId: member.id},
+      success: (res) => {
+        console.log('res:', res);
+        if (res.data && res.data.msg && res.data.msg == 'success') {
+          this.handelTotalMny();
+        }
+      },
+      fail: (err) => {}
+    })
+  },
+  handelTotalMny: function (){
+    let totalMny = 0;
+    let isAllCheck = this.data.isAllCheck;
+    let shoppingList = this.data.shoppingList || [];
+    let count = 0;
+    let ids = '';
+    shoppingList = shoppingList.filter(item => {
+      if (item.isCheck) {
+        totalMny = (Number(totalMny) + (Number(item.price || 0)).toFixed(2) * Number(item.num));
+        ids += ids ? ',' : '';
+        ids += item.id
+        count++;
+      }
+      return true;
+    })
+    if (count === shoppingList.length) isAllCheck = true;
+    else isAllCheck = false;
+    this.setData({
+      isAllCheck: isAllCheck,
+      totalMny: totalMny,
+      ids: ids
+    })
+  }
 })
