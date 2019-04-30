@@ -1,7 +1,6 @@
 var orderService = require('../../apis/order/orderService')
 var msgDlg = require('../../utils/msgDlg')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -10,57 +9,15 @@ Page({
     currentTab: 0,
     status: '',
     member: {},
-    orderList: [
-      {
-        id: 33,
-        status: "wfk",
-        createDate: "2019-04-28 15:07:43.0",
-        statusStr: "未付款",
-        no: "oyfk1556367178503315309548",
-        sumPrice: 8176.00,
-        orderItemSet: [
-          {
-            xiaoji: 0,
-            price: 2400.00,
-            num: 3.00,
-            name: "新中式A户型",
-            id: 28,
-            ciid: "1542275384228Fzz",
-            remarks: "新中式A户型:       3    600.00    1800.00 \n\n  新中式A户型: 1    600.00    600.00  "
-          }
-        ]
-      },
-      {
-        id: 34,
-        status: "wfk",
-        createDate: "2019-04-28 15:07:43.0",
-        statusStr: "未付款",
-        no: "oyfk1556367178503315309548",
-        sumPrice: 8176.00,
-        orderItemSet: [
-          {
-            xiaoji: 0,
-            price: 2400.00,
-            num: 3.00,
-            name: "新中式A户型",
-            id: 28,
-            ciid: "1542275384228Fzz"
-          }
-        ]
-      }
-    ]
+    orderList: []
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let status = options.status
     let member = wx.getStorageSync('member');
-    this.setData({
-      status: status,
-      member: member
-    });
+    this.setData({ status: status, member: member });
     this.loadData();
   },
   loadData: function() {
@@ -85,51 +42,32 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
-  },
-
+  onReady: function () {},
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
-
+  onShow: function () {},
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
-
+  onHide: function () {},
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
-  },
-
+  onUnload: function () {},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
-
+  onPullDownRefresh: function () {},
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  },
+  onShareAppMessage: function () {},
   switchTab: function (e) {
     let status = this.data.status;
     debugger

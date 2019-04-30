@@ -47,25 +47,23 @@
     </view>
   </scroll-view>
   <view class='ad-detail'>
-    <view>● 品牌制造商直供　</view>
-    <view>● 软装设计师服务　</view>
-    <view>● 美学家线下真实体验　</view>
-    <view class='font-size-28 color-info'><i class="fa fa-angle-right"></i></view>
+    <view class='left'>
+      <view>● 品牌制造商直供　</view>
+      <view>● 软装设计师服务　</view>
+      <view>● 美学家线下真实体验　</view>
+      <view class='font-size-28 color-info'><i class="fa fa-angle-right"></i></view>
+    </view>
+    <view class='contact'><button open-type="contact">客 服</button></view>
   </view>
   <view class='gx-ad'>
-    <image src='../image/1556512444(1).jpg'></image>
+    <image src='{{urlPrefix}}/upload/mini/1556512444(1).jpg'></image>
   </view>
   <view class='body'>
     <view class="text-align-center">
       <image wx:if="{{!taocanList.length}}" src="../image/offshelf.png" mode="aspectFit" style="width:120px;margin-top:40%;" />
     </view>
     <view wx:for="{{taocanList}}" wx:for-item="taocan" wx:key="index" class='body-taocan'>
-      <!-- <view class='designer'>
-        <image src='../image/avater2.jpg'></image>
-      </view> -->
-      <!-- <view class='designer' wx:if="{{index == 1}}">
-        <image src='../image/avater1.jpg'></image>
-      </view> -->
+      <view class='sort-num'>{{index+1}}</view>
       <view style='height: {{windowWidth}}px'>
         <swiper current="{{currentTab}}" class="change-img" autoplay='true' interval='5000' duration='300' data-index = '{{index+1}}'>
           <swiper-item wx:for="{{taocan.showImages}}" wx:for-item="image" wx:key="index">
@@ -77,10 +75,9 @@
       <view class='taocan-info'>
         <view class='user-info'>
           <view>
-            <image src='../image/factory.jpg'></image>
+            <image src='{{urlPrefix}}/upload/mini/factory.jpg'></image>
             <view>厂家服务</view>
           </view>
-          <!-- <view style='font-size:24rpx'>18607599088</view> -->
         </view>
         <view class='title'>
           <view class='title-info'>
@@ -94,18 +91,19 @@
         <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
         <view class='detail float-left' bindtap='clickDetail' data-taocan='{{taocan}}'>
           <view class='detail-icon'>{{taocan.hsquare}}m² {{taocan.hname}}</view>
+          <view class='pintuan'>去拼团</view>
         </view>
       </view>
       <view class='guoxue-info'>
         <view class='guoxue-image'>
-          <view><image src='../image/guoxue.jpg'></image><view>赖易风水</view></view>
+          <view><image src='{{urlPrefix}}/upload/mini/guoxue.jpg'></image><view>赖易风水</view></view>
         </view>
         <view class='content'></view>
         <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
       </view>
       <view class='design-info'>
         <view class='designer-image'>
-          <view><view><image src='../image/avater2.jpg'></image></view><view>设计师</view></view>
+          <view><view><image src='{{urlPrefix}}/upload/mini/avater2.jpg'></image></view><view>设计师</view></view>
         </view>
         <view class='content'></view>
         <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
@@ -211,7 +209,7 @@
       <i class="fa fa-times-circle-o color-white" bindtap="clickAdvertise" ></i>
     </view>
   </view>
-  <button open-type="contact" class='contact'>
+  <!-- <button open-type="contact" class='contact'>
     <i class="fa fa-comments-o"></i>
-  </button>
+  </button> -->
 </view>

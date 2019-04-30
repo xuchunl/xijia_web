@@ -4,7 +4,6 @@ var subscribeService = require('../../apis/subscribe/subscribeService')
 var huxingService = require('../../apis/huxing/huxingService')
 var fenggeService = require('../../apis/fengge/fenggeService')
 const app = getApp()
-
 Page({
   data: {
     userInfo: {},
@@ -26,10 +25,7 @@ Page({
     windowWidth: wx.getSystemInfoSync().windowWidth,
     windowHeight: wx.getSystemInfoSync().screenHeight,
     previewImageUrl: null,
-    item: {
-      name: '喜家',
-      videoName: '大城'
-    },
+    item: { name: '喜家', videoName: '大城' },
     winWidth: 0,
     winHeight: 0,
     canvasImagePath: null,
@@ -47,18 +43,14 @@ Page({
   onLoad: function () {
     wx.getSystemInfo({
       success: (res) => {
-        this.setData({
-          winWidth: res.windowWidth,
-          winHeight: res.windowHeight
-        })
+        this.setData({ winWidth: res.windowWidth, winHeight: res.windowHeight });
       }
     })
     let member = wx.getStorageSync('member') || {};
-    this.setData({ userInfo: member });
     if (!member || !member.id) {
       this.setData({ loginStatus: true})
       return;
-    } else this.setData({ advertiseStatus: true, userInfo: member})
+    } else this.setData({ advertiseStatus: true, userInfo: member});
     // 加载数据
     this.loadData();
   },
@@ -68,9 +60,6 @@ Page({
     // 登录
     wx.login({
       success: res => {
-        console.log('code', res.code);
-        // debugger
-        // return;
         wx.request({
           url: app.globalData.baseUrl+'/mini/login/login.action',
           data: {
@@ -108,7 +97,6 @@ Page({
   // 加载数据
   loadData: function () {
     msgDlg.showLoading('正在加载中');
-    let $this = this
     indexService.findList({
       data: {},
       success: (res) => {
@@ -122,11 +110,11 @@ Page({
             item.showImages.push(this.data.urlPrefix +item.functionRoom);
             item.showImages.push(this.data.urlPrefix +item.veranda);
           })
-          $this.setData({ taocanList: res.data || [] })
-        } else msgDlg.showModal('错误提示', res.data.message || res.data.state || '查询出错！', false)
+          this.setData({ taocanList: res.data || [] });
+        } else msgDlg.showModal('错误提示', res.data.message || res.data.state || '查询出错！', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state  || '查询出错！', false)
+        msgDlg.showModal('错误提示', res.state  || '查询出错！', false);
       },
       complete: (res) => {
         msgDlg.hideLoading();
@@ -165,10 +153,6 @@ Page({
       success: function (res) {},
       fail: function (res) {}
     }
-    // wx.previewImage({
-    //   current: '../image/post1.jpg', // 当前显示图片的http链接
-    //   urls: ['../image/post1.jpg'] // 需要预览的图片http链接列表，数组形式
-    // })
   },
   onShareVisible: function (e) {
     var shareVisible = this.data.shareVisible;
@@ -223,11 +207,9 @@ Page({
           success: (res) => {
             if (res.confirm) {
               console.log('用户点击确定');
-              that.setData({ postVisible: false})
+              that.setData({ postVisible: false});
             }
-          }, fail: (res) => {
-            console.log(res)
-          }
+          }, fail: (res) => {}
         })
       }
     })
@@ -286,11 +268,11 @@ Page({
     subscribeService.queryList({
       data: {},
       success: function (res) {
-        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ orderList: res.data })
-        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ orderList: res.data });
+        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       complete: (res) => {
         msgDlg.hideLoading();
@@ -303,11 +285,11 @@ Page({
     huxingService.queryList({
       data: {},
       success: (res) => {
-        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ hxList: res.data })
-        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ hxList: res.data });
+        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       complete: (res) => {
         msgDlg.hideLoading();
@@ -315,15 +297,14 @@ Page({
     })
   },
   loadFGList: function () {
-    let $this = this
     fenggeService.queryList({
       data: {},
       success: (res) => {
-        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ fgList: res.data })
-        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) this.setData({ fgList: res.data });
+        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       complete: (res) => {
         msgDlg.hideLoading();
@@ -388,11 +369,11 @@ Page({
               fgIndex: null
             })
             wx.showToast({ title: '报名成功！', icon: 'success' })
-          } else msgDlg.showModal('错误提示', res.state || res.data.state || '报名出错！', false)
-        } else if (res.statusCode === 404) msgDlg.showModal('错误提示', '404!', false)
+          } else msgDlg.showModal('错误提示', res.state || res.data.state || '报名出错！', false);
+        } else if (res.statusCode === 404) msgDlg.showModal('错误提示', '404!', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state || res.data.state || '报名出错！', false)
+        msgDlg.showModal('错误提示', res.state || res.data.state || '报名出错！', false);
       },
       complete: (res) => {
         msgDlg.hideLoading();
@@ -409,6 +390,6 @@ Page({
   },
   swichNav: function (e) {
     if (this.data.currentCate === e.currentTarget.dataset.current) return false;
-    else this.setData({ currentCate: e.currentTarget.dataset.current })
+    else this.setData({ currentCate: e.currentTarget.dataset.current });
   },
 })

@@ -3,23 +3,25 @@
   <view class='header'>
     <view class='left float-left'>
       <view class='xj-info'>
-        <view class='float-left' style='font-size: 45rpx'>喜 家</view>
-        <view class='float-left shop-name'>岭秀金江</view>
-        <view class='float-left shop-num'>00003</view>
-        <view class='float-right' style='font-size: 34rpx;padding: 15rpx;'>生活头条</view>
+        <view class='logo'>
+          <view class='float-left' style='font-size: 45rpx'>喜 家</view>
+          <view class='float-left shop-name'>岭秀金江</view>
+        </view>
+        <view class='float-right color-success' style='font-size: 34rpx;padding: 15rpx;'>生活头条...</view>
+        <view class='share' bindtap='onShareVisible'>
+          <view style="font-size: 24rpx;">分享</view>
+        </view>
       </view>
-      <view class='slogan'>—— 有品质的社区软装设计拼团系统</view>
+      <view class='center'>
+        <view class='slogan float-left'>—— 有品质的社区软装设计拼团系统</view>
+      </view>
     </view>
-    <view class='header-bottom'>
-      <view class='search float-left'>
-        <input type='text' confirm-type='search' placeholder='输入商品名称' bindinput='onQuery'></input>
-        <icon size='15' type='search'></icon>
+    <view class='qz'>
+      <view class='jl'>远亲不如近邻</view>
+      <view class='avater'>
+        <image wx:for="{{[0,1,2]}}" wx:for-item="img"  wx:key="index"  src='{{userInfo.headimgurl}}'></image>
       </view>
-      <view class='share float-right' bindtap='onShareVisible'>
-        <view class='float-left'><image src='../image/share.jpg'></image></view>
-        <view class='float-left'>分享</view>
-         <!-- <i class="fa fa-share-square-o"></i> -->
-      </view>
+      <view class='ljq color-info'>邻居圈　<i class="fa fa-angle-right"></i> </view>
     </view>
   </view>
   <view class="mobile-conatiner">
@@ -268,7 +270,7 @@
   </view> -->
   <!-- 播放  -->
   <view class='video-tab ' style='top: {{windowWidth}}px'>
-    <image bindtap="bindVideoTab" src="../image/bofang.png"></image>
+    <image bindtap="bindVideoTab" src="{{urlPrefix}}/upload/mini/bofang.png"></image>
   </view>
   <view class='video-info' wx:if="{{videoStatus}}">
     <view class='close-video' bindtap="bindVideoTab">

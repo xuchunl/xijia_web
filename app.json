@@ -6,8 +6,6 @@
     "pages/single/index",
     "pages/shopping/index",
     "pages/settle/settle",
-    "pages/receiver/index",
-    "pages/receiver/edit",
     "pages/mine/index",
     "pages/order/index",
     "pages/brand/index",

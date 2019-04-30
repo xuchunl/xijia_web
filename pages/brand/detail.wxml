@@ -9,7 +9,7 @@
       <view class='info'>
         <view class='float-left user-info'>
           <view>
-            <image src='../image/avater.jpg'></image>
+            <image src='{{urlPrefix}}/upload/mini/factory.jpg'></image>
             <view>厂家服务</view>
           </view>
         </view>

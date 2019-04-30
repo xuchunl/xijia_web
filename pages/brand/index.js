@@ -22,12 +22,8 @@ Page({
         success: (res) => {
           console.log('res.data', res);
           if (res.data && !res.data.message && res.data.msg != 'fail') {
-            this.setData({
-              productList: res.data || []
-            })
-          } else {
-            msgDlg.showModal('错误提示', res.data.message || res.data.state || '查询出错！', false)
-          }
+            this.setData({ productList: res.data || [] });
+          } else msgDlg.showModal('错误提示', res.data.message || res.data.state || '查询出错！', false);
         },
         fail: (res) => {
           msgDlg.showModal('错误提示', res.state || '查询出错！', false)
@@ -38,64 +34,40 @@ Page({
       });
     }
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
-
+  onShow: function () {},
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
-  },
-
+  onUnload: function () {},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
-
+  onPullDownRefresh: function () {},
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
-
+  onReachBottom: function () {},
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  },
+  onShareAppMessage: function () {},
   toDetail: function(e) {
-    wx.navigateTo({
-      url: 'detail?id=' + e.currentTarget.dataset.product.id,
-    })
+    wx.navigateTo({ url: 'detail?id=' + e.currentTarget.dataset.product.id })
   },
   toBuyUser: (e) => {
-    console.log(e);
-    wx.navigateTo({
-      url: 'buy-detail?brandId=',
-    })
+    wx.navigateTo({ url: 'buy-detail?brandId=' })
   }
 })

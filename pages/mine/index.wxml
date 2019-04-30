@@ -44,7 +44,7 @@
     <view class='text'>我的当前自提点</view>
     <view class='detail'>
       <view class='label' style='color: #F56C6C;'>当前自提点：广州市XXXXXXX</view>
-      <view class='label' style='color: #F56C6C;'>自提点电话：（11111111111）<i class='fa fa-phone'></i></view>
+      <view class='label' style='color: #F56C6C;'>自提点电话：（18688988654）<i class='fa fa-phone'></i></view>
       <view class='label' style='color: #909399;'>提货地址：广州市XXXXXXXX</view>
     </view>
   </view>
@@ -54,7 +54,7 @@
     </view>
     <view class='label'>2.如果你找不到购物的提货门店，请致电喜家帮忙热线！</view>
     <view class='phone'>
-      <view style='color: #909399;'>1111111111</view>
+      <view style='color: #909399;'>18688988654</view>
       <i class='fa fa-phone'></i>
     </view>
   </view>

@@ -2,7 +2,6 @@ var cartService = require('../../apis/cart/cartService')
 var msgDlg = require('../../utils/msgDlg')
 const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -16,7 +15,6 @@ Page({
     ids: null,
     member: {}
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -45,12 +43,12 @@ Page({
               item.num = Number(item.num);
               item.isCheck = false;
             })
-            this.setData({ shoppingList: shoppingList })
+            this.setData({ shoppingList: shoppingList });
           }
-        } else msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false);
+        } else msgDlg.showModal('错误提示', result.data || result.data.state || '查询出错！', false);
       },
       fail: (result) => {
-        msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false);
+        msgDlg.showModal('错误提示', result.data || result.data.state || '查询出错！', false);
       },
       complete: (result) => {
         msgDlg.hideLoading();
@@ -75,7 +73,7 @@ Page({
           }
         },
         fail: (result) => {
-          msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
+          msgDlg.showModal('错误提示', result.data || result.data.state || '查询出错！', false)
         },
         complete: (result) => {}
       })
@@ -84,45 +82,33 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  },
-
+  onReady: function () {},
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
-
+  onShow: function () {},
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  },
-
+  onHide: function () {},
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  },
-
+  onUnload: function () {},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
     this.loadData();
   },
-
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  },
-
+  onReachBottom: function () {},
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  },
+  onShareAppMessage: function () {},
   clickCheck(e) {
     let shopping = e.currentTarget.dataset.shopping;
     let shoppingList = this.data.shoppingList || [];
@@ -130,9 +116,7 @@ Page({
       if (item.id === shopping.id) item.isCheck = !item.isCheck;
       return true;
     })
-    this.setData({
-      shoppingList: shoppingList
-    });
+    this.setData({ shoppingList: shoppingList });
     this.handelTotalMny();
   },
   clickAllCheck(param) {
@@ -142,10 +126,7 @@ Page({
       item.isCheck = isAllCheck;
       return true;
     })
-    this.setData({
-      isAllCheck: isAllCheck,
-      shoppingList: shoppingList
-    });
+    this.setData({ isAllCheck: isAllCheck, shoppingList: shoppingList });
     this.handelTotalMny();
   },
   deNum(e) {
@@ -238,10 +219,6 @@ Page({
     })
     if (count === shoppingList.length) isAllCheck = true;
     else isAllCheck = false;
-    this.setData({
-      isAllCheck: isAllCheck,
-      totalMny: totalMny,
-      ids: ids
-    })
+    this.setData({ isAllCheck: isAllCheck, totalMny: totalMny, ids: ids });
   }
 })

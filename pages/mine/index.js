@@ -12,12 +12,10 @@ Page({
   },
   toOrder: function (e) {
     var status = e.currentTarget.dataset.status
-    wx.navigateTo({ url: '../order/index?status=' + status})
+    wx.navigateTo({ url: '../order/index?status=' + status});
   },
   onShopping: function (){
-    wx.switchTab({
-      url: '../index/index',
-    })
+    wx.switchTab({ url: '../index/index' });
   },
   onOut: function () {
     msgDlg.showModal('系统提示', '确定退出登录？', false, (res) => {

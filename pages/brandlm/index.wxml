@@ -24,6 +24,6 @@
     </view>
   </view>
   <view class='body'>
-    <image src='../image/gx.jpg'></image>
+    <image src='{{urlPrefix}}/upload/mini/gx.jpg'></image>
   </view>
 </view>

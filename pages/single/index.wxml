@@ -41,7 +41,7 @@
       <view class='taocan-info'>
         <view class='float-left user-info'>
           <view>
-            <view bindtap='toBrand' data-product='{{product}}'><image src='../image/avater.jpg'></image></view>
+            <view bindtap='toBrand' data-product='{{product}}'><image src='{{urlPrefix}}/upload/mini/factory.jpg'></image></view>
             <view bindtap='toBrand' data-product='{{product}}'>厂家服务</view>
           </view>
           <!-- <view>18607599088</view> -->
@@ -84,11 +84,11 @@
       </view>
       <view class='pin-tun-info' bindtap='toBuyUser'>
         <view class='avater'>
-          <image src='../image/avater.jpg'></image>
-          <image class='no-first0' src='../image/avater.jpg'></image>
-          <image class='no-first1' src='../image/avater.jpg'></image>
-          <image class='no-first2' src='../image/avater.jpg'></image>
-          <image class='no-first3' src='../image/avater.jpg'></image>
+          <image src='{{userInfo.headimgurl}}'></image>
+          <image class='no-first0' src='{{userInfo.headimgurl}}'></image>
+          <image class='no-first1' src='{{userInfo.headimgurl}}'></image>
+          <image class='no-first2' src='{{userInfo.headimgurl}}'></image>
+          <image class='no-first3' src='{{userInfo.headimgurl}}'></image>
         </view>
         <view class='label'> 等刚拼了此商品</view>
         <view class='float-right'><i class='fa fa-angle-right'></i></view>

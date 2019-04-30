@@ -1,4 +1,3 @@
-//获取应用实例
 var mobileService = require('../../apis/mobile/mobileService')
 var cartService = require('../../apis/cart/cartService')
 var msgDlg = require('../../utils/msgDlg')
@@ -55,60 +54,31 @@ Page({
     fgIndex: '',
     loading: false,
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     msgDlg.showLoading('正在加载中');
     let id = id = options ? options.id : ''
-    var $this = this;
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    let member = wx.getStorageSync('member') || {};
+    this.setData({ userInfo: member })
     if (id) this.loadData(id);
     this.loadHXList();
     this.loadFGList();
   },
   loadData: function (id) {
-    let $this = this
     let fengeDetail = storage.getSync('fenge-detail');
     if (fengeDetail) {
-      $this.setData({
-        detailInfo: fengeDetail,
-        videoUrl: fengeDetail.livingVideo,
-        productList: fengeDetail.goodsList
-      })
+      this.setData({ detailInfo: fengeDetail, videoUrl: fengeDetail.livingVideo, productList: fengeDetail.goodsList });
       let huDetail = storage.getSync('hx-detail-' + hxInfo.data.id)
-      if (huDetail) {
-        $this.setData({ hxDetail: huDetail})
-      } else this.queryHX(fengeDetail.huxingId);
+      if (huDetail) this.setData({ hxDetail: huDetail });
+      else this.queryHX(fengeDetail.huxingId);
     } else {
       mobileService.details({
         data: {id: id},
         success: (res) => {
           if (res.data && (!res.data.msg || res.data.msg !== 'fail')) {
-            res.data.info = []
+            res.data.info = [];
             res.data.info.push({ price: res.data.tg10Price, num :1})
             res.data.info.push({ price: res.data.tg20Price, num: 2 })
             res.data.info.push({ price: res.data.tg30Price, num: 3 })
@@ -122,20 +92,15 @@ Page({
             res.data.showImages.push(this.data.urlPrefix + res.data.functionRoom);
             res.data.showImages.push(this.data.urlPrefix + res.data.veranda);
             res.data.goodsList.filter(item => item.changeNum = item.num)
-            $this.setData({
-              detailInfo: res.data,
-              videoUrl: res.data.livingVideo,
-              productList: res.data.goodsList
-            })
+            this.setData({ detailInfo: res.data, videoUrl: res.data.livingVideo, productList: res.data.goodsList });
             this.findCatelist();
             let time = new Date(moment(new Date).add(1, 'd')).getTime()
             // storage.setSync('fenge-detail', res.data, time)
-            $this.queryHX(res.data.huxingId);
-          } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+            this.queryHX(res.data.huxingId);
+          } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
         },
         fail: (res) => {
-          
-          msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+          msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
         },
         complete: (res) => {
           msgDlg.hideLoading();
@@ -145,18 +110,16 @@ Page({
   },
   // 通过id查询户型信息
   queryHX: function(id) {
-    let $this = this
     let time = new Date(moment(new Date).add(1, 'd')).getTime()
     mobileService.queryHx({
       data: { id: id },
-      success: function (hxInfo) {
+      success: (hxInfo) => {
         if (hxInfo.data && (!hxInfo.data.msg || hxInfo.data.msg !== 'fail')) {
-          $this.setData({ hxDetail: hxInfo.data})
-          // storage.setSync('hx-detail-' + hxInfo.data.id, hxInfo.data, time)
-        } else msgDlg.showModal('错误提示', hxInfo.state || hxInfo.data.state || '查询出错！', false)
+          this.setData({ hxDetail: hxInfo.data});
+        } else msgDlg.showModal('错误提示', hxInfo.state || hxInfo.data.state || '查询出错！', false);
       },
       fail:　(hxInfo)　=> {
-        msgDlg.showModal('错误提示', hxInfo.state || hxInfo.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', hxInfo.state || hxInfo.data.state || '查询出错！', false);
       },
       complete: (res) => {}
     })
@@ -170,10 +133,10 @@ Page({
           let list = res.data.filter(item => item.isLeaf);
           this.setData({ cateList: list, currentCate: list[0] || {} });
           this.handlePrice();
-        } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        } else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       complete: (res) => {}
     })
@@ -225,11 +188,10 @@ Page({
     this.handlePrice();
   },
   loadHXList: function () {
-    let $this = this
     huxingService.queryList({
       data: {},
       success: (res) => {
-        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ hxList: res.data })
+        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) this.setData({ hxList: res.data })
         else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
       },
       fail: (res) => {
@@ -241,15 +203,14 @@ Page({
     })
   },
   loadFGList: function () {
-    let $this = this
     fenggeService.queryList({
       data: {},
       success: (res) => {
-        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) $this.setData({ fgList: res.data })
-        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        if (res.data && (!res.data.msg || res.data.msg !== 'fail')) this.setData({ fgList: res.data });
+        else msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
       complete: (res) => {
         msgDlg.hideLoading();
@@ -266,58 +227,46 @@ Page({
   },
   bindHX: function (e) {
     let hx = ''
-    if (this.data.hxList && this.data.hxList.length) hx = this.data.hxList[e.detail.value].id
+    if (this.data.hxList && this.data.hxList.length) hx = this.data.hxList[e.detail.value].id;
     let user = this.data.user
     user.houseType = hx;
-    this.setData({ hxIndex: e.detail.value, user: user })
+    this.setData({ hxIndex: e.detail.value, user: user });
   },
   bindFG: function (e) {
     let fenggeId = ''
-    if (this.data.fgList && this.data.fgList.length) fenggeId = this.data.fgList[e.detail.value].id
+    if (this.data.fgList && this.data.fgList.length) fenggeId = this.data.fgList[e.detail.value].id;
     let user = this.data.user
     user.fenggeId = fenggeId;
-    this.setData({ fgIndex: e.detail.value, user: user })
+    this.setData({ fgIndex: e.detail.value, user: user });
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    this.setData({ userInfo: e.detail.userInfo, hasUserInfo: true });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  },
+  onReady: function () {},
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function () {},
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  },
-
+  onHide: function () {},
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  },
-
+  onUnload: function () {},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  },
-
+  onPullDownRefresh: function () {},
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  },
+  onReachBottom: function () {},
   /**
  * 用户点击右上角分享
  */
@@ -339,108 +288,41 @@ Page({
   },
   switchTabFinish: function(e) {},
   swichNav: function (e) {
-    var $this = this;
-    if ($this.data.currentTab == e.currentTarget.dataset.current) return false;
+    if (this.data.currentTab == e.currentTarget.dataset.current) return false;
      else {
-      $this.setData({
+      this.setData({
         currentIndex: e.currentTarget.dataset.current,
         autoplayStatus: false,
         currentTab: e.currentTarget.dataset.current,
       })
-      setTimeout(function () {
-        $this.setData({ autoplayStatus: true})
+      setTimeout(() => {
+        this.setData({ autoplayStatus: true})
       },5000)
     }
-  },
-  /**
-   * 显示对话框
-   */
-  showModal: function (e) {
-    var $this = this;
-    if ($this.data.modalHidden) {
-      $this.setData({ modalHidden: false})
-    }
-  },
-  /**
-   * 确认
-   */
-  modalBindconfirm: function () {
-    var $this = this;
-    //把Modal上的时间赋给一层页面
-    $this.setData({ modalHidden: true})
-  },
-  /**
-   * 取消
-   */
-  modalBindcancel: function () {
-    var $this = this;
-    //把一层页面的时间赋给Modal
-    $this.setData({ modalHidden: true})
   },
   clickCate: function(e){
     let id = e.currentTarget.dataset.id;
     let currentCate = e.currentTarget.dataset.cate;
-    this.setData({ currentCate: currentCate})
+    this.setData({ currentCate: currentCate});
   },
   closeShowShopping: function () {
     this.setData({ guiGeStatus: false})
   },
   /**
- * 购物车按钮点击事件
- */
-  addIconTap1: function (e) {
-    let name = e.currentTarget.dataset.name;
-    let type = e.currentTarget.dataset.type;
-    let shoppingInfoList = this.data.shoppingInfo;
-    let productDetail = {};
-    let detailList = shoppingInfoList.filter(item => item.name === name 
-        && item.type === type);
-    if (detailList.length > 0) {
-      productDetail = detailList[0];
-      productDetail.count = productDetail.count + 1;
-      productDetail.sumMny = productDetail.count * Number(productDetail.price);
-    } else {
-      productDetail = {};
-      let product = this.data.productList.filter(item => item.name === name)[0];
-      if (product && product.name) {
-        productDetail = product.detailInfo.filter(item => item.type === type)[0];
-        productDetail.count = 1;
-        productDetail.sumMny = productDetail.count * Number(productDetail.price);
-      }
-    }
-    if (shoppingInfoList && shoppingInfoList.length > 0 ) {
-      if (detailList.length > 0 ) {
-        // shoppingInfoList.push(productDetail);
-      } else shoppingInfoList.push(productDetail);
-    } else shoppingInfoList.push(productDetail);
-    let total = 0;
-    shoppingInfoList.filter(item => {
-      total = item.sumMny + total;
-    }) 
-    this.setData({
-      shoppingInfo: shoppingInfoList,
-      totalMny: total
-    })
-  },
-  /**
    * 显示规格
    */
   showAddView(e) {
-    let $this = this;
-    var addIconPopover = !$this.data.popoverIsShow.addIconPopover
-    $this.setData({
-      popoverIsShow: {
-        addIconPopover: addIconPopover
-      }
-    })
+    var addIconPopover = !this.data.popoverIsShow.addIconPopover;
+    this.setData({
+      popoverIsShow: { addIconPopover: addIconPopover }
+    });
   },
   /**
    * 隐藏规格
    */
   hideAddView(e) {
-    let $this = this;
-    var addIconPopover = !$this.data.popoverIsShow.addIconPopover
-    $this.setData({
+    var addIconPopover = !this.data.popoverIsShow.addIconPopover;
+    this.setData({
       popoverIsShow: {
         addIconPopover: addIconPopover,
       },
@@ -473,48 +355,30 @@ Page({
     if (videoStatus) {
       if (this.data.currentTab ==0) {
         let videoUrl = this.data.detailInfo.livingVideo
-        this.setData({
-          videoUrl: videoUrl
-        })
+        this.setData({ videoUrl: videoUrl });
       } else if (this.data.currentTab == 1) {
         let videoUrl = this.data.detailInfo.diningVideo
-        this.setData({
-          videoUrl: videoUrl
-        })
+        this.setData({ videoUrl: videoUrl });
       } else if (this.data.currentTab == 2) {
         let videoUrl = this.data.detailInfo.bedVideo
-        this.setData({
-          videoUrl: videoUrl
-        })
+        this.setData({ videoUrl: videoUrl });
       } else if (this.data.currentTab == 3) {
         let videoUrl = this.data.detailInfo.secondaryVideo
-        this.setData({
-          videoUrl: videoUrl
-        })
+        this.setData({ videoUrl: videoUrl });
       } else if (this.data.currentTab == 4) {
         let videoUrl = this.data.detailInfo.functionVideo
-        this.setData({
-          videoUrl: videoUrl
-        })
+        this.setData({ videoUrl: videoUrl });
       }
       else if (this.data.currentTab == 5) {
         let videoUrl = this.data.detailInfo.verandaVideo
-        this.setData({
-          videoUrl: videoUrl
-        })
+        this.setData({ videoUrl: videoUrl });
       }
     }
-    this.setData({
-      videoStatus: videoStatus,
-      autoplayStatus: !videoStatus
-    })
+    this.setData({ videoStatus: videoStatus, autoplayStatus: !videoStatus });
   },
   closeVideo: function() {
     let videoStatus = !this.data.videoStatus;
-    this.setData({
-      videoStatus: videoStatus,
-      autoplayStatus: !videoStatus
-    })
+    this.setData({ videoStatus: videoStatus, autoplayStatus: !videoStatus });
   },
   preventTouchMove() {},
   // 选详情规格事件
@@ -526,7 +390,6 @@ Page({
   },
   // 根据选择商品规格后， 查询出商品相应规格的相关信息
   findGoods: function (guigeId, goodsId, guigeName) {
-    let $this = this;
     let currentShopping = this.data.currentShopping || {};
     let shoppingList = this.data.shoppingList || [];
     let index = null;
@@ -545,7 +408,7 @@ Page({
     })
     mobileService.findByIds({
       data: { goodsId: goodsId, guigeId: guigeId },
-      success: function (result) {
+      success: (result) => {
         if (result.data && (!result.data.msg || result.data.msg !== 'fail')) {
           if (shopping && shopping.goodsId) {
             shopping.guigeIds = guigeId;
@@ -562,20 +425,14 @@ Page({
             shoppingList.push(currentShopping)
           }
           console.log('e', currentShopping)
-          $this.setData({
-            currentShopping: currentShopping,
-            shoppingList: shoppingList
-          })
+          this.setData({ currentShopping: currentShopping, shoppingList: shoppingList });
           let time = new Date(moment(new Date).add(1, 'd')).getTime()
-        } else {
-          msgDlg.showModal('错误提示', result.state || result.data.state || '查询信息不存在！', false)
-        }
+        } else msgDlg.showModal('错误提示', result.data || result.data.state || '查询信息不存在！', false);
       },
       fail: function (result) {
-        msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
+        msgDlg.showModal('错误提示', result.data || result.data.state || '查询出错！', false);
       },
-      complete: function (result) {
-      }
+      complete: function (result) {}
     })
   },
   // 添加到购物车
@@ -624,22 +481,21 @@ Page({
    * 显示拼团信息
    */
   onPintuan: function() {
-    this.setData({ pintuanStatus: !this.data.pintuanStatus})
+    this.setData({ pintuanStatus: !this.data.pintuanStatus});
   },
   onMask: function (e) {
-    this.setData({ pintuanStatus: false, cartStatus: false})
+    this.setData({ pintuanStatus: false, cartStatus: false});
   },
   /**
    * 点击选规格事件
    */
   clickShowShopping: function(e) {
     msgDlg.showLoading('正在加载中');
-    let $this = this
     let guiGeStatus = this.data.guiGeStatus;
     let currentShopping = this.data.currentShopping;
     if (!this.data.guiGeStatus) {
       let detail = e.currentTarget.dataset.product || {};
-      let shoppingList = $this.data.shoppingList || [];
+      let shoppingList = this.data.shoppingList || [];
       let index = null;
       let shopping = {};
       shoppingList.forEach((item, itemIndex) => {
@@ -656,7 +512,7 @@ Page({
       this.setData({ goodsId: detail.id})
       mobileService.detailOfGoods({
         data: { id: detail.id },
-        success: function (result) {
+        success:(result) => {
           if (result.data && (!result.data.msg || result.data.msg !== 'fail')) {
             if (shopping && shopping.goodsId) {
               let tempGuiGeList = result.data[0].giList[0].subItemList.filter((item) => item.id === shopping.guigeIds)
@@ -671,16 +527,16 @@ Page({
               shoppingList.push(currentShopping);
             }
             console.log('currentShopping', currentShopping)
-            $this.setData({
+            this.setData({
               currentShopping: currentShopping,
               shoppingList: shoppingList,
               showGuiGeInfo: result.data,
               guiGeStatus: !guiGeStatus
             })
-          } else msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
+          } else msgDlg.showModal('错误提示', result.data || result.data.state || '查询出错！', false);
         },
         fail: (result) => {
-          msgDlg.showModal('错误提示', result.state || result.data.state || '查询出错！', false)
+          msgDlg.showModal('错误提示', result.data || result.data.state || '查询出错！', false);
         },
         complete: (result) => {
           msgDlg.hideLoading();
@@ -692,7 +548,6 @@ Page({
     let url = this.data.urlPrefix + this.data.hxDetail.bigImgUrl
     let urls = []
     urls.push(url)
-    // {{urlPrefix}}{{hxDetail.bigImgUrl}}
     wx.previewImage({
       current: url, // 当前显示图片的http链接
       urls: urls || [] // 需要预览的图片http链接列表
@@ -701,27 +556,15 @@ Page({
   pintuanTouchMove: function () { },
   bindFocus: function (e) {
     let value = e.currentTarget.dataset.value;
-    if (value === 'userName') {
-      this.setData({ userNameFocus: true})
-    }
-    if (value === 'mobile') {
-      this.setData({ mobileFocus: true})
-    }
-    if (value === 'houseType') {
-      this.setData({ houseTypeFocus: true})
-    }
+    if (value === 'userName') this.setData({ userNameFocus: true });
+    if (value === 'mobile') this.setData({ mobileFocus: true });
+    if (value === 'houseType') this.setData({ houseTypeFocus: true });
   },
   bindBlur: function (e) {
     let value = e.currentTarget.dataset.value;
-    if (value === 'userName') {
-      this.setData({ userNameFocus: false})
-    }
-    if (value === 'mobile') {
-      this.setData({ mobileFocus: false})
-    }
-    if (value === 'houseType') {
-      this.setData({ houseTypeFocus: false})
-    }
+    if (value === 'userName') this.setData({ userNameFocus: false });
+    if (value === 'mobile') this.setData({ mobileFocus: false });
+    if (value === 'houseType') this.setData({ houseTypeFocus: false });
   },
   onBuy: function () {
     let currentShopping = this.data.currentShopping || {};
@@ -752,8 +595,8 @@ Page({
       isNow: true,
       fgPositionId: this.data.detailInfo.id
     }
-    wx.setStorageSync("goodsList", [data])
-    wx.navigateTo({ url: '../settle/settle?pageType=mobile&isNow=' + true})
+    wx.setStorageSync("goodsList", [data]);
+    wx.navigateTo({ url: '../settle/settle?pageType=mobile&isNow=' + true});
   },
   /* 支付 */
   wxpay1: function () {
@@ -775,7 +618,7 @@ Page({
     msgDlg.showLoading('正在支付中...');
     let loginInfo = wx.getStorageSync('loginInfo');
     if (loginInfo) {
-      this.wxpay(loginInfo.code)
+      this.wxpay(loginInfo.code);
     }
   },
   /* 获取openId */
@@ -995,7 +838,6 @@ Page({
       signType: param.signType,
       paySign: param.paySign,
       success: function (res) {
-        // success
         console.log(res)
         wx.navigateBack({
           delta: 1, // 回退前 delta(默认为1) 页面

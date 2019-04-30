@@ -2,7 +2,6 @@ var brandService = require('../../apis/brand/brandService')
 var mobileService = require('../../apis/mobile/mobileService')
 var msgDlg = require('../../utils/msgDlg')
 const app = getApp()
-
 Page({
   data: {
     userInfo: {},
@@ -31,8 +30,10 @@ Page({
     })
   },
   onLoad: function () {
+    let member = wx.getStorageSync('member') || {};
+    this.setData({ userInfo: member });
     this.loadData();
-    this.findCatelist()
+    this.findCatelist();
   },
   // 加载数据
   loadData: function () {

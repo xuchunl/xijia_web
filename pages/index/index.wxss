@@ -149,6 +149,23 @@
   z-index: 10;
   background: #fff;
 }
+.index .ad-detail .left {
+  display: flex;
+  width: calc(100% - 85rpx);
+}
+.index .ad-detail .contact {
+  height: 100%;
+  display:flex;
+  align-items:center;
+}
+.index .ad-detail .contact button {
+  height: 50rpx;
+  padding:0 10rpx;
+  margin:0;
+  line-height:50rpx;
+  font-size:20rpx;
+  background: #fff;
+}
 .index .gx-ad {
   position: relative;
   width: 100%;
@@ -194,11 +211,6 @@
   color: #909399;
   display: flex;
 }
-.index .body .body-taocan .taocan-info .user-info image{
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
-}
 .index .body .body-taocan .taocan-info .create-name {
   width: 155rpx;
   height: 100%;
@@ -222,33 +234,26 @@
   right: 15rpx;
   z-index: 10px;
   font-size: 28rpx;
+  display: flex;
 }
-.index .body .body-taocan .taocan-info .detail-icon {
-  background: #E6A23C;
-  border-radius: 25rpx;
-  padding: 20rpx;
-  float: right;
+.index .body .body-taocan .taocan-info .detail .detail-icon {
+  background:#fff;
+  padding:8rpx;
+  float:right;
+  font-size:22rpx;
+}
+.index .body .body-taocan .taocan-info .detail .pintuan {
+  background:#fff;
+  padding:8rpx;
+  float:right;
+  font-size:22rpx;
+  border-radius:0rpx 20rpx 20rpx 0rpx;
 }
 .index .body .body-taocan .design-info {
   height: 140rpx;
   width: 100%;
   display: flex;
   border-bottom: 1rpx solid #DCDFE6;
-}
-.index .body .body-taocan .design-info .designer-image {
-  width: 140rpx;
-  font-size: 20rpx;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #909399;
-  display: flex;
-}
-.index .body .body-taocan .design-info .designer-image image {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
 }
 .index .body .body-taocan .design-info .content {
   width: calc(100% -  160rpx);
@@ -259,6 +264,7 @@
   display: flex;
   border-bottom: 1rpx solid #DCDFE6;
 }
+.index .body .body-taocan .design-info .designer-image,
 .index .body .body-taocan .guoxue-info .guoxue-image {
   width: 140rpx;
   font-size: 20rpx;
@@ -269,10 +275,13 @@
   color: #909399;
   display: flex;
 }
+.index .body .body-taocan .taocan-info .user-info image,
+.index .body .body-taocan .design-info .designer-image image,
 .index .body .body-taocan .guoxue-info .guoxue-image image {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
+  border:1rpx solid #DCDFE6;
 }
 .index .body .body-taocan .guoxue-info .content {
   width: calc(100% -  160rpx);
@@ -283,20 +292,20 @@
   font-size: 30rpx;
   line-height: 140rpx;
 }
-.index .body .body-taocan .designer {
+.index .body .body-taocan .sort-num {
   position: absolute;
   z-index: 5;
-  top: 0px;
+  top: 10rpx;
   right: 15px;
-  display: flex;
-  height: 80rpx;
-  align-items: center;
-}
-.index .body .body-taocan .designer image {
-  width: 65rpx;
-  height: 65rpx;
-  border-radius: 50%;
+  background: #000;
   border: 1rpx solid #f4f4f4;
+  border-radius: 50%;
+  font-size: 20rpx;
+  color: #fff;
+  width: 25rpx;
+  height: 25rpx;
+  line-height: 25rpx;
+  text-align: center;
 }
 .index .share-area {
   position: fixed;
@@ -447,7 +456,7 @@
   z-index:100;
   bottom:60rpx;
   right:20rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
   width:200rpx;
   height:100rpx;
   background:#fff;
@@ -572,19 +581,4 @@
 }
 .input-focus {
   border: 1rpx solid #409EFF!important;
-}
-.contact {
-  position: fixed;
-  bottom: 50rpx;
-  left: 10rpx;
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 50%;
-  background: #F56C6C;
-  color: #fff;
-  font-size: 50rpx;
-  text-align: center;
-  line-height: 80rpx;
-  padding: 0;
-  margin: 0;
 }
