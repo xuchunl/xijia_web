@@ -14,7 +14,7 @@ Page({
     currentCate: '0',
     cateList: [
       { id: 'all', name: '全部' },
-      { id: 'modern', name: '现代'},
+      { id: 'modern', name: '现代' },
       { id: 'new', name: '新中' },
       { id: 'small', name: '小美' },
       { id: 'french', name: '法式' },
@@ -38,7 +38,7 @@ Page({
     fgIndex: '',
   },
   bindViewTap: function () {
-    wx.navigateTo({ url: '../shopping/index'})
+    wx.navigateTo({ url: '../shopping/index' })
   },
   onLoad: function () {
     wx.getSystemInfo({
@@ -48,9 +48,9 @@ Page({
     })
     let member = wx.getStorageSync('member') || {};
     if (!member || !member.id) {
-      this.setData({ loginStatus: true})
+      this.setData({ loginStatus: true })
       return;
-    } else this.setData({ advertiseStatus: true, userInfo: member});
+    } else this.setData({ advertiseStatus: true, userInfo: member });
     // 加载数据
     this.loadData();
   },
@@ -61,7 +61,7 @@ Page({
     wx.login({
       success: res => {
         wx.request({
-          url: app.globalData.baseUrl+'/mini/login/login.action',
+          url: app.globalData.baseUrl + '/mini/login/login.action',
           data: {
             code: res.code,
             'mem.nickname': this.data.userInfo.nickName,
@@ -86,7 +86,7 @@ Page({
               }
             }
           },
-          fail: (res) => {},
+          fail: (res) => { },
           complete: (res) => {
             msgDlg.hideLoading();
           },
@@ -103,18 +103,18 @@ Page({
         if (res.data && !res.data.message && res.data.msg != 'fail') {
           res.data.filter(item => {
             item.showImages = [];
-            item.showImages.push(this.data.urlPrefix+item.livingRoom);
-            item.showImages.push(this.data.urlPrefix +item.diningRoom);
-            item.showImages.push(this.data.urlPrefix +item.bedroom);
-            item.showImages.push(this.data.urlPrefix +item.secondaryRoom);
-            item.showImages.push(this.data.urlPrefix +item.functionRoom);
-            item.showImages.push(this.data.urlPrefix +item.veranda);
+            item.showImages.push(this.data.urlPrefix + item.livingRoom);
+            item.showImages.push(this.data.urlPrefix + item.diningRoom);
+            item.showImages.push(this.data.urlPrefix + item.bedroom);
+            item.showImages.push(this.data.urlPrefix + item.secondaryRoom);
+            item.showImages.push(this.data.urlPrefix + item.functionRoom);
+            item.showImages.push(this.data.urlPrefix + item.veranda);
           })
           this.setData({ taocanList: res.data || [] });
         } else msgDlg.showModal('错误提示', res.data.message || res.data.state || '查询出错！', false);
       },
       fail: (res) => {
-        msgDlg.showModal('错误提示', res.state  || '查询出错！', false);
+        msgDlg.showModal('错误提示', res.state || '查询出错！', false);
       },
       complete: (res) => {
         msgDlg.hideLoading();
@@ -130,12 +130,12 @@ Page({
     if (!this.data.loginStatus) {
       let member = wx.getStorageSync('member');
       if (!member || !member.id) {
-        this.setData({ 
+        this.setData({
           loginStatus: true,
           shareVisible: false,
           postVisible: false,
           advertiseStatus: false
-         })
+        })
         return;
       }
     }
@@ -145,21 +145,21 @@ Page({
    */
   onShareAppMessage: function (ops) {
     this.setData({ shareVisible: false });
-    if (ops.from === 'button') {}
+    if (ops.from === 'button') { }
     return {
       title: '分享',
       imageUrl: '../image/post1.jpg',//图片地址
       path: '/pages/index/index',// 用户点击首先进入的当前页面
-      success: function (res) {},
-      fail: function (res) {}
+      success: function (res) { },
+      fail: function (res) { }
     }
   },
   onShareVisible: function (e) {
     var shareVisible = this.data.shareVisible;
-    this.setData({ shareVisible: !shareVisible});
+    this.setData({ shareVisible: !shareVisible });
   },
   buildPosterSaveAlbum: function () {
-    this.setData({shareVisible: false})
+    this.setData({ shareVisible: false })
     wx.showLoading({ title: '生成中...', })
     let that = this;
     const context = wx.createCanvasContext('firstCanvas');
@@ -169,7 +169,7 @@ Page({
     context.setTextAlign('left')
     context.setStrokeStyle('#DCDFE6');
     context.setFillStyle('#606266');
-    context.fillText('喜 家',10,18);
+    context.fillText('喜 家', 10, 18);
     context.setFontSize(12);
     context.setFillStyle('#606266');
     context.fillText('—— 有品质的社区软装设计拼团系统', 15, 33);
@@ -181,7 +181,7 @@ Page({
     context.drawImage('../image/code.jpg', 10, (this.data.winHeight * 0.75) - 75, 75, 75);
     context.setFillStyle('#606266');
     let textWidth = context.measureText('长按识别小程序二维码');
-    context.fillText('长按识别小程序二维码', this.data.winWidth - textWidth.width - 75 - 20 , (this.data.winHeight * 0.75) - 50);
+    context.fillText('长按识别小程序二维码', this.data.winWidth - textWidth.width - 75 - 20, (this.data.winHeight * 0.75) - 50);
     context.setFillStyle('#909399');
     let textWidth1 = context.measureText('进店购买');
     context.fillText('进店购买', this.data.winWidth - textWidth1.width - 75 - (textWidth.width / 2), (this.data.winHeight * 0.75) - 30);
@@ -189,9 +189,9 @@ Page({
     context.draw();
     //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
     setTimeout(() => {
-      that.setData({ postVisible: true});
+      that.setData({ postVisible: true });
       msgDlg.hideLoading();
-    },2000)
+    }, 2000)
   },
   //点击保存到相册
   baocun1: function () {
@@ -207,9 +207,9 @@ Page({
           success: (res) => {
             if (res.confirm) {
               console.log('用户点击确定');
-              that.setData({ postVisible: false});
+              that.setData({ postVisible: false });
             }
-          }, fail: (res) => {}
+          }, fail: (res) => { }
         })
       }
     })
@@ -230,7 +230,7 @@ Page({
             filePath: res.tempFilePath,
             success: (res) => {
               wx.hideLoading();
-              wx.showToast({ title: '保存成功'});
+              wx.showToast({ title: '保存成功' });
             },
             fail: (res) => {
               console.log(res)
@@ -256,7 +256,7 @@ Page({
     })
   },
   closePost: function (e) {
-    this.setData({ postVisible: false})
+    this.setData({ postVisible: false })
   },
   clickAdvertise: function () {
     let advertiseStatus = this.data.advertiseStatus;
@@ -355,7 +355,7 @@ Page({
     }
     msgDlg.showLoading('正在报名中...');
     subscribeService.saveSubscribe({
-      data: { name: subscribe.name, phone: subscribe.phone, huXing: { id: subscribe.houseType }, fengge: {id: subscribe.fenggeId} },
+      data: { name: subscribe.name, phone: subscribe.phone, huXing: { id: subscribe.houseType }, fengge: { id: subscribe.fenggeId } },
       success: function (res) {
         msgDlg.hideLoading();
         console.log('saveSubscribe:', res)
@@ -380,7 +380,7 @@ Page({
       }
     })
   },
-  previewImage: function(e) {
+  previewImage: function (e) {
     let images = e.currentTarget.dataset.images;
     let index = e.currentTarget.dataset.index || this.data.currentTab;
     wx.previewImage({

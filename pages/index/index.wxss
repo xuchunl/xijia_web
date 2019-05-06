@@ -151,7 +151,9 @@
 }
 .index .ad-detail .left {
   display: flex;
-  width: calc(100% - 85rpx);
+  width: calc(100% - 100rpx);
+  height:100%;
+  align-items:center;
 }
 .index .ad-detail .contact {
   height: 100%;
@@ -159,11 +161,11 @@
   align-items:center;
 }
 .index .ad-detail .contact button {
-  height: 50rpx;
+  height: 60rpx;
   padding:0 10rpx;
   margin:0;
-  line-height:50rpx;
-  font-size:20rpx;
+  line-height:60rpx;
+  font-size:24rpx;
   background: #fff;
 }
 .index .gx-ad {
@@ -199,6 +201,7 @@
   height: 140rpx;
   position: relative;
   border-bottom: 1rpx solid #DCDFE6;
+  border-top: 1rpx solid #DCDFE6;
   display: flex;
 }
 .index .body .body-taocan .taocan-info .user-info {
@@ -221,12 +224,20 @@
   width: calc(100% - 160rpx);
   height: 100%;
   font-size: 26rpx;
-  text-align: left;
 }
 .index .body .body-taocan .taocan-info .title .to-view-brand {
   padding-left: 20rpx;
   font-size: 24rpx;
   color: #909399;
+}
+.index .body .body-taocan .taocan-info .title .top {
+  height: 47rpx;
+  display: flex;
+  align-items: center;
+}
+.index .body .body-taocan .taocan-info .title .content {
+  height: calc(100% - 47rpx);
+  font-size:22rpx;
 }
 .index .body .body-taocan .taocan-info .detail {
   position:absolute;
@@ -237,17 +248,16 @@
   display: flex;
 }
 .index .body .body-taocan .taocan-info .detail .detail-icon {
-  background:#fff;
-  padding:8rpx;
   float:right;
   font-size:22rpx;
+  padding:15rpx;
 }
 .index .body .body-taocan .taocan-info .detail .pintuan {
-  background:#fff;
-  padding:8rpx;
   float:right;
-  font-size:22rpx;
+  font-size:24rpx;
   border-radius:0rpx 20rpx 20rpx 0rpx;
+  padding:15rpx;
+  font-weight: bold;
 }
 .index .body .body-taocan .design-info {
   height: 140rpx;
@@ -257,6 +267,10 @@
 }
 .index .body .body-taocan .design-info .content {
   width: calc(100% -  160rpx);
+  height:100%;
+  display:flex;
+  align-items:center;
+  font-size: 22rpx;
 }
 .index .body .body-taocan .guoxue-info {
   height: 140rpx;
@@ -285,6 +299,10 @@
 }
 .index .body .body-taocan .guoxue-info .content {
   width: calc(100% -  160rpx);
+  height:100%;
+  display:flex;
+  align-items:center;
+  font-size: 22rpx;
 }
 .index .body .body-taocan .taocan-info .angle-right,
 .index .body .body-taocan .design-info .angle-right,

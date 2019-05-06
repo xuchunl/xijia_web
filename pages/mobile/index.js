@@ -19,7 +19,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    num:1,
+    num: 1,
     videoUrl: '',
     style: 0,
     currentSize: null,
@@ -31,7 +31,7 @@ Page({
     guiGeStatus: false,
     autoplayStatus: true,
     hxDetail: {},
-    user: { userName: null, mobile: null, houseType: null,fengeId: null },
+    user: { userName: null, mobile: null, houseType: null, fengeId: null },
     userNameFocus: false,
     mobileFocus: false,
     houseTypeFocus: false,
@@ -45,9 +45,9 @@ Page({
     interval: 5000,
     currentShopping: { goodsId: null, guigeIds: null, price: null, num: 1, total: 0, ciimgUrl: null, name: null, count: 0, guigeName: null, cartGoodsList: [] }, // 当前选中的商品信息
     shoppingCarList: [], // 购物车的商品信息
-    shoppingList:[], // 选中所有的商品信息
+    shoppingList: [], // 选中所有的商品信息
     goodsId: '',
-    cateList:[],
+    cateList: [],
     hxList: [],
     fgList: [],
     hxIndex: '',
@@ -59,7 +59,7 @@ Page({
    */
   onLoad: function (options) {
     msgDlg.showLoading('正在加载中');
-    let id = id = options ? options.id : ''
+    let id = options ? options.id : ''
     let member = wx.getStorageSync('member') || {};
     this.setData({ userInfo: member })
     if (id) this.loadData(id);
@@ -75,11 +75,11 @@ Page({
       else this.queryHX(fengeDetail.huxingId);
     } else {
       mobileService.details({
-        data: {id: id},
+        data: { id: id },
         success: (res) => {
           if (res.data && (!res.data.msg || res.data.msg !== 'fail')) {
             res.data.info = [];
-            res.data.info.push({ price: res.data.tg10Price, num :1})
+            res.data.info.push({ price: res.data.tg10Price, num: 1 })
             res.data.info.push({ price: res.data.tg20Price, num: 2 })
             res.data.info.push({ price: res.data.tg30Price, num: 3 })
             res.data.info.push({ price: res.data.tg40Price, num: 4 })
@@ -109,19 +109,19 @@ Page({
     }
   },
   // 通过id查询户型信息
-  queryHX: function(id) {
+  queryHX: function (id) {
     let time = new Date(moment(new Date).add(1, 'd')).getTime()
     mobileService.queryHx({
       data: { id: id },
       success: (hxInfo) => {
         if (hxInfo.data && (!hxInfo.data.msg || hxInfo.data.msg !== 'fail')) {
-          this.setData({ hxDetail: hxInfo.data});
+          this.setData({ hxDetail: hxInfo.data });
         } else msgDlg.showModal('错误提示', hxInfo.state || hxInfo.data.state || '查询出错！', false);
       },
-      fail:　(hxInfo)　=> {
+      fail: 　(hxInfo) 　=> {
         msgDlg.showModal('错误提示', hxInfo.state || hxInfo.data.state || '查询出错！', false);
       },
-      complete: (res) => {}
+      complete: (res) => { }
     })
   },
   // 查询类别列表
@@ -138,7 +138,7 @@ Page({
       fail: (res) => {
         msgDlg.showModal('错误提示', res.state || res.data.state || '查询出错！', false);
       },
-      complete: (res) => {}
+      complete: (res) => { }
     })
   },
   handlePrice: function () {
@@ -153,7 +153,7 @@ Page({
       productList.filter(product => {
         if (product.cateId == item.id) {
           item.num = Number(item.num || 0) + Number(product.changeNum || 0);
-          item.price = item.price +  Number(product.changeNum || 0) * Number(product.marketPrice || 0);
+          item.price = item.price + Number(product.changeNum || 0) * Number(product.marketPrice || 0);
         }
         if (item.id === currentCate.id) currentCate.price = item.price;
       })
@@ -246,67 +246,67 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () { },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () { },
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {},
+  onHide: function () { },
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () { },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () { },
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () { },
   /**
  * 用户点击右上角分享
  */
   onShareAppMessage: function (ops) {
-    if (ops.from === 'button') {}
+    if (ops.from === 'button') { }
     return {
       title: '分享',
       imageUrl: '../image/post2.jpg',//图片地址
-      path: '/pages/index/index?jump=123',// 用户点击首先进入的当前页面
-      success: function (res) {},
-      fail: (res) => {}
+      path: '/pages/mobile/index?id=' + this.data.detailInfo.id,// 用户点击首先进入的当前页面
+      success: function (res) { },
+      fail: (res) => { }
     }
   },
   bindViewTap: function () {
-    wx.navigateTo({ url: '../shopping/index'})
+    wx.navigateTo({ url: '../shopping/index' })
   },
   switchTab: function (e) {
-    this.setData({ currentIndex: e.detail.current});
+    this.setData({ currentIndex: e.detail.current });
   },
-  switchTabFinish: function(e) {},
+  switchTabFinish: function (e) { },
   swichNav: function (e) {
     if (this.data.currentTab == e.currentTarget.dataset.current) return false;
-     else {
+    else {
       this.setData({
         currentIndex: e.currentTarget.dataset.current,
         autoplayStatus: false,
         currentTab: e.currentTarget.dataset.current,
       })
       setTimeout(() => {
-        this.setData({ autoplayStatus: true})
-      },5000)
+        this.setData({ autoplayStatus: true })
+      }, 5000)
     }
   },
-  clickCate: function(e){
+  clickCate: function (e) {
     let id = e.currentTarget.dataset.id;
     let currentCate = e.currentTarget.dataset.cate;
-    this.setData({ currentCate: currentCate});
+    this.setData({ currentCate: currentCate });
   },
   closeShowShopping: function () {
-    this.setData({ guiGeStatus: false})
+    this.setData({ guiGeStatus: false })
   },
   /**
    * 显示规格
@@ -333,7 +333,7 @@ Page({
     let currentShopping = this.data.currentShopping || {};
     if (currentShopping.num > 1) currentShopping.num--;
     else currentShopping.num = 1;
-    this.setData({ currentShopping: currentShopping});
+    this.setData({ currentShopping: currentShopping });
     this.handlePrice();
   },
   addNum(e) {
@@ -350,10 +350,10 @@ Page({
     this.setData({ currentShopping: currentShopping })
     this.handlePrice();
   },
-  bindVideoTab: function() {
+  bindVideoTab: function () {
     let videoStatus = !this.data.videoStatus;
     if (videoStatus) {
-      if (this.data.currentTab ==0) {
+      if (this.data.currentTab == 0) {
         let videoUrl = this.data.detailInfo.livingVideo
         this.setData({ videoUrl: videoUrl });
       } else if (this.data.currentTab == 1) {
@@ -376,11 +376,11 @@ Page({
     }
     this.setData({ videoStatus: videoStatus, autoplayStatus: !videoStatus });
   },
-  closeVideo: function() {
+  closeVideo: function () {
     let videoStatus = !this.data.videoStatus;
     this.setData({ videoStatus: videoStatus, autoplayStatus: !videoStatus });
   },
-  preventTouchMove() {},
+  preventTouchMove() { },
   // 选详情规格事件
   clickType(e) {
     let goodsId = this.data.goodsId;
@@ -432,19 +432,19 @@ Page({
       fail: function (result) {
         msgDlg.showModal('错误提示', result.data || result.data.state || '查询出错！', false);
       },
-      complete: function (result) {}
+      complete: function (result) { }
     })
   },
   // 添加到购物车
   addShoppingCar(e) {
-    this.setData({ loading: true});
+    this.setData({ loading: true });
     let currentShopping = this.data.currentShopping || {};
     if (!Number(currentShopping.num)) return wx.showToast({ title: '数量有误！', icon: 'none' });
     let member = wx.getStorageSync('member');
     let cartGoodsList = this.data.productList.map(item => {
       return {
-        goods: {id: item.id},
-        fgPosition: {id: this.data.detailInfo.id},
+        goods: { id: item.id },
+        fgPosition: { id: this.data.detailInfo.id },
         cate: { id: item.cateId },
         num: item.changeNum,
         price: item.marketPrice,
@@ -474,22 +474,22 @@ Page({
       },
       complete: (result) => {
         this.setData({ loading: false });
-       }
+      }
     })
   },
   /**
    * 显示拼团信息
    */
-  onPintuan: function() {
-    this.setData({ pintuanStatus: !this.data.pintuanStatus});
+  onPintuan: function () {
+    this.setData({ pintuanStatus: !this.data.pintuanStatus });
   },
   onMask: function (e) {
-    this.setData({ pintuanStatus: false, cartStatus: false});
+    this.setData({ pintuanStatus: false, cartStatus: false });
   },
   /**
    * 点击选规格事件
    */
-  clickShowShopping: function(e) {
+  clickShowShopping: function (e) {
     msgDlg.showLoading('正在加载中');
     let guiGeStatus = this.data.guiGeStatus;
     let currentShopping = this.data.currentShopping;
@@ -501,7 +501,7 @@ Page({
       shoppingList.forEach((item, itemIndex) => {
         if (item.goodsId === detail.id) {
           if (currentShopping.goodsId === item.goodsId && currentShopping.guigeIds)
-          index = itemIndex;
+            index = itemIndex;
           shopping = item;
           shopping.ciimgUrl = detail.imgMobileUrl;
           shopping.count = detail.num;
@@ -509,10 +509,10 @@ Page({
           return;
         }
       })
-      this.setData({ goodsId: detail.id})
+      this.setData({ goodsId: detail.id })
       mobileService.detailOfGoods({
         data: { id: detail.id },
-        success:(result) => {
+        success: (result) => {
           if (result.data && (!result.data.msg || result.data.msg !== 'fail')) {
             if (shopping && shopping.goodsId) {
               let tempGuiGeList = result.data[0].giList[0].subItemList.filter((item) => item.id === shopping.guigeIds)
@@ -544,7 +544,7 @@ Page({
       })
     }
   },
-  clickShowImage: function(e) {
+  clickShowImage: function (e) {
     let url = this.data.urlPrefix + this.data.hxDetail.bigImgUrl
     let urls = []
     urls.push(url)
@@ -592,11 +592,10 @@ Page({
       goodsId: this.data.detailInfo.goodsId,
       ciimgUrl: this.data.detailInfo.preImg,
       price: this.data.totalMny / currentShopping.num,
-      isNow: true,
-      fgPositionId: this.data.detailInfo.id
+      isNow: true
     }
     wx.setStorageSync("goodsList", [data]);
-    wx.navigateTo({ url: '../settle/settle?pageType=mobile&isNow=' + true});
+    wx.navigateTo({ url: '../settle/settle?pageType=mobile&isNow=' + true });
   },
   /* 支付 */
   wxpay1: function () {
@@ -699,7 +698,7 @@ Page({
           },
         })
       },
-      fail: () => {}
+      fail: () => { }
     })
   },
   paysignjsapi: function (appid, body, mch_id, nonce_str, notify_url, openid, out_trade_no, spbill_create_ip, total_fee, trade_type) {
@@ -848,7 +847,7 @@ Page({
               duration: 2000
             })
           },
-          fail: () => {}
+          fail: () => { }
         })
       },
       fail: () => {
@@ -856,7 +855,7 @@ Page({
       }
     })
   },
-  previewImageOne: function(e) {
+  previewImageOne: function (e) {
     let imageUrl = e.currentTarget.dataset.imageurl;
     wx.previewImage({
       current: imageUrl, // 当前显示图片的http链接
@@ -871,10 +870,10 @@ Page({
       urls: images // 需要预览的图片http链接列表
     })
   },
-  toViewVR: function(){
+  toViewVR: function () {
     wx.navigateTo({ url: '../webView/index?url=' + this.data.detailInfo.locationUrl });
   },
-  onCartStatus : function () {
-    this.setData({ cartStatus: !this.data.cartStatus});
+  onCartStatus: function () {
+    this.setData({ cartStatus: !this.data.cartStatus });
   }
 })

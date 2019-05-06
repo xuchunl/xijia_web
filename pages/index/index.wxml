@@ -80,32 +80,64 @@
           </view>
         </view>
         <view class='title'>
-          <view class='title-info'>
-            <view style='height:50rpx;line-height:50rpx'>
-              <view class='float-left'>宾皇尊品</view>
-              <view class='float-left to-view-brand'>查看品牌故事 <i class='fa fa-angle-right'></i> </view>
-            </view>
+          <view class='top'>
+            <view>莫兰迪</view>
+            <view class='to-view-brand'>查看品牌故事 <i class='fa fa-angle-right'></i> </view>
           </view>
-          <view class='color-info' style='font-size: 20rpx;word-break:break-all;'>{{taocan.description}}</view>
+          <view class='content' wx:if="{{index != 1}}">
+            <view class='float-left'>莫兰迪白色美式系列：橡木材质，设计取源于美式乡村风格</view>
+            <view class='float-left'>，整个套餐合计27</view>
+            <view class='float-left'>件家具，零售价：</view>
+            <view class='float-left color-danger'>117400</view>
+            <view class='float-left'>元，团购价：</view>
+            <view class='float-left color-danger'>61988元</view>
+            <view class='float-left'>（基本配置26件</view>
+            <view class='float-left color-danger'>51500</view>
+            <view class='float-left'>元）</view>
+          </view>
+          <!-- <view class='color-info' style='font-size: 20rpx;word-break:break-all;'>{{taocan.description}}</view> -->
+          <view class='content' wx:if="{{index == 1}}">
+            <view class='float-left'>270平-莫兰迪深色美式系列：鹅掌楸木，水性漆樱桃色</view>
+            <view class='float-left'>，设计取源于美式乡村风格，整个套餐合计30件家具</view>
+            <view class='float-left'>，零售价：</view>
+            <view class='float-left color-danger'>161400</view>
+            <view class='float-left'>元，团购价：</view>
+            <view class='float-left color-danger'>85200</view>
+            <view class='float-left'>元）</view>
+          </view>
         </view>
         <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
         <view class='detail float-left' bindtap='clickDetail' data-taocan='{{taocan}}'>
-          <view class='detail-icon'>{{taocan.hsquare}}m² {{taocan.hname}}</view>
-          <view class='pintuan'>去拼团</view>
+          <view class='detail-icon background-white'>{{taocan.hsquare}}m² {{taocan.hname}}</view>
+          <view class='pintuan color-danger background-white'>去拼团</view>
         </view>
       </view>
       <view class='guoxue-info'>
         <view class='guoxue-image'>
-          <view><image src='{{urlPrefix}}/upload/mini/guoxue.jpg'></image><view>赖易风水</view></view>
+          <view>
+            <!-- <image src='../image/guoxue.jpg'></image> -->
+            <image src='{{urlPrefix}}/upload/mini/guoxue.jpg'></image>
+            <view>赖易风水</view>
+          </view>
         </view>
-        <view class='content'></view>
+        <view class='content'>
+          <view wx:if="{{index != 1}}">
+            餐、客厅居户型中央：预示家庭和睦，餐厅位于厨房与卫生间的西南方位，餐厅主位中通空无依靠，宜调左尊位为主位。选蓝色靠背椅，宜尊老爱幼，饮水思源之意。
+          </view>
+          <view wx:if="{{index == 1}}">
+            卧室10号楼YJ140户型：此户为四代同堂佳户，主人房以北，设儿子房，属望子成龙位；主人房以西为闺女房。
+          </view>
+        </view>
         <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
       </view>
       <view class='design-info'>
         <view class='designer-image'>
           <view><view><image src='{{urlPrefix}}/upload/mini/avater2.jpg'></image></view><view>设计师</view></view>
         </view>
-        <view class='content'></view>
+        <view class='content'>
+          <view wx:if="{{index != 1}}">珍珠白色木色漆工艺配上蓝色皮革系列的效果，显示出休闲优雅的气质</view>
+          <view wx:if="{{index == 1}}">美式具有独特的乡村风格，还有简约舒适生活型的家具表达了向往自然的内心渴求</view>
+        </view>
         <view class='font-size-28 angle-right color-info'><i class="fa fa-angle-right"></i></view>
       </view>
     </view>

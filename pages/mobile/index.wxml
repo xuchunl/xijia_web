@@ -5,7 +5,7 @@
       <view class='xj-info'>
         <view class='logo'>
           <view class='float-left' style='font-size: 45rpx'>喜 家</view>
-          <view class='float-left shop-name'>岭秀金江</view>
+          <view class='float-left shop-name'>蕉岭首府</view>
         </view>
         <view class='float-right color-success' style='font-size: 34rpx;padding: 15rpx;'>生活头条...</view>
         <view class='share' bindtap='onShareVisible'>
@@ -40,7 +40,7 @@
           套餐{{detailInfo.taoCanPrice}}元-团购{{detailInfo.tuangouPrice}}元起
         </view>
       </view> -->
-      <view class="mobile-change-scrollView ">
+      <!-- <view class="mobile-change-scrollView ">
         <scroll-view scroll-x = "true" class='tab-h' scroll-left = "{{scrollLeft}}" >
           <view class="tab-item {{currentIndex ==0 ? 'active' : ''}}" data-current = '0' bindtap="swichNav">客 厅</view>
           <view class="tab-item {{currentIndex ==1 ? 'active' : ''}}" data-current = '1' bindtap="swichNav">餐 厅</view>
@@ -49,60 +49,58 @@
           <view class="tab-item {{currentIndex ==4 ? 'active' : ''}}" data-current = '4' bindtap="swichNav">书 房</view>
           <view class="tab-item {{currentIndex ==5 ? 'active' : ''}}" data-current = '5' bindtap="swichNav">阳 台</view>
         </scroll-view>
-      </view>
-      <view class='mobile-invite'>
-        <button class='mobile-invite-button' bindtap='onShareAppMessage' open-type="share">邀请邻居好友 <i class='fa fa-wechat'></i></button>
+      </view> -->
+      <view class='square-info'>
+        <view class='square background-white' >
+          {{detailInfo.hsquare}}m² {{detailInfo.hname}}
+        </view>
+        <view class='vr' bindtap='clickShowImage'>户型 VR体验</view>
       </view>
     </view>
   </view>
   <view class='main-bottom' >
-    <view class='main-bottom-info'>
+    <view class='left-pin'>
+      <view class='pin-text float-left'>5套起拼</view>
+      <view class="house-item">
+        <image wx:for="{{detailInfo.info}}" wx:for-item="house"  wx:key="index" class="main-bottom-userInfo-avatar float-left" src="{{userInfo.headimgurl}}"></image>
+      </view>
+      <view class='main-bottom-top-house-group float-right color-danger' bindtap="onPintuan">我要拼团</view>
+    </view>
+    <!-- <view class='main-bottom-info'>
       <view class='main-bottom-main' >
-        <view class='main-bottom-house-info'>
-          <view class='main-bottom-top-square float-left background-waring' bindtap='clickShowImage'>{{detailInfo.hsquare}}m² {{detailInfo.hname}}</view>
-          <view class='float-left vr' bindtap='toViewVR'>VR体验</view>
-          <!-- <view class='main-bottom-top-house-type background-gray float-left' bindtap='clickShowImage'>{{hxDetail.name}}</view> -->
-          <view class='main-bottom-top-house-group float-right  background-gray' bindtap="onPintuan">我要拼团</view>
-        </view>
-        <view class='main-bottom-steps'>
-          <view class="main-bottom-progressbar float-left" wx:for="{{detailInfo.info}}" wx:for-item="house"  wx:key="index">
-            <view class='main-bottom-progressbar-num'>{{house.num}}套</view>
-            <view class='main-bottom-progressbar-case'>
-              <view class="el-step is-horizontal" style="flex-basis: 50%; margin-right: 0px;">
-                <view class="el-step__head is-process">
-                  <view class="{{(index+1) != detailInfo.info.length ? 'el-step__line' : 'el-step__last__line'}}" style="margin-right: 0px;">
-                    <i class="el-step__line-inner" style="transition-delay: 0ms; border-width: 0px;width: 0%;"></i>
-                  </view>
-                  <view class="el-step__icon is-text background-info">
-                    <view class="el-step__icon-inner"></view>
-                  </view>
-                </view>  
-                <view class="el-step__main">
-                  <!-- <view class="el-step__title is-process">{{house.price}}万</view> -->
-                  <view class="el-step__title is-process">
-                    <image class=" main-bottom-userInfo-avatar userInfo-avatar-margin float-left" src="{{userInfo.avatarUrl}}" ></image>
-                  </view>
-                  <view class="el-step__description is-process"></view>
+        <view class=" float-left {{(index+1) != detailInfo.info.length ? 'main-bottom-progressbar' : ''}}" wx:for="{{detailInfo.info}}" wx:for-item="house"  wx:key="index">
+          <view class='main-bottom-progressbar-num'>{{house.num}}套</view>
+          <view class='main-bottom-progressbar-case'>
+            <view class="el-step is-horizontal" style="flex-basis: 50%; margin-right: 0px;">
+              <view class="el-step__head is-process">
+                <view class="{{(index+1) != detailInfo.info.length ? 'el-step__line' : 'el-step__last__line'}}" style="margin-right: 0px;">
+                  <i class="el-step__line-inner" style="transition-delay: 0ms; border-width: 0px;width: 0%;"></i>
                 </view>
+                <view class="el-step__icon is-text background-info">
+                  <view class="el-step__icon-inner"></view>
+                </view>
+              </view>  
+              <view class="el-step__main">
+                <view class="el-step__title is-process">{{house.price}}万</view>
+                <view class="el-step__title is-process">
+                  <image class=" main-bottom-userInfo-avatar userInfo-avatar-margin float-left" src="{{userInfo.headimgurl}}" ></image>
+                </view>
+                <view class="el-step__description is-process"></view>
               </view>
             </view>
           </view>
         </view>
-        <!-- <view class='main-bottom-userInfo'>
-          <image class=" main-bottom-userInfo-avatar float-left" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-          <image class=" main-bottom-userInfo-avatar userInfo-avatar-margin float-left" src="{{userInfo.avatarUrl}}" ></image>
-          <image class=" main-bottom-userInfo-avatar userInfo-avatar-margin float-left" src="{{userInfo.avatarUrl}}" ></image>
-          <view  class='main-bottom-tatol-pin float-left'>3人在拼单</view>
-          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-        </view> -->
-        <!-- <view class='main-bottom-total'>
-          共10套
-        </view> -->
+        <view class='main-bottom-top-house-group float-right  background-gray' bindtap="onPintuan">我要拼团</view>
       </view>
-    </view>
+    </view> -->
   </view>
   <view class='mobile-show-product'>
-    <view class="taoqan-detail">拎包价格 1800元 ~ 30000元</view>
+    <view class="taoqan-detail background-white">
+      <view class='detail font-size-28 '>拎包清单</view>
+      <button class='mobile-invite-button font-size-28 ' bindtap='onShareAppMessage' open-type="share">
+        邀请邻居好友 <i class='fa fa-wechat'></i>
+      </button>
+    </view>
     <view style='width:100%'>
       <view class='float-left product-class'>
         <view class="product-class-name {{currentCate.id == cateItem.id ? 'taocanBackground' : 'taocanDefultBackground'}}" data-id='{{cateItem.id}}' data-cate='{{cateItem}}' bindtap='clickCate' wx:for="{{cateList}}" wx:for-item="cateItem" wx:key="tabIndex">{{cateItem.name}} {{cateItem.num || 0}}件 {{cateItem.price || 0}}元</view>
@@ -269,9 +267,9 @@
     </view>
   </view> -->
   <!-- 播放  -->
-  <view class='video-tab ' style='top: {{windowWidth}}px'>
+  <!-- <view class='video-tab ' style='top: {{windowWidth}}px'>
     <image bindtap="bindVideoTab" src="{{urlPrefix}}/upload/mini/bofang.png"></image>
-  </view>
+  </view> -->
   <view class='video-info' wx:if="{{videoStatus}}">
     <view class='close-video' bindtap="bindVideoTab">
       <view class='float-right fa fa-close video-close-icon'></view>
@@ -279,16 +277,16 @@
     </view>
     <video src="{{urlPrefix}}{{videoUrl}}" autoplay="{{videoStatus}}" loop page-gesture controls ></video>
   </view>
-  <view class='on-pay'>
+  <view class='on-pay background-white'>
     <view class='totalMny float-left'>
-      <view class='color-white float-left'>总价：</view><view class='color-waring float-left'>￥{{totalMny}}</view>
+      <view class='float-left'>总价：</view><view class='color-waring float-left'>￥{{totalMny}}</view>
     </view>
     <view class='shopping-cart float-left' bindtap='onCartStatus'>
       <i class='fa fa-shopping-cart shopping-cart-icon'></i>
       <view class='count'>{{currentShopping.num}}</view>
     </view>
     <view class='price float-right'>
-      <view class='color-white float-left'>{{currentCate.name}}：</view>
+      <view class='float-left'>{{currentCate.name}}：</view>
       <view class='color-waring float-left'>￥{{currentCate.price || 0}}</view>
     </view>
   </view>

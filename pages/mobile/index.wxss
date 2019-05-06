@@ -121,6 +121,21 @@
   text-align: center;
   background: #000;
 }
+.mobile .square-info {
+  display: flex;
+  font-size: 28rpx;
+  height: 80rpx;
+  align-items:center;
+}
+.mobile .square-info .square {
+  padding-left: 10rpx;
+  width:calc(100% - 205rpx);
+}
+.mobile .square-info .vr {
+  border-radius: 10rpx;
+  padding:10rpx;
+  border: 1rpx solid #909399;
+}
 .mobile .tab-item{
   width: calc(100% / 6);
   display: inline-block;
@@ -139,16 +154,9 @@
   width: 100%;
   height: 80rpx;
   text-align: center;
-  margin: 20rpx 0rpx;
-}
-.mobile-invite .fa {
-  color: #67C23A;
-}
-.mobile-invite-button {
-  height:75rpx;
-  width:50%;
-  font-size:100%;
-  line-height:75rpx;
+  padding: 10rpx 0rpx;
+  font-size: 28rpx;
+  border-top:1rpx solid #DCDFE6;
 }
 .mobile-time {
   width: 100%;
@@ -264,10 +272,22 @@
 }
 .mobile-show-product .taoqan-detail {
   width: 100%;
-  text-align: center;
   height: 80rpx;
-  line-height: 80rpx;
-  /* background: #F1F1F1; */
+  display: flex;
+  align-items:center;
+  border-bottom:1rpx solid #f1f1f1;
+}
+.detail {
+  width: 230rpx;
+  text-align: center;
+}
+.mobile-show-product .taoqan-detail .mobile-invite-button {
+  height:65rpx;
+  background: #fff;
+  line-height:65rpx;
+}
+.mobile-show-product .taoqan-detail .fa-wechat {
+  color: #67C23A;
 }
 .mobile-show-product .dingzhi {
   position: relative;
@@ -312,7 +332,7 @@
 .product-class-name {
   padding: 20rpx;
   padding-left: 15rpx;
-  font-size: 28rpx;
+  font-size: 26rpx;
 }
 .mobile-show-product .product-info {
   width: calc(100% - 230rpx - 10rpx);
@@ -671,31 +691,38 @@
 
 .main-bottom {
   width: 100%;
+  height: 80rpx;
+  font-size: 28rpx;
+  border-bottom:1rpx solid #f1f1f1;
+}
+.main-bottom .left-pin {
+  display:flex;
+  height:100%;
+  align-items:center;
+}
+.main-bottom .left-pin .pin-text {
+  width: 110rpx;
+  text-align: center;
+  font-size: 20rpx;
+}
+.main-bottom .left-pin .house-item {
+  width: calc(100% - 260rpx);
 }
 .main-bottom-info {
   width: 100%;
-  height: 280rpx;
+  height: 155rpx;
   border-bottom: 1rpx solid #DCDFE6;
 }
 .main-bottom-main {
   padding: 20rpx;
   width: calc(100% - 40rpx);
-  height: 100%;
-  /* font-size: 28rpx; */
+  height: calc(100% - 40rpx);
+  font-size: 28rpx;
 }
 .main-bottom-house-info {
   width: 100%;
   height: 100rpx;
   font-size: 28rpx;
-}
-.main-bottom-top-square {
-  padding: 10rpx;
-  margin-right: 10rpx;
-}
-.main-bottom-house-info .vr {
-border-radius: 10rpx;
-padding:10rpx;
-border: 1rpx solid #909399;
 }
 .main-bottom-top-house-type {
   padding: 10rpx;
@@ -704,15 +731,13 @@ border: 1rpx solid #909399;
   padding: 10rpx;
   margin-right: 10rpx;
   border-radius: 10rpx;
+  border:1rpx solid #c0c4cc;
 }
 .main-bottom-steps {
   width: 100%;
 }
 .main-bottom-progressbar {
-  width: 20%;
-}
-.main-bottom-progressbar-num {
-  font-size: 90%;
+  width: 18%;
 }
 .main-bottom-progressbar-case {
   width: 100%;
@@ -803,8 +828,8 @@ border: 1rpx solid #909399;
   font-size: 90%;
 }
 .main-bottom-userInfo-avatar {
-  width: 50rpx;
-  height: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
   border-radius: 50%;
 }
 .main-bottom-tatol-pin {
@@ -1049,16 +1074,13 @@ border: 1rpx solid #909399;
   position: fixed;
   bottom: 0;
   z-index: 10;
-  background: #000 none repeat scroll 0% 0%;
-  /* opacity: 0.7; */
-  border-radius: 50rpx;
   height: 90rpx;
   width: 100%;
+  border-top:1rpx solid #000;
 }
 .mobile .on-pay .totalMny {
   height: 100%;
   line-height: 90rpx;
-  color: #fff;
   font-size: 34rpx;
   padding-left: 10rpx;
 }
@@ -1068,11 +1090,9 @@ border: 1rpx solid #909399;
 }
 .mobile .on-pay .shopping-cart-icon {
   font-size: 60rpx;
-  color: #fff;
 }
 .mobile .on-pay .count {
   position:relative;
-  color:#fff;
   bottom:100rpx;
   background:red;
   border-radius:20rpx;
